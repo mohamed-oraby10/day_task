@@ -1,0 +1,20 @@
+import 'package:day_task/constants.dart';
+import 'package:day_task/widgets/main_button.dart';
+import 'package:flutter/material.dart';
+
+class AddTaskButton extends StatelessWidget {
+  const AddTaskButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 50),
+        height: 115,
+        width: double.maxFinite,
+        color: kSecondColor,
+        child: Center(
+          child: MainButton(textButton: "Add Task", onPress: () {}),
+        ),
+      );
+  }
+}
