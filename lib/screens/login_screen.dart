@@ -1,8 +1,10 @@
+import 'package:day_task/service/google_sign_in_service.dart';
 import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
+import 'package:day_task/widgets/google_button.dart';
 import 'package:day_task/widgets/main_button.dart';
-import 'package:day_task/widgets/snak_bar.dart';
+import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -93,11 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPress: () async {
                       if (formKey.currentState!.validate()) {
                         inAsyncCall = true;
-                        setState(() {
-                          
-                        });
+                        setState(() {});
                         try {
                           await loginUser();
+                          Navigator.pushNamed(context, AppRoutes.homeRoute);
+
                           showSnakBar(context, 'You login successfully');
                         } on FirebaseAuthException catch (e) {
                           if (e.code == "user-not-found") {
@@ -111,18 +113,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               "Wrong password provided for that user.",
                             );
                           }
-                          
                         }
-                         inAsyncCall = false;
-                        setState(() {
-                          
-                        });
+                        inAsyncCall = false;
+                        setState(() {});
                       }
-
-                      // Navigator.pushNamed(context, AppRoutes.homeRoute);
                     },
                   ),
                   const SizedBox(height: 20),
+                  GoogleButton(
+                    onPress: () async {
+                      setState(() {
+                        inAsyncCall = true;
+                      });
+                      try {
+                        await signWithGoogle();
+                      } catch (e) {
+                        print(e);
+                      }
+                      setState(() {
+                        inAsyncCall = false;
+                      });
+                    },
+                  ),
                   const Continue(),
                 ],
               ),

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LogoutButton extends StatelessWidget {
-  const LogoutButton({super.key});
+  const LogoutButton({super.key, this.onPress});
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class LogoutButton extends StatelessWidget {
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPress,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.mainColor,
             foregroundColor: Colors.white,

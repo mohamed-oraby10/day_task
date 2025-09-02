@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class GoogleButton extends StatelessWidget {
-  const GoogleButton({super.key});
+  const GoogleButton({super.key, this.onPress});
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class GoogleButton extends StatelessWidget {
       width: double.infinity,
       height: 60,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPress,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.backgroundColor,
           foregroundColor: Colors.white,

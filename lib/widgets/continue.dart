@@ -1,12 +1,21 @@
+import 'package:day_task/service/google_sign_in_service.dart';
 import 'package:day_task/widgets/google_button.dart';
 import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Continue extends StatelessWidget {
+class Continue extends StatefulWidget {
   final bool isRegisterScreen;
   const Continue({super.key, this.isRegisterScreen = false});
 
+  @override
+  State<Continue> createState() => _ContinueState();
+}
+
+class _ContinueState extends State<Continue> {
+  // bool inAsyncCall = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +29,10 @@ class Continue extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 'Or continue with',
-                style: TextStyle(color: AppColors.labelTextColor, fontSize: 17),
+                style: TextStyle(
+                  color: AppColors.labelTextColor,
+                  fontSize: 17,
+                ),
               ),
             ),
             const Expanded(
@@ -36,13 +48,27 @@ class Continue extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        GoogleButton(),
+        // GoogleButton(
+        //   onPress: () async {
+        //     setState(() {
+        //       inAsyncCall = true;
+        //     });
+        //     try {
+        //       await signWithGoogle();
+        //     }catch (e) {
+        //       print(e);
+        //     }
+        //     setState(() {
+        //       inAsyncCall = false;
+        //     });
+        //   },
+        // ),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              isRegisterScreen
+              widget.isRegisterScreen
                   ? 'Already have an account?'
                   : 'Don\'t have an account?',
               style: const TextStyle(
@@ -52,12 +78,12 @@ class Continue extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                isRegisterScreen
+                widget.isRegisterScreen
                     ? Navigator.pop(context)
                     : Navigator.pushNamed(context, AppRoutes.registerRoute);
               },
               child: Text(
-                isRegisterScreen ? 'Log In' : 'Sign Up',
+                widget.isRegisterScreen ? 'Log In' : 'Sign Up',
                 style: const TextStyle(
                   color: AppColors.mainColor,
                   fontSize: 17,

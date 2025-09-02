@@ -1,7 +1,8 @@
 import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
-import 'package:day_task/widgets/snak_bar.dart';
+import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -140,6 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         setState(() {});
                         try {
                           await registerUser();
+                                                     Navigator.pushNamed(context, AppRoutes.homeRoute);
                           showSnakBar(context, 'Account created successfully');
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
@@ -156,6 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         inAsyncCall = false;
                         setState(() {});
+
                       } else if (!check) {
                         showSnakBar(
                           context,
@@ -163,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         );
                       }
 
-                      // Navigator.pushNamed(context, AppRoutes.homeRoute);
+                   
                     },
                   ),
                   const SizedBox(height: 20),
