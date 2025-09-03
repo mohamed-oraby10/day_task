@@ -12,7 +12,20 @@
           "package_name": "com.example.day_task"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "525760575410-7to9dp4pla2updqi2v0c2pmhmpqev0hv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.day_task",
+            "certificate_hash": "df9b672af80f4f4efa0059c43183300991c2c79a"
+          }
+        },
+        {
+          "client_id": "525760575410-l1dlqu5i9cnla3eh1dtlrmedvtvahcuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAO9vZuGVconcVeopiR9Cu7QVkurQ23CRA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525760575410-l1dlqu5i9cnla3eh1dtlrmedvtvahcuc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "525760575410-8cs847r718rgglp82kiku5hpv38o86av.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dayTask"
+              }
+            }
+          ]
         }
       }
     }

@@ -6,15 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Continue extends StatefulWidget {
+class Continue extends StatelessWidget {
   final bool isRegisterScreen;
   const Continue({super.key, this.isRegisterScreen = false});
 
-  @override
-  State<Continue> createState() => _ContinueState();
-}
-
-class _ContinueState extends State<Continue> {
   // bool inAsyncCall = false;
   @override
   Widget build(BuildContext context) {
@@ -29,10 +24,7 @@ class _ContinueState extends State<Continue> {
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 'Or continue with',
-                style: TextStyle(
-                  color: AppColors.labelTextColor,
-                  fontSize: 17,
-                ),
+                style: TextStyle(color: AppColors.labelTextColor, fontSize: 17),
               ),
             ),
             const Expanded(
@@ -48,27 +40,13 @@ class _ContinueState extends State<Continue> {
           ],
         ),
         const SizedBox(height: 20),
-        // GoogleButton(
-        //   onPress: () async {
-        //     setState(() {
-        //       inAsyncCall = true;
-        //     });
-        //     try {
-        //       await signWithGoogle();
-        //     }catch (e) {
-        //       print(e);
-        //     }
-        //     setState(() {
-        //       inAsyncCall = false;
-        //     });
-        //   },
-        // ),
+        GoogleButton(),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.isRegisterScreen
+              isRegisterScreen
                   ? 'Already have an account?'
                   : 'Don\'t have an account?',
               style: const TextStyle(
@@ -78,12 +56,12 @@ class _ContinueState extends State<Continue> {
             ),
             TextButton(
               onPressed: () {
-                widget.isRegisterScreen
+                isRegisterScreen
                     ? Navigator.pop(context)
                     : Navigator.pushNamed(context, AppRoutes.registerRoute);
               },
               child: Text(
-                widget.isRegisterScreen ? 'Log In' : 'Sign Up',
+                isRegisterScreen ? 'Log In' : 'Sign Up',
                 style: const TextStyle(
                   color: AppColors.mainColor,
                   fontSize: 17,

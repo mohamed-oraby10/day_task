@@ -120,21 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-                  GoogleButton(
-                    onPress: () async {
-                      setState(() {
-                        inAsyncCall = true;
-                      });
-                      try {
-                        await signWithGoogle();
-                      } catch (e) {
-                        print(e);
-                      }
-                      setState(() {
-                        inAsyncCall = false;
-                      });
-                    },
-                  ),
+                 
                   const Continue(),
                 ],
               ),
