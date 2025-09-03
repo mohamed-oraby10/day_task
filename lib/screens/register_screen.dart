@@ -1,3 +1,4 @@
+import 'package:day_task/screens/home_screen.dart';
 import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
@@ -43,34 +44,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Create your Account',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
+                  Text(
+                    'Create your Account',
+                    style: const TextStyle(fontSize: 28, color: Colors.white),
+                  ),
+                  const SizedBox(height: 15),
 
-                      Text(
-                        'Full Name',
-                        style: TextStyle(
-                          color: AppColors.labelTextColor,
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      TextInput(
-                        hint: 'Enter your Full Name',
-                        prefixIcon: Icons.person,
-                        onChanged: (data) {
-                          name = data;
-                        },
-                      ),
-                    ],
+                  Text(
+                    'Full Name',
+                    style: TextStyle(
+                      color: AppColors.labelTextColor,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  TextInput(
+                    hint: 'Enter your Full Name',
+                    prefixIcon: Icons.person,
+                    onChanged: (data) {
+                      name = data;
+                    },
                   ),
                   const SizedBox(height: 25),
                   const Text(
@@ -141,7 +134,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         setState(() {});
                         try {
                           await registerUser();
-                                                     Navigator.pushNamed(context, AppRoutes.homeRoute);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return HomeScreen(name: name);
+                              },
+                            ),
+                          );
                           showSnakBar(context, 'Account created successfully');
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
@@ -158,15 +158,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         inAsyncCall = false;
                         setState(() {});
-
                       } else if (!check) {
                         showSnakBar(
                           context,
                           "You must agree to DayTask policy",
                         );
                       }
-
-                   
                     },
                   ),
                   const SizedBox(height: 20),
@@ -181,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> registerUser() async {
-    var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+   var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email!,
       password: password!,
     );

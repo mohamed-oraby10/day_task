@@ -27,6 +27,7 @@ class ProfileCategory extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(preImage),
+              SizedBox(width: 8,),
               Text(
                 text,
                 style: const TextStyle(color: Colors.white, fontSize: 18),

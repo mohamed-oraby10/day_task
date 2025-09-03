@@ -10,7 +10,6 @@ class Continue extends StatelessWidget {
   final bool isRegisterScreen;
   const Continue({super.key, this.isRegisterScreen = false});
 
-  // bool inAsyncCall = false;
   @override
   Widget build(BuildContext context) {
     return Column(

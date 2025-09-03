@@ -1,8 +1,6 @@
-import 'package:day_task/service/google_sign_in_service.dart';
 import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
-import 'package:day_task/widgets/google_button.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/widgets/text_input.dart';
@@ -43,7 +41,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                   const SizedBox(height: 30),
+                  Text(
+                        'Welcome Back!',
+                        style: const TextStyle(
+                          fontSize: 28,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                 
                   const Text(
                     'Email Address',
                     style: TextStyle(
@@ -132,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> loginUser() async {
-    var user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+ await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email!,
       password: password!,
     );

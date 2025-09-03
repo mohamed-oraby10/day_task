@@ -1,4 +1,5 @@
 import 'package:day_task/enum.dart';
+import 'package:day_task/screens/profile_screen.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
@@ -9,9 +10,15 @@ import 'package:day_task/utilitis/custom_bottom_bar.dart';
 
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, this.name});
+  final String? name;
+  
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 30),
             Row(
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -38,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Mohamed Oraby',
+                      widget.name ?? "",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -50,7 +57,14 @@ class HomeScreen extends StatelessWidget {
                 const Spacer(flex: 1),
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.profileRoute);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ProfileScreen(name: widget.name);
+                        },
+                      ),
+                    );
                   },
                   icon: Image.asset('assets/images/Rectangle 6.png'),
                 ),

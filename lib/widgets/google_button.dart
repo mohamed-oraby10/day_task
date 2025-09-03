@@ -7,14 +7,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class GoogleButton extends StatefulWidget {
   const GoogleButton({super.key});
-  // final void Function()? onPress;
-
   @override
   State<GoogleButton> createState() => _GoogleButtonState();
 }
 
 class _GoogleButtonState extends State<GoogleButton> {
   bool isLoading = false;
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -70,5 +69,3 @@ class _GoogleButtonState extends State<GoogleButton> {
     );
   }
 }
-
-

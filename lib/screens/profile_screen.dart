@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, this.name});
+  final String? name;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -42,38 +43,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               ProfileCategory(
-                text: '  Fazil Laghari',
+                text: widget.name ?? "",
                 preImage: 'assets/images/useradd.svg',
                 postImage: 'assets/images/edit.svg',
               ),
               ProfileCategory(
-                text: '  fazzzil72@gmail.com',
+                text: 'fazzzil72@gmail.com',
                 preImage: 'assets/images/usertag.svg',
                 postImage: 'assets/images/edit.svg',
               ),
               ProfileCategory(
-                text: '  Password',
+                text: 'Password',
                 preImage: 'assets/images/lock.svg',
                 postImage: 'assets/images/edit.svg',
               ),
               ProfileCategory(
-                text: '  My Tasks',
+                text: 'My Tasks',
                 preImage: 'assets/images/task.svg',
                 postImage: 'assets/images/arrowdown2.svg',
               ),
               ProfileCategory(
-                text: '  Privacy',
+                text: 'Privacy',
                 preImage: 'assets/images/securitycard.svg',
                 postImage: 'assets/images/arrowdown2.svg',
               ),
               ProfileCategory(
-                text: '  Setting',
+                text: 'Setting',
                 preImage: 'assets/images/setting2.svg',
                 postImage: 'assets/images/arrowdown2.svg',
               ),
               LogoutButton(
                 onPress: () async {
-                   setState(() {
+                  setState(() {
                     inAsyncCall = true;
                   });
                   await FirebaseAuth.instance.signOut();
@@ -81,7 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     inAsyncCall = false;
                   });
                 },
-                 
               ),
             ],
           ),
