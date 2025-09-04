@@ -1,3 +1,4 @@
+import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/logout_button.dart';
 import 'package:day_task/widgets/profile_category.dart';
@@ -5,6 +6,7 @@ import 'package:day_task/utilitis/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, this.name});
@@ -18,6 +20,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool inAsyncCall = false;
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<UserProvider>(context);
+    final firstLetter = user.name?[0].toUpperCase() ?? '?';
     return ModalProgressHUD(
       inAsyncCall: inAsyncCall,
       child: Scaffold(
@@ -27,28 +31,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: CircleAvatar(
                     radius: 60,
                     backgroundColor: AppColors.mainColor,
                     child: CircleAvatar(
                       radius: 55,
-                      backgroundImage: AssetImage(
-                        'assets/images/Ellipse 36.png',
-                      ),
+                      backgroundImage: user.image != null
+                          ? NetworkImage(user.image!)
+                          : null,
+                      child: user.image == null
+                          ? Text(firstLetter, style: TextStyle(fontSize: 30))
+                          : null,
                     ),
                   ),
                 ),
               ),
               ProfileCategory(
-                text: widget.name ?? "",
+                text: user.name ?? "",
                 preImage: 'assets/images/useradd.svg',
                 postImage: 'assets/images/edit.svg',
               ),
               ProfileCategory(
-                text: 'fazzzil72@gmail.com',
+                text: user.email ?? '',
                 preImage: 'assets/images/usertag.svg',
                 postImage: 'assets/images/edit.svg',
               ),

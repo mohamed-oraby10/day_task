@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/home_screen.dart';
 import 'package:day_task/utilitis/app_colors.dart';
-import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/helper/snak_bar.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -25,6 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
+      progressIndicator :CircularProgressIndicator(color: AppColors.mainColor,),
       inAsyncCall: inAsyncCall,
       child: Scaffold(
         body: Padding(
@@ -134,11 +137,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         setState(() {});
                         try {
                           await registerUser();
+                         
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return HomeScreen(name: name);
+                                return HomeScreen();
                               },
                             ),
                           );
@@ -178,9 +182,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> registerUser() async {
-   var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email!,
-      password: password!,
-    );
+    UserCredential user = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email!, password: password!);
+
+    await user.user!.updateDisplayName(name);
+    await user.user!.updatePhotoURL(null);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.user!.uid)
+        .set({
+          'name': name,
+          'email': email,
+          'photo': null,
+        }, SetOptions(merge: true));
   }
 }

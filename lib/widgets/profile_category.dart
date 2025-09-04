@@ -28,11 +28,13 @@ class ProfileCategory extends StatelessWidget {
             children: [
               SvgPicture.asset(preImage),
               SizedBox(width: 8,),
-              Text(
-                text,
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+              Expanded(
+                child: Text(
+                  text,
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
+                ),
               ),
-              const Spacer(flex: 1),
+             
               IconButton(onPressed: onPress, icon: SvgPicture.asset(postImage,color: AppColors.labelTextColor,)),
             ],
           ),

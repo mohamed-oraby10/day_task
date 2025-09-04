@@ -1,4 +1,4 @@
-import 'package:day_task/service/google_sign_in_service.dart';
+import 'package:day_task/service/signin_with_google_service.dart';
 import 'package:day_task/widgets/google_button.dart';
 import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
