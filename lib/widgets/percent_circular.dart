@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -13,8 +13,8 @@ class PercentCircular extends StatelessWidget {
       percent: 0.6,
       startAngle: 180,
       center: Text("60%", style: TextStyle(fontSize: 14, color: Colors.white)),
-      progressColor: AppColors.mainColor,
-      backgroundColor: AppColors.fillTextFormColor,
+      progressColor: kMainColor,
+      backgroundColor: kFillTextFormColor,
       circularStrokeCap: CircularStrokeCap.round,
     );
   }

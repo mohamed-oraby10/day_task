@@ -1,8 +1,8 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/logout_button.dart';
 import 'package:day_task/widgets/profile_category.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Center(
                   child: CircleAvatar(
                     radius: 60,
-                    backgroundColor: AppColors.mainColor,
+                    backgroundColor: kMainColor,
                     child: CircleAvatar(
                       radius: 55,
                       backgroundImage: user.image != null

@@ -1,5 +1,4 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,7 +12,7 @@ class ChatTextField extends StatelessWidget {
        
         hint: Text(
           "Type a message",
-          style: TextStyle(color: AppColors.labelTextColor, fontSize: 16),
+          style: TextStyle(color: kLabelTextColor, fontSize: 16),
         ),
         prefixIcon: IconButton(
           onPressed: () {},

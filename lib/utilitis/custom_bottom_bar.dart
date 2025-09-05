@@ -1,5 +1,5 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,7 +61,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required MenuState menu,
   }) {
     final isSelected = selectedMenu == menu;
-    final color = isSelected ? AppColors.mainColor : AppColors.labelTextColor;
+    final color = isSelected ? kMainColor : kLabelTextColor;
 
     return GestureDetector(
       onTap: () {
@@ -93,14 +93,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Container(
         height: 50,
         width: 50,
-        decoration: BoxDecoration(color: AppColors.mainColor),
+        decoration: BoxDecoration(color: kMainColor),
         child: Center(
           child: SvgPicture.asset(
             'assets/images/addsquare.svg',
             width: 28,
             height: 28,
             fit: BoxFit.contain,
-            color: AppColors.backgroundColor,
+            color: kBackgroundColor,
           ),
         ),
       ),

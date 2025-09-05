@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
@@ -46,7 +46,7 @@ class _TextInputState extends State<TextInput> {
 
         hintStyle: const TextStyle(color: Colors.white, fontSize: 18),
         border: const OutlineInputBorder(),
-        fillColor: AppColors.fillTextFormColor,
+        fillColor: kFillTextFormColor,
         filled: true,
         prefixIcon: Icon(widget.prefixIcon, color: Colors.white),
         suffixIcon: widget.isPassword

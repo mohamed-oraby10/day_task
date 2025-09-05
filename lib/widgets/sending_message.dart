@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class SendingMeaasge extends StatelessWidget {
@@ -15,11 +15,11 @@ class SendingMeaasge extends StatelessWidget {
             vertical: 12,
             horizontal: 20,
           ),
-          color: AppColors.mainColor,
+          color: kMainColor,
           child: Text(
             text,
             style: const TextStyle(
-              color: AppColors.backgroundColor,
+              color: kBackgroundColor,
               fontSize: 16,
             ),
           ),

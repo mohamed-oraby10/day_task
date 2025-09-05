@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
@@ -12,7 +12,7 @@ class MainButton extends StatelessWidget {
     super.key,
     required this.textButton,
     required this.onPress,
-    this.backColor = AppColors.mainColor,
+    this.backColor = kMainColor,
     this.textColor = Colors.black,
     this.border,
   });

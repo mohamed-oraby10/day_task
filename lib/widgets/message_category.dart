@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +17,7 @@ class MessageCategory extends StatelessWidget {
         children: [
           Image.asset(image),
           Material(
-            color: AppColors.backgroundColor,
+            color: kBackgroundColor,
             child: InkWell(
               onTap: () {},
               child: Padding(

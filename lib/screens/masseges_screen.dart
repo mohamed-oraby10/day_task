@@ -1,7 +1,7 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_button.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class MassegesScraan extends StatelessWidget {
               children: [
                 Image.asset('assets/images/Ellipse 381.png'),
                 Material(
-                  color: AppColors.backgroundColor,
+                  color: kBackgroundColor,
                   child: InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, AppRoutes.chatingRoute);

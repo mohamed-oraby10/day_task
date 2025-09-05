@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class TaskesCategory extends StatelessWidget {
@@ -20,7 +20,7 @@ class TaskesCategory extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 7),
       child: Row(
         children: [
-          Container(height: 70, width: 10, color: AppColors.mainColor),
+          Container(height: 70, width: 10, color: kMainColor),
           Container(
             color: color,
             height: 70,
@@ -45,7 +45,7 @@ class TaskesCategory extends StatelessWidget {
                         const Text(
                           '16:00 - 18:30',
                           style: TextStyle(
-                            color: AppColors.labelTextColor,
+                            color: kLabelTextColor,
                             fontSize: 12,
                           ),
                         ),

@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/container_button.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class TaskDetailsRow extends StatelessWidget {
         SizedBox(width: 10),
         Column(
           children: [
-            Text(title, style: TextStyle(color: AppColors.labelTextColor)),
+            Text(title, style: TextStyle(color: kLabelTextColor)),
             SizedBox(height: 5),
             Text(
              content,

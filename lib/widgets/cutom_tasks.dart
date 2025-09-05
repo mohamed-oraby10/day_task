@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class CutomTasks extends StatelessWidget {
@@ -12,7 +12,7 @@ class CutomTasks extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12),
         height: 60,
         width: double.infinity,
-        color: AppColors.fillTextFormColor,
+        color: kFillTextFormColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -24,13 +24,13 @@ class CutomTasks extends StatelessWidget {
             Container(
               height: 40,
               width: 40,
-              color: AppColors.mainColor,
+              color: kMainColor,
               child: Center(
                 child: IconButton(
                   onPressed: () {},
                   icon: Icon(
                     Icons.check_circle_outline_outlined,
-                    color: AppColors.backgroundColor,
+                    color: kBackgroundColor,
                   ),
                 ),
               ),

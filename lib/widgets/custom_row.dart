@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomRow extends StatelessWidget {
@@ -21,7 +21,7 @@ class CustomRow extends StatelessWidget {
           onPressed: () {},
           child: const Text(
             'See all',
-            style: TextStyle(fontSize: 15, color: AppColors.mainColor),
+            style: TextStyle(fontSize: 15, color: kMainColor),
           ),
         ),
       ],

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/constants.dart';
 import 'package:day_task/screens/home_screen.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/helper/snak_bar.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -27,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      progressIndicator :CircularProgressIndicator(color: AppColors.mainColor,),
+      progressIndicator :CircularProgressIndicator(color: kMainColor,),
       inAsyncCall: inAsyncCall,
       child: Scaffold(
         body: Padding(
@@ -56,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Text(
                     'Full Name',
                     style: TextStyle(
-                      color: AppColors.labelTextColor,
+                      color: kLabelTextColor,
                       fontSize: 18,
                     ),
                   ),
@@ -72,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Text(
                     'Email Address',
                     style: TextStyle(
-                      color: AppColors.labelTextColor,
+                      color: kLabelTextColor,
                       fontSize: 18,
                     ),
                   ),
@@ -88,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Text(
                     'Password',
                     style: TextStyle(
-                      color: AppColors.labelTextColor,
+                      color: kLabelTextColor,
                       fontSize: 18,
                     ),
                   ),
@@ -112,16 +110,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           setState(() {});
                         },
 
-                        checkColor: AppColors.backgroundColor,
+                        checkColor: kBackgroundColor,
                         fillColor: const WidgetStatePropertyAll(
-                          AppColors.mainColor,
+                          kMainColor,
                         ),
                       ),
                       const Expanded(
                         child: Text(
                           'I have read & agreed to DayTask Privacy Policy, Terms & Condition',
                           style: TextStyle(
-                            color: AppColors.labelTextColor,
+                            color: kLabelTextColor,
                             fontSize: 15,
                           ),
                         ),

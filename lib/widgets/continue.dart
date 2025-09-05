@@ -1,10 +1,7 @@
-import 'package:day_task/service/signin_with_google_service.dart';
+import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/google_button.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Continue extends StatelessWidget {
   final bool isRegisterScreen;
@@ -17,13 +14,13 @@ class Continue extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Container(height: 1, color: AppColors.labelTextColor),
+              child: Container(height: 1, color: kLabelTextColor),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 'Or continue with',
-                style: TextStyle(color: AppColors.labelTextColor, fontSize: 17),
+                style: TextStyle(color:kLabelTextColor , fontSize: 17),
               ),
             ),
             const Expanded(
@@ -32,7 +29,7 @@ class Continue extends StatelessWidget {
                 child: Divider(
                   height: 1,
                   thickness: 1,
-                  color: AppColors.labelTextColor,
+                  color: kLabelTextColor,
                 ),
               ),
             ),
@@ -49,7 +46,7 @@ class Continue extends StatelessWidget {
                   ? 'Already have an account?'
                   : 'Don\'t have an account?',
               style: const TextStyle(
-                color: AppColors.labelTextColor,
+                color:kLabelTextColor,
                 fontSize: 17,
               ),
             ),
@@ -62,7 +59,7 @@ class Continue extends StatelessWidget {
               child: Text(
                 isRegisterScreen ? 'Log In' : 'Sign Up',
                 style: const TextStyle(
-                  color: AppColors.mainColor,
+                  color: kMainColor,
                   fontSize: 17,
                 ),
               ),

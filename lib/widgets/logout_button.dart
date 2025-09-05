@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,7 +16,7 @@ class LogoutButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPress,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.mainColor,
+            backgroundColor: kMainColor,
             foregroundColor: Colors.white,
           ),
           child: Row(
@@ -27,7 +27,7 @@ class LogoutButton extends StatelessWidget {
               Text(
                 style: TextStyle(
                   fontSize: 18,
-                  color: AppColors.backgroundColor,
+                  color: kBackgroundColor,
                 ),
                 "Logout",
               ),

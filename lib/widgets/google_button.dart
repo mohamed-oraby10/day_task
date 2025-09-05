@@ -1,6 +1,6 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/service/signin_with_google_service.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,7 +44,7 @@ class _GoogleButtonState extends State<GoogleButton> {
               },
 
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: kBackgroundColor,
           foregroundColor: Colors.white,
           side: const BorderSide(color: Colors.white, width: 2),
         ),
@@ -54,7 +54,7 @@ class _GoogleButtonState extends State<GoogleButton> {
                 width: 25,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: AppColors.mainColor,
+                  color: kMainColor,
                 ),
               )
             : Row(

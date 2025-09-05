@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTaskDateAndTime extends StatelessWidget {
@@ -9,7 +9,7 @@ class CustomTaskDateAndTime extends StatelessWidget {
     return Container(
       height: 40,
       width: 140,
-      color: AppColors.fillTextFormColor,
+      color: kFillTextFormColor,
       child: Center(
         child: Text(text, style: TextStyle(color: Colors.white, fontSize: 18)),
       ),

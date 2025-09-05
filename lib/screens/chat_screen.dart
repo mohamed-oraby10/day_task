@@ -1,7 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
 import 'package:day_task/widgets/recieved_message.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,7 +18,7 @@ class ChatScreen extends StatelessWidget {
           },
           icon: SvgPicture.asset("assets/images/arrowleft.svg"),
         ),
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: kBackgroundColor,
         elevation: 0,
         foregroundColor: Colors.white,
 

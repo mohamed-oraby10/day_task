@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,7 +11,7 @@ class AddTeamMember extends StatelessWidget {
     return Container(
       height: 40,
       width: 150,
-      color: AppColors.fillTextFormColor,
+      color: kFillTextFormColor,
       child: Row(
         children: [
           Padding(

@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
@@ -60,7 +60,7 @@ class TaskDetailsScreen extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-              style: TextStyle(color: AppColors.labelTextColor, fontSize: 13),
+              style: TextStyle(color: kLabelTextColor, fontSize: 13),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),

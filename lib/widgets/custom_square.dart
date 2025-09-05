@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,14 +14,14 @@ class CustomSquare extends StatelessWidget {
       child: Container(
         height: 40,
         width: 40,
-        decoration: BoxDecoration(color: AppColors.mainColor),
+        decoration: BoxDecoration(color: kMainColor),
         child: Center(
           child: SvgPicture.asset(
             icon,
             width: 28,
             height: 28,
             fit: BoxFit.contain,
-            color: AppColors.backgroundColor,
+            color: kBackgroundColor,
           ),
         ),
       ),

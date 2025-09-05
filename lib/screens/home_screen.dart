@@ -1,3 +1,4 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/profile_screen.dart';
@@ -5,7 +6,6 @@ import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
 import 'package:day_task/widgets/ongoing_tasks_caregory.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         'Welcome Back!',
                         style: TextStyle(
-                          color: AppColors.mainColor,
+                          color: kMainColor,
                           fontSize: 14,
                         ),
                       ),
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     icon: CircleAvatar(
                       radius: 20,
-                      backgroundColor: AppColors.mainColor,
+                      backgroundColor: kMainColor,
                       backgroundImage: user.image != null
                           ? NetworkImage(user.image!)
                           : null,
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return CompletedTasksCrad(
                     taskName: 'Real Estate\nWebsite Design',
-                    taskColor: AppColors.mainColor,
+                    taskColor: kMainColor,
                     fontColor: Colors.black,
                     taskImage: 'assets/images/Rectangle 12.png',
                   );

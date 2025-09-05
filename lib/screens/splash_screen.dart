@@ -1,7 +1,6 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/custom_text.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../widgets/main_button.dart';
@@ -43,7 +42,7 @@ class SplashScreen extends StatelessWidget {
               text: "Manage \nyour \nTasks with",
               textColor: Colors.white,
             ),
-            CustomText(text: "DayTask", textColor: AppColors.mainColor),
+            CustomText(text: "DayTask", textColor: kMainColor),
 
             SizedBox(height: 40),
             MainButton(

@@ -1,15 +1,13 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.text,
-    // required this.buttonColor,
     this.onPress,
   });
   final String text;
-  // final Color buttonColor;
   final void Function()? onPress;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: 47,
         width: 175,
-        decoration: BoxDecoration(color: AppColors.mainColor),
+        decoration: BoxDecoration(color: kMainColor),
         child: Center(
           child: Text(
             text,

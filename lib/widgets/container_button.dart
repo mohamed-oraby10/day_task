@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,7 +13,7 @@ class ContainerButton extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      color: AppColors.mainColor,
+      color: kMainColor,
       child: IconButton(
         onPressed: () {},
         icon: SvgPicture.asset(image),

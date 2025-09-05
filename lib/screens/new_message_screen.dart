@@ -1,6 +1,6 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/new_message_category.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -24,7 +24,7 @@ class NewMessage extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: AppColors.mainColor,
+                  color: kMainColor,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Center(

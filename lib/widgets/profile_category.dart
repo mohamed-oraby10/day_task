@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,7 +19,7 @@ class ProfileCategory extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
-        color: AppColors.fillTextFormColor,
+        color: kFillTextFormColor,
         width: double.infinity,
         height: 55,
         child: Padding(
@@ -35,7 +35,7 @@ class ProfileCategory extends StatelessWidget {
                 ),
               ),
              
-              IconButton(onPressed: onPress, icon: SvgPicture.asset(postImage,color: AppColors.labelTextColor,)),
+              IconButton(onPressed: onPress, icon: SvgPicture.asset(postImage,color: kLabelTextColor,)),
             ],
           ),
         ),

@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         icon: SvgPicture.asset("assets/images/arrowleft.svg"),
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: kBackgroundColor,
       elevation: 0,
       foregroundColor: Colors.white,
       title: Center(child: Text(title)),

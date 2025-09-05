@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
@@ -24,7 +24,7 @@ class OngoingTasks extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(8),
 
-          color: AppColors.fillTextFormColor,
+          color:kFillTextFormColor,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             child: Column(
@@ -57,7 +57,7 @@ class OngoingTasks extends StatelessWidget {
                         backgroundImage: AssetImage(percentageImage),
                         backgroundColor: const Color(0xFF2C4653),
                         child: CircleAvatar(
-                          backgroundColor: AppColors.fillTextFormColor,
+                          backgroundColor: kFillTextFormColor,
                           radius: 20,
                           child: Image.asset(image),
                         ),

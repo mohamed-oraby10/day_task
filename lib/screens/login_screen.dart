@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     'Email Address',
                     style: TextStyle(
-                      color: AppColors.labelTextColor,
+                      color: kLabelTextColor,
                       fontSize: 18,
                     ),
                   ),
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     'Password',
                     style: TextStyle(
-                      color: AppColors.labelTextColor,
+                      color: kLabelTextColor,
                       fontSize: 18,
                     ),
                   ),
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
-                          color: AppColors.labelTextColor,
+                          color: kLabelTextColor,
                           fontSize: 16,
                         ),
                       ),

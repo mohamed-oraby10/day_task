@@ -1,5 +1,5 @@
+import 'package:day_task/constants.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/utilitis/app_colors.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Inter",
-        scaffoldBackgroundColor: AppColors.backgroundColor,
+        scaffoldBackgroundColor: kBackgroundColor,
         useMaterial3: false,
       ),
       initialRoute: AppRoutes.splashRoute,

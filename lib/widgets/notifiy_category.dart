@@ -1,4 +1,4 @@
-import 'package:day_task/utilitis/app_colors.dart';
+import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class NotificationCategory extends StatelessWidget {
@@ -21,7 +21,7 @@ class NotificationCategory extends StatelessWidget {
           children: [
             Image.asset(image, height: 45, width: 45),
             Material(
-              color: AppColors.backgroundColor,
+              color: kBackgroundColor,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Column(
@@ -38,14 +38,14 @@ class NotificationCategory extends StatelessWidget {
                         ),
                         const Text(
                           ' left a comment in task',
-                          style: TextStyle(color: AppColors.labelTextColor),
+                          style: TextStyle(color: kLabelTextColor),
                         ),
                       ],
                     ),
                     const Text(
                       'Mobile App Design Project',
                       style: TextStyle(
-                        color: AppColors.mainColor,
+                        color: kMainColor,
                         fontSize: 14,
                       ),
                     ),
