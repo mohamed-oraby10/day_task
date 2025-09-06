@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     radius: 70,
                     backgroundColor: kMainColor,
                     child: CircleAvatar(
-                      radius: 65,
+                      radius: 67,
                       backgroundImage: user.image != null
                           ? NetworkImage(user.image!)
                           : null,
