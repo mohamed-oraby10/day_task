@@ -5,12 +5,29 @@ import 'package:day_task/widgets/schedule_category.dart';
 import 'package:day_task/widgets/taskes_category.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class ScheduleSceen extends StatelessWidget {
+class ScheduleSceen extends StatefulWidget {
   const ScheduleSceen({super.key});
 
   @override
+  State<ScheduleSceen> createState() => _ScheduleSceenState();
+}
+
+class _ScheduleSceenState extends State<ScheduleSceen> {
+  late int selectedIndex;
+
+  @override
+  void initState() {
+    selectedIndex = DateTime.now().day;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    int daysInMonth = DateUtils.getDaysInMonth(now.year, now.month);
+
     return Scaffold(
       bottomNavigationBar: const CustomBottomNavigationBar(
         selectedMenu: MenuState.calendar,
@@ -25,7 +42,7 @@ class ScheduleSceen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'November',
+              DateFormat('MMMM').format(now),
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             Padding(
@@ -34,11 +51,28 @@ class ScheduleSceen extends StatelessWidget {
                 height: 75,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  itemCount: daysInMonth,
                   itemBuilder: (context, index) {
+                    DateTime date = DateTime(now.year, now.month, index + 1);
+                    String dayNumber = DateFormat('d').format(date);
+                    String dayName = DateFormat('EEE').format(date);
+                    bool isSelected = index == selectedIndex;
+
                     return ScheduleCategory(
-                      color: kSecondColor,
-                      number: '1',
-                      day: 'Mon',
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      color: isSelected ? kMainColor : kSecondColor,
+                      dayNameColor: isSelected
+                          ? kBackgroundColor
+                          : Colors.white,
+                      dayNumberColor: isSelected
+                          ? kBackgroundColor
+                          : Colors.white,
+                      number: dayNumber,
+                      day: dayName,
                     );
                   },
                 ),

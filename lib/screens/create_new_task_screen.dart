@@ -5,9 +5,18 @@ import 'package:day_task/widgets/custom_task_date_and_time.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class CreateNewTask extends StatelessWidget {
+class CreateNewTask extends StatefulWidget {
   const CreateNewTask({super.key});
+
+  @override
+  State<CreateNewTask> createState() => _CreateNewTaskState();
+}
+
+class _CreateNewTaskState extends State<CreateNewTask> {
+  var selectedTime = TimeOfDay.now();
+  DateTime? selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +73,43 @@ class CreateNewTask extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomSquare(icon: "assets/images/clock.svg"),
-                  CustomTaskDateAndTime(text: '10:30 AM'),
+                  CustomSquare(
+                    icon: "assets/images/clock.svg",
+                    onPress: () async {
+                      TimeOfDay? timePicked = await showTimePicker(
+                        context: context,
+                        initialTime: selectedTime,
+                      );
+                      if (timePicked != null) {
+                        setState(() {
+                          selectedTime = timePicked;
+                        });
+                      }
+                    },
+                  ),
+                  CustomTaskDateAndTime(text: selectedTime.format(context)),
                   SizedBox(width: 7),
-                  CustomSquare(icon: "assets/images/calendar.svg"),
-                  CustomTaskDateAndTime(text: '19/7/2025'),
+                  CustomSquare(
+                    icon: "assets/images/calendar.svg",
+                    onPress: () async {
+                      DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate ?? DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2300),
+                      );
+                      if (picked != null) {
+                        setState(() {
+                          selectedDate = picked;
+                        });
+                      }
+                    },
+                  ),
+                  CustomTaskDateAndTime(
+                    text: selectedDate == null
+                        ? DateFormat('dd/MM/yyyy').format(DateTime.now())
+                        : DateFormat('dd/MM/yyyy').format(selectedDate!),
+                  ),
                 ],
               ),
               const Center(

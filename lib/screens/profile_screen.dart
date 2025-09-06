@@ -35,10 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: CircleAvatar(
-                    radius: 60,
+                    radius: 70,
                     backgroundColor: kMainColor,
                     child: CircleAvatar(
-                      radius: 55,
+                      radius: 65,
                       backgroundImage: user.image != null
                           ? NetworkImage(user.image!)
                           : null,
@@ -49,6 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
               ProfileCategory(
                 text: user.name ?? "",
                 preImage: 'assets/images/useradd.svg',
@@ -59,11 +60,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 preImage: 'assets/images/usertag.svg',
                 postImage: 'assets/images/edit.svg',
               ),
-              ProfileCategory(
-                text: 'Password',
-                preImage: 'assets/images/lock.svg',
-                postImage: 'assets/images/edit.svg',
-              ),
+              // ProfileCategory(
+              //   text: 'Password',
+              //   preImage: 'assets/images/lock.svg',
+              //   postImage: 'assets/images/edit.svg',
+              // ),
               ProfileCategory(
                 text: 'My Tasks',
                 preImage: 'assets/images/task.svg',

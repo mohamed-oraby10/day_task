@@ -37,9 +37,11 @@ dependencies:
   flutter_svg: ^2.2.0
   font_awesome_flutter: ^10.8.0
   google_sign_in: ^6.2.1
+  intl: ^0.20.2
   modal_progress_hud_nsn: ^0.5.1
   percent_indicator: ^4.2.5
   provider: ^6.1.5+1
+  time_picker_spinner: ^1.0.2
 
 dev_dependencies:
   flutter_lints: ^5.0.0
