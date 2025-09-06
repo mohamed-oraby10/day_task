@@ -53,7 +53,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: daysInMonth,
                   itemBuilder: (context, index) {
-                    DateTime date = DateTime(now.year, now.month, index + 1);
+                    DateTime date = DateTime(now.year, now.month, index );
                     String dayNumber = DateFormat('d').format(date);
                     String dayName = DateFormat('EEE').format(date);
                     bool isSelected = index == selectedIndex;

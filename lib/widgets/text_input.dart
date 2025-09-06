@@ -7,6 +7,7 @@ class TextInput extends StatefulWidget {
   final bool isPassword;
   final int maxLines;
   final Function(String)? onChanged;
+  final Function(String?)? onSaved;
 
   const TextInput({
     super.key,
@@ -15,6 +16,7 @@ class TextInput extends StatefulWidget {
     this.isPassword = false,
     this.maxLines = 1,
     this.onChanged,
+    this.onSaved,
   });
 
   @override
@@ -35,8 +37,11 @@ class _TextInputState extends State<TextInput> {
       validator: (data) {
         if (data!.isEmpty) {
           return "Field is required";
+        } else {
+          return null;
         }
       },
+      onSaved: widget.onSaved,
       onChanged: widget.onChanged,
       maxLines: widget.maxLines,
       obscureText: obscure,
