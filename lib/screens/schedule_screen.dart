@@ -16,6 +16,7 @@ class ScheduleSceen extends StatefulWidget {
 
 class _ScheduleSceenState extends State<ScheduleSceen> {
   late int selectedIndex;
+  ScrollController? scrollController;
 
   @override
   void initState() {
@@ -50,6 +51,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
               child: SizedBox(
                 height: 75,
                 child: ListView.builder(
+                  controller: scrollController ,
                   scrollDirection: Axis.horizontal,
                   itemCount: daysInMonth,
                   itemBuilder: (context, index) {
