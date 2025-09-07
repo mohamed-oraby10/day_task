@@ -1,8 +1,10 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -24,16 +26,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DayTask',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Inter",
-        scaffoldBackgroundColor: kBackgroundColor,
-        useMaterial3: false,
+    return MultiBlocProvider(
+       providers: [
+        BlocProvider(create: (context) => AddTaskCubit()),
+      ],
+      child: MaterialApp(
+        title: 'DayTask',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: "Inter",
+          scaffoldBackgroundColor: kBackgroundColor,
+          useMaterial3: false,
+        ),
+        initialRoute: AppRoutes.splashRoute,
+        onGenerateRoute: AppRoutes.generateRoutes,
       ),
-      initialRoute: AppRoutes.splashRoute,
-      onGenerateRoute: AppRoutes.generateRoutes,
     );
   }
 }
