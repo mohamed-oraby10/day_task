@@ -1,4 +1,5 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/widgets/percent_circular.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
@@ -24,7 +25,7 @@ class OngoingTasks extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(8),
 
-          color:kFillTextFormColor,
+          color: kFillTextFormColor,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             child: Column(
@@ -52,17 +53,18 @@ class OngoingTasks extends StatelessWidget {
                       Image.asset('assets/images/Ellipse 3.png'),
                       Image.asset('assets/images/Ellipse 4.png'),
                       const Spacer(flex: 6),
-                      CircleAvatar(
-                        radius: 21,
-                        backgroundImage: AssetImage(percentageImage),
-                        backgroundColor: const Color(0xFF2C4653),
-                        child: CircleAvatar(
-                          backgroundColor: kFillTextFormColor,
-                          radius: 20,
-                          child: Image.asset(image),
-                        ),
-                      ),
-                      const Spacer(flex: 1),
+                      PercentCircular(backgroundColor: kBackgroundColor,percent: 0.75,),
+                      // CircleAvatar(
+                      //   radius: 21,
+                      //   backgroundImage: PercentCircular(),
+                      //   backgroundColor: const Color(0xFF2C4653),
+                      //   child: CircleAvatar(
+                      //     backgroundColor: kFillTextFormColor,
+                      //     radius: 20,
+                      //     child: Image.asset(image),
+                      //   ),
+                      // ),
+                     
                     ],
                   ),
                 ),
