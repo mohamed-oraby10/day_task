@@ -3,6 +3,7 @@ import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_state.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
 import 'package:day_task/model/task_model.dart';
+import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/widgets/add_team_member.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_square.dart';
@@ -22,7 +23,7 @@ class CreateNewTask extends StatefulWidget {
 }
 
 class _CreateNewTaskState extends State<CreateNewTask> {
-  List<String> teamMembers = [];
+  List<TeamMemberModel> teamMembers = [];
   var selectedTime = TimeOfDay.now();
   DateTime? selectedDate;
   String? title, details;
@@ -101,8 +102,8 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                               itemBuilder: (context, index) {
                                 final member = teamMembers[index];
                                 return AddTeamMember(
-                                  memberName: member,
-                                // memberImage: member['photo'],
+                                  memberName: member.name,
+                                  memberImage: member.image,
                                   onPress: () {
                                     setState(() {
                                       teamMembers.removeAt(index);
@@ -118,8 +119,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             onPress: () async {
                               await showUsersDialog(context, (user) {
                                 setState(() {
-                                  if (!teamMembers.contains(user['name'])) {
-                                    teamMembers.add(user['name']);
+                                  if (!teamMembers.any(
+                                    (m) => m.name == user.name,
+                                  )) {
+                                    teamMembers.add(user);
                                   }
                                 });
                               });

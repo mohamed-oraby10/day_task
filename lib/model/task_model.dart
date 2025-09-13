@@ -1,3 +1,4 @@
+import 'package:day_task/model/team_member_model.dart';
 import 'package:hive/hive.dart';
 part 'task_model.g.dart';
 
@@ -12,7 +13,7 @@ class TaskModel extends HiveObject {
   @HiveField(3)
   final String date;
   @HiveField(4)
-  final List<String> teamMembers;
+  final List<TeamMemberModel> teamMembers;
 
   TaskModel({required this.title, required this.details, required this.time, required this.date, required this.teamMembers});
 }

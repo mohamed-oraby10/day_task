@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/model/task_model.dart';
+import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:day_task/utilitis/app_routes.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TaskModelAdapter());
+  Hive.registerAdapter(TeamMemberModelAdapter());
   await Hive.openBox<TaskModel>(kTaskBox);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

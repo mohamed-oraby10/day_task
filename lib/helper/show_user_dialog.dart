@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
+import 'package:day_task/model/team_member_model.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showUsersDialog(
   BuildContext context,
-  Function(Map<String, dynamic>) onSelect,
+  Function(TeamMemberModel) onSelect,
 ) async {
   await showDialog(
     context: context,
@@ -66,12 +67,10 @@ Future<void> showUsersDialog(
                       style: const TextStyle(color: Colors.white),
                     ),
                     // subtitle: Text(email, style: const TextStyle(color: Colors.grey)),
-                    onTap: () {
-                      onSelect({
-                        "name": name,
-                        // "email": email,
-                        "photo": image,
-                      });
+                    onTap: ()  {
+                      onSelect(
+                      TeamMemberModel(name: name, image: image)
+                      );
                       Navigator.pop(context);
                     },
                   );

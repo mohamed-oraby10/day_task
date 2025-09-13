@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AddTeamMember extends StatelessWidget {
-  const AddTeamMember({super.key, this.memberName, this.onPress,});
+  const AddTeamMember({super.key, this.memberName, this.onPress, this.memberImage});
   final String? memberName;
-  // final String? memberImage;
+  final String? memberImage;
   final void Function()? onPress;
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class AddTeamMember extends StatelessWidget {
         color: kFillTextFormColor,
         child: Row(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 8),
-            //   child: CircleAvatar(
-            //     radius: 10,
-            //     child: Image.asset(memberImage!),
-            //   ),
-            // ),
-            // const Spacer(flex: 1),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: CircleAvatar(
+                radius: 10,
+                child: Image.asset(memberImage!),
+              ),
+            ),
+            const Spacer(flex: 1),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
