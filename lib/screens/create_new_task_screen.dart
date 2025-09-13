@@ -1,6 +1,8 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_state.dart';
+import 'package:day_task/helper/show_user_dialog.dart';
+import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/add_team_member.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_square.dart';
@@ -20,6 +22,7 @@ class CreateNewTask extends StatefulWidget {
 }
 
 class _CreateNewTaskState extends State<CreateNewTask> {
+  List<String> teamMembers = [];
   var selectedTime = TimeOfDay.now();
   DateTime? selectedDate;
   String? title, details;
@@ -89,18 +92,42 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                       SizedBox(height: 12),
                       Row(
                         children: [
-                          AddTeamMember(),
-                          SizedBox(width: 8),
-                          AddTeamMember(),
-                          SizedBox(width: 8),
-                          Align(
-                            alignment: AlignmentDirectional.centerEnd,
-                            child: CustomSquare(
-                              icon: "assets/images/addsquare.svg",
+                          SizedBox(
+                            height: 45,
+                            width: 300,
+                            child: ListView.builder(
+                              itemCount: teamMembers.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                final member = teamMembers[index];
+                                return AddTeamMember(
+                                  memberName: member,
+                                // memberImage: member['photo'],
+                                  onPress: () {
+                                    setState(() {
+                                      teamMembers.removeAt(index);
+                                    });
+                                  },
+                                );
+                              },
                             ),
+                          ),
+                          SizedBox(width: 25),
+                          CustomSquare(
+                            icon: "assets/images/addsquare.svg",
+                            onPress: () async {
+                              await showUsersDialog(context, (user) {
+                                setState(() {
+                                  if (!teamMembers.contains(user['name'])) {
+                                    teamMembers.add(user['name']);
+                                  }
+                                });
+                              });
+                            },
                           ),
                         ],
                       ),
+
                       SizedBox(height: 25),
                       Text(
                         'Time & Date',
@@ -168,9 +195,24 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                       MainButton(
                         textButton: 'Create',
                         onPress: () {
-                      
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
+                            var taskModel = TaskModel(
+                              title: title!,
+                              details: details!,
+                              time: selectedTime.format(context),
+                              date: selectedDate == null
+                                  ? DateFormat(
+                                      'dd/MM/yyyy',
+                                    ).format(DateTime.now())
+                                  : DateFormat(
+                                      'dd/MM/yyyy',
+                                    ).format(selectedDate!),
+                              teamMembers: teamMembers,
+                            );
+                            BlocProvider.of<AddTaskCubit>(
+                              context,
+                            ).addTask(taskModel);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                             setState(() {});

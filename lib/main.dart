@@ -15,7 +15,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TaskModelAdapter());
-  await Hive.openBox(kTaskBox);
+  await Hive.openBox<TaskModel>(kTaskBox);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
