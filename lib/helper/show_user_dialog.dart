@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/team_member_model.dart';
+import 'package:day_task/widgets/default_image.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showUsersDialog(
@@ -52,14 +53,7 @@ Future<void> showUsersDialog(
                           ? NetworkImage(image)
                           : null,
                       child: (image == null || image.isEmpty)
-                          ? Text(
-                              name.isNotEmpty ? name[0].toUpperCase() : "?",
-                              style: const TextStyle(
-                                color: kBackgroundColor,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
+                          ? DefaultImage(name: name)
                           : null,
                     ),
                     title: Text(
