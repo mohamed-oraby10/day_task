@@ -32,204 +32,207 @@ class _CreateNewTaskState extends State<CreateNewTask> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddTaskCubit, AddTaskState>(
-      listener: (context, state) {
-        if (state is AddTaskFailure) {
-          print('feild ${state.errorMessage}');
-        }
-
-        if (state is AddTaskSuccess) {
-          Navigator.pop(context);
-        }
-      },
-      builder: (context, state) {
-        return ModalProgressHUD(
-          progressIndicator: CircularProgressIndicator(color: kMainColor),
-          inAsyncCall: state is AddTaskLoading ? true : false,
-          child: Scaffold(
-            appBar: CustomAppBar(title: "Create New Task"),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Task Title',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: TextInput(
-                          hint: "Title",
-                          onSaved: (value) async {
-                            title = value;
-                          },
+    return BlocProvider(
+      create: (context) => AddTaskCubit(),
+      child: BlocConsumer<AddTaskCubit, AddTaskState>(
+        listener: (context, state) {
+          if (state is AddTaskFailure) {
+            print('feild ${state.errorMessage}');
+          }
+      
+          if (state is AddTaskSuccess) {
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+            progressIndicator: CircularProgressIndicator(color: kMainColor),
+            inAsyncCall: state is AddTaskLoading ? true : false,
+            child: Scaffold(
+              appBar: CustomAppBar(title: "Create New Task"),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Task Title',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      const Text(
-                        'Task Details',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: TextInput(
-                          hint: "Details",
-                          maxLines: 3,
-                          onSaved: (value) async {
-                            details = value;
-                          },
+      
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: TextInput(
+                            hint: "Title",
+                            onSaved: (value) async {
+                              title = value;
+                            },
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      const Text(
-                        'Add team members',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      SizedBox(height: 12),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 45,
-                            width: 300,
-                            child: ListView.builder(
-                              itemCount: teamMembers.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                final member = teamMembers[index];
-                                return AddTeamMember(
-                                  memberName: member.name,
-                                  memberImage: member.image,
-                                  onPress: () {
-                                    setState(() {
-                                      teamMembers.removeAt(index);
-                                    });
-                                  },
-                                );
+                        SizedBox(height: 15),
+                        const Text(
+                          'Task Details',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: TextInput(
+                            hint: "Details",
+                            maxLines: 3,
+                            onSaved: (value) async {
+                              details = value;
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        const Text(
+                          'Add team members',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        SizedBox(height: 12),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 45,
+                              width: 300,
+                              child: ListView.builder(
+                                itemCount: teamMembers.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final member = teamMembers[index];
+                                  return AddTeamMember(
+                                    memberName: member.name,
+                                    memberImage: member.image,
+                                    onPress: () {
+                                      setState(() {
+                                        teamMembers.removeAt(index);
+                                      });
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 25),
+                            CustomSquare(
+                              icon: "assets/images/addsquare.svg",
+                              onPress: () async {
+                                await showUsersDialog(context, (user) {
+                                  setState(() {
+                                    if (!teamMembers.any(
+                                      (m) => m.name == user.name,
+                                    )) {
+                                      teamMembers.add(user);
+                                    }
+                                  });
+                                });
                               },
                             ),
-                          ),
-                          SizedBox(width: 25),
-                          CustomSquare(
-                            icon: "assets/images/addsquare.svg",
-                            onPress: () async {
-                              await showUsersDialog(context, (user) {
-                                setState(() {
-                                  if (!teamMembers.any(
-                                    (m) => m.name == user.name,
-                                  )) {
-                                    teamMembers.add(user);
-                                  }
-                                });
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 25),
-                      Text(
-                        'Time & Date',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomSquare(
-                            icon: "assets/images/clock.svg",
-                            onPress: () async {
-                              TimeOfDay? timePicked = await showTimePicker(
-                                context: context,
-                                initialTime: selectedTime,
-                              );
-                              if (timePicked != null) {
-                                setState(() {
-                                  selectedTime = timePicked;
-                                });
-                              }
-                            },
-                          ),
-
-                          CustomTaskDateAndTime(
-                            text: selectedTime.format(context),
-                          ),
-                          SizedBox(width: 7),
-                          CustomSquare(
-                            icon: "assets/images/calendar.svg",
-                            onPress: () async {
-                              DateTime? picked = await showDatePicker(
-                                context: context,
-                                initialDate: selectedDate ?? DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2300),
-                              );
-                              if (picked != null) {
-                                setState(() {
-                                  selectedDate = picked;
-                                });
-                              }
-                            },
-                          ),
-                          CustomTaskDateAndTime(
-                            text: selectedDate == null
-                                ? DateFormat(
-                                    'dd/MM/yyyy',
-                                  ).format(DateTime.now())
-                                : DateFormat(
-                                    'dd/MM/yyyy',
-                                  ).format(selectedDate!),
-                          ),
-                        ],
-                      ),
-                      const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 40),
-                          child: Text(
-                            'Add New',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
+                          ],
                         ),
-                      ),
-                      MainButton(
-                        textButton: 'Create',
-                        onPress: () {
-                          if (formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
-                            var taskModel = TaskModel(
-                              title: title!,
-                              details: details!,
-                              time: selectedTime.format(context),
-                              date: selectedDate == null
+      
+                        SizedBox(height: 25),
+                        Text(
+                          'Time & Date',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CustomSquare(
+                              icon: "assets/images/clock.svg",
+                              onPress: () async {
+                                TimeOfDay? timePicked = await showTimePicker(
+                                  context: context,
+                                  initialTime: selectedTime,
+                                );
+                                if (timePicked != null) {
+                                  setState(() {
+                                    selectedTime = timePicked;
+                                  });
+                                }
+                              },
+                            ),
+      
+                            CustomTaskDateAndTime(
+                              text: selectedTime.format(context),
+                            ),
+                            SizedBox(width: 7),
+                            CustomSquare(
+                              icon: "assets/images/calendar.svg",
+                              onPress: () async {
+                                DateTime? picked = await showDatePicker(
+                                  context: context,
+                                  initialDate: selectedDate ?? DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2300),
+                                );
+                                if (picked != null) {
+                                  setState(() {
+                                    selectedDate = picked;
+                                  });
+                                }
+                              },
+                            ),
+                            CustomTaskDateAndTime(
+                              text: selectedDate == null
                                   ? DateFormat(
                                       'dd/MM/yyyy',
                                     ).format(DateTime.now())
                                   : DateFormat(
                                       'dd/MM/yyyy',
                                     ).format(selectedDate!),
-                              teamMembers: teamMembers,
-                            );
-                            BlocProvider.of<AddTaskCubit>(
-                              context,
-                            ).addTask(taskModel);
-                          } else {
-                            autovalidateMode = AutovalidateMode.always;
-                            setState(() {});
-                          }
-                        },
-                      ),
-                    ],
+                            ),
+                          ],
+                        ),
+                        const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 40),
+                            child: Text(
+                              'Add New',
+                              style: TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ),
+                        ),
+                        MainButton(
+                          textButton: 'Create',
+                          onPress: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              var taskModel = TaskModel(
+                                title: title!,
+                                details: details!,
+                                time: selectedTime.format(context),
+                                date: selectedDate == null
+                                    ? DateFormat(
+                                        'dd/MM/yyyy',
+                                      ).format(DateTime.now())
+                                    : DateFormat(
+                                        'dd/MM/yyyy',
+                                      ).format(selectedDate!),
+                                teamMembers: teamMembers,
+                              );
+                              BlocProvider.of<AddTaskCubit>(
+                                context,
+                              ).addTask(taskModel);
+                            } else {
+                              autovalidateMode = AutovalidateMode.always;
+                              setState(() {});
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

@@ -9,7 +9,7 @@ class DefaultImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: kMainColor,
+      backgroundColor: Colors.white,
       child: Text(
         name.isNotEmpty ? name[0].toUpperCase() : "?",
         style: const TextStyle(

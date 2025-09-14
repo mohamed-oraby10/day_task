@@ -30,19 +30,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => AddTaskCubit())],
-      child: MaterialApp(
-        title: 'DayTask',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: "Inter",
-          scaffoldBackgroundColor: kBackgroundColor,
-          useMaterial3: false,
-        ),
-        initialRoute: AppRoutes.splashRoute,
-        onGenerateRoute: AppRoutes.generateRoutes,
+    return MaterialApp(
+      title: 'DayTask',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: "Inter",
+        scaffoldBackgroundColor: kBackgroundColor,
+        useMaterial3: false,
       ),
+      initialRoute: AppRoutes.splashRoute,
+      onGenerateRoute: AppRoutes.generateRoutes,
     );
   }
 }

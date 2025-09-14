@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
+import 'package:day_task/model/task_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/profile_screen.dart';
 import 'package:day_task/widgets/custom_row.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TaskModel? task;
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
@@ -42,10 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         'Welcome Back!',
-                        style: TextStyle(
-                          color: kMainColor,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: kMainColor, fontSize: 14),
                       ),
                       Text(
                         user.name ?? "",
