@@ -44,7 +44,7 @@ Future<void> showUsersDialog(
                   final data = users[index].data() as Map<String, dynamic>;
                   final name = data['name'] ?? "Unknown";
                   // final email = data['email'] ?? "";
-                  final image = data['photo'];
+                  final image = data['photo'] ;
 
                   return ListTile(
                     leading: CircleAvatar(
@@ -63,7 +63,7 @@ Future<void> showUsersDialog(
                     // subtitle: Text(email, style: const TextStyle(color: Colors.grey)),
                     onTap: ()  {
                       onSelect(
-                      TeamMemberModel(name: name, image: image)
+                      TeamMemberModel(name: name, image: (image != null && image.isNotEmpty) ? image : null)
                       );
                       Navigator.pop(context);
                     },

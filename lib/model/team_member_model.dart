@@ -7,7 +7,7 @@ class TeamMemberModel extends HiveObject {
   final String name;
 
   @HiveField(1)
-  final String image;
+  final String? image;
 
   TeamMemberModel({required this.name, required this.image});
 }

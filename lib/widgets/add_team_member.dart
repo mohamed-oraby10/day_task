@@ -1,4 +1,5 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/widgets/default_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -24,7 +25,7 @@ class AddTeamMember extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8),
-              child: CircleAvatar(radius: 10, child: Image.network(memberImage!)),
+              child: CircleAvatar(radius: 10, backgroundImage: (memberImage != null) ? NetworkImage(memberImage!) : null, child:(memberImage == null) ? DefaultImage(name: memberName!) : null),
             ),
             // const Spacer(flex: 1),
             Expanded(
