@@ -15,5 +15,5 @@ class TasksSuccess extends TasksState {
 class TasksFailure extends TasksState {
   final String errMessage;
 
-  TasksFailure({required this.errMessage});
+  TasksFailure(this.errMessage);
 }
