@@ -1,20 +1,16 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/percent_circular.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
   const OngoingTasks({
     super.key,
-    required this.name,
-    required this.date,
-    required this.image,
-    required this.percentageImage,
+   required this.task,
   });
 
-  final String name;
-  final String date;
-  final String image;
-  final String percentageImage;
+ 
+  final TaskModel task;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +28,7 @@ class OngoingTasks extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  task.title,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -45,31 +41,38 @@ class OngoingTasks extends StatelessWidget {
                   'Team Members',
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/Ellipse 2.png'),
-                      Image.asset('assets/images/Ellipse 3.png'),
-                      Image.asset('assets/images/Ellipse 4.png'),
-                      const Spacer(flex: 6),
-                      PercentCircular(backgroundColor: kBackgroundColor,percent: 0.75,),
-                      // CircleAvatar(
-                      //   radius: 21,
-                      //   backgroundImage: PercentCircular(),
-                      //   backgroundColor: const Color(0xFF2C4653),
-                      //   child: CircleAvatar(
-                      //     backgroundColor: kFillTextFormColor,
-                      //     radius: 20,
-                      //     child: Image.asset(image),
-                      //   ),
-                      // ),
-                     
-                    ],
+                SizedBox(
+  height: 40,
+  child: Stack(
+    children: List.generate(task.teamMembers.length, (index) {
+      final member = task.teamMembers[index];
+
+      return Positioned(
+        left: index * 25, // عشان الصور تتراكب زي الـ screenshot
+        child: CircleAvatar(
+          radius: 18,
+          backgroundColor: kMainColor,
+          backgroundImage: (member.image != null && member.image!.isNotEmpty)
+              ? NetworkImage(member.image!)
+              : null,
+          child: (member.image == null || member.image!.isEmpty)
+              ? Text(
+                  member.name.isNotEmpty ? member.name[0].toUpperCase() : "?",
+                  style: const TextStyle(
+                    color: kBackgroundColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
+                )
+              : null,
+        ),
+      );
+    }),
+  ),
+),
+
                 Text(
-                  date,
+                 "Due on: ${task.date}",
                   style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ],

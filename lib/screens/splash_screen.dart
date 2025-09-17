@@ -13,45 +13,46 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-            SizedBox(height: 20),
-            SvgPicture.asset(
-              'assets/images/Group 5.svg',
-              height: 70,
-              width: double.infinity,
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Container(
-                  color: Colors.white,
-                  child: Image.asset(
-                    'assets/images/pana.png',
-                    height: 330,
-                    width: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20),
+              SvgPicture.asset(
+                'assets/images/Group 5.svg',
+                height: 70,
+                width: double.infinity,
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Container(
+                    color: Colors.white,
+                    child: Image.asset(
+                      'assets/images/pana.png',
+                      height: 330,
+                      width: double.infinity,
+                    ),
                   ),
                 ),
               ),
-            ),
-
-            CustomText(
-              text: "Manage \nyour \nTasks with",
-              textColor: Colors.white,
-            ),
-            CustomText(text: "DayTask", textColor: kMainColor),
-
-            SizedBox(height: 40),
-            MainButton(
-              textButton: 'Let\'s Start',
-              onPress: () {
-                Navigator.pushNamed(context, AppRoutes.homeRoute);
-              },
-            ),
-          ],
+          
+              CustomText(
+                text: "Manage \nyour \nTasks with",
+                textColor: Colors.white,
+              ),
+              CustomText(text: "DayTask", textColor: kMainColor),
+          
+              SizedBox(height: 40),
+              MainButton(
+                textButton: 'Let\'s Start',
+                onPress: () {
+                  Navigator.pushNamed(context, AppRoutes.homeRoute);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

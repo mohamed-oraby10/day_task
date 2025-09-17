@@ -18,7 +18,7 @@ class TeamMemberModelAdapter extends TypeAdapter<TeamMemberModel> {
     };
     return TeamMemberModel(
       name: fields[0] as String,
-      image: fields[1] as String,
+      image: fields[1] as String?,
     );
   }
 

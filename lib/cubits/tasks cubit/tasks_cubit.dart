@@ -5,16 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
 class TasksCubit extends Cubit<TasksState> {
-    TasksCubit() : super(TasksInitial());
- 
-  featchAllTasks(TaskModel task) async {
-    
-    try {
-      var tasksBox = Hive.box<TaskModel>(kTaskBox);
-      List<TaskModel> tasks = tasksBox.values.toList();
-      emit(TasksSuccess(tasks: tasks));
-    } catch (e) {
-    emit(TasksFailure(e.toString()));
-    }
+  TasksCubit() : super(TasksInitial());
+  List<TaskModel>? tasks;
+  featchAllTasks()  {
+    var tasksBox = Hive.box<TaskModel>(kTaskBox);
+    tasks = tasksBox.values.toList();
   }
 }

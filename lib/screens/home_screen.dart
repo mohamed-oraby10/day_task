@@ -1,4 +1,6 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
+import 'package:day_task/cubits/tasks%20cubit/tasks_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -9,6 +11,7 @@ import 'package:day_task/widgets/home_search_bar.dart';
 import 'package:day_task/widgets/ongoing_tasks_caregory.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +23,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TaskModel? task;
+
+  @override
+  void initState() {
+    BlocProvider.of<TasksCubit>(context).featchAllTasks();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
@@ -113,17 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20),
             CustomRow(title: "Ongoing Projects"),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return OngoingTasks(
-                    name: 'Mobile App Wireframe',
-                    date: 'Due on : 21 March',
-                    image: 'assets/images/75%.png',
-                    percentageImage: 'assets/images/Ellipse 16 (1).png',
-                  );
-                },
-              ),
+            BlocBuilder<TasksCubit, TasksState>(
+              builder: (context, state) {
+                List<TaskModel> tasks = BlocProvider.of<TasksCubit>(
+                  context,
+                ).tasks!;
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      return OngoingTasks(
+                        task: tasks[index] ,
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
+import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -15,9 +16,10 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
+    Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
-  Hive.registerAdapter(TeamMemberModelAdapter());
   await Hive.openBox<TaskModel>(kTaskBox);
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
@@ -30,16 +32,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DayTask',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Inter",
-        scaffoldBackgroundColor: kBackgroundColor,
-        useMaterial3: false,
+    return MultiBlocProvider(
+      providers: [
+       BlocProvider(create: (context) =>  TasksCubit() ),
+      ],
+      child: MaterialApp(
+        title: 'DayTask',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: "Inter",
+          scaffoldBackgroundColor: kBackgroundColor,
+          useMaterial3: false,
+        ),
+        initialRoute: AppRoutes.splashRoute,
+        onGenerateRoute: AppRoutes.generateRoutes,
       ),
-      initialRoute: AppRoutes.splashRoute,
-      onGenerateRoute: AppRoutes.generateRoutes,
     );
   }
 }
