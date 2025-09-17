@@ -1,9 +1,9 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/service/signOut.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/logout_button.dart';
 import 'package:day_task/widgets/profile_category.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   setState(() {
                     inAsyncCall = true;
                   });
-                  await FirebaseAuth.instance.signOut();
+                  await signOut(context);
                   setState(() {
                     inAsyncCall = false;
                   });
@@ -97,4 +97,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+ 
 }
