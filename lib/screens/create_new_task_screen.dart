@@ -37,13 +37,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
       create: (context) => AddTaskCubit(),
       child: BlocConsumer<AddTaskCubit, AddTaskState>(
         listener: (context, state) {
-          if (state is AddTaskFailure) {
-          }
+          if (state is AddTaskFailure) {}
 
           if (state is AddTaskSuccess) {
-             BlocProvider.of<TasksCubit>(
-                              context,
-                            ).featchAllTasks();
+            BlocProvider.of<TasksCubit>(context).featchAllTasks();
             Navigator.pop(context);
           }
         },
@@ -125,12 +122,14 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
-                                await showUsersDialog(context, (user) {
+                                await showUsersDialog(context, (users) {
                                   setState(() {
-                                    if (!teamMembers.any(
-                                      (m) => m.name == user.name,
-                                    )) {
-                                      teamMembers.add(user);
+                                    for (var user in users) {
+                                      if (!teamMembers.any(
+                                        (m) => m.name == user.name,
+                                      )) {
+                                        teamMembers.add(user);
+                                      }
                                     }
                                   });
                                 });
@@ -231,7 +230,6 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                               autovalidateMode = AutovalidateMode.always;
                               setState(() {});
                             }
-                           
                           },
                         ),
                       ],

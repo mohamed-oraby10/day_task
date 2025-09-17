@@ -13,7 +13,7 @@ class OngoingTasks extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(bottom: 14),
         child: Container(
           padding: EdgeInsets.all(8),
 
@@ -33,7 +33,7 @@ class OngoingTasks extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: const Text(
                     'Team Members',
                     style: TextStyle(color: Colors.white, fontSize: 15),
@@ -43,22 +43,27 @@ class OngoingTasks extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: 40,
+                      height: 35,
                       width: 150,
                       child: Stack(
-                        children: List.generate(task.teamMembers.length, (index) {
+                        children: List.generate(task.teamMembers.length, (
+                          index,
+                        ) {
                           final member = task.teamMembers[index];
-                    
+
                           return Positioned(
                             left: index * 25,
                             child: CircleAvatar(
                               radius: 12,
                               backgroundColor: kMainColor,
                               backgroundImage:
-                                  (member.image != null && member.image!.isNotEmpty)
+                                  (member.image != null &&
+                                      member.image!.isNotEmpty)
                                   ? NetworkImage(member.image!)
                                   : null,
-                              child: (member.image == null || member.image!.isEmpty)
+                              child:
+                                  (member.image == null ||
+                                      member.image!.isEmpty)
                                   ? Text(
                                       member.name.isNotEmpty
                                           ? member.name[0].toUpperCase()
@@ -75,8 +80,10 @@ class OngoingTasks extends StatelessWidget {
                         }),
                       ),
                     ),
-                                      PercentCircular(backgroundColor: kBackgroundColor,percent: 0.75,),
-
+                    PercentCircular(
+                      backgroundColor: kBackgroundColor,
+                      percent: 0.75,
+                    ),
                   ],
                 ),
 
