@@ -7,8 +7,9 @@ import 'package:hive/hive.dart';
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
   List<TaskModel>? tasks;
-  featchAllTasks()  {
+  featchAllTasks() {
     var tasksBox = Hive.box<TaskModel>(kTaskBox);
     tasks = tasksBox.values.toList();
+    emit(TasksSuccess());
   }
 }

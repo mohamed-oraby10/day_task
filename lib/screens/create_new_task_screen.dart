@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/add%20task%20cubit/add_task_state.dart';
+import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
@@ -37,10 +38,12 @@ class _CreateNewTaskState extends State<CreateNewTask> {
       child: BlocConsumer<AddTaskCubit, AddTaskState>(
         listener: (context, state) {
           if (state is AddTaskFailure) {
-            print('feild ${state.errorMessage}');
           }
-      
+
           if (state is AddTaskSuccess) {
+             BlocProvider.of<TasksCubit>(
+                              context,
+                            ).featchAllTasks();
             Navigator.pop(context);
           }
         },
@@ -51,7 +54,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
             child: Scaffold(
               appBar: CustomAppBar(title: "Create New Task"),
               body: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20,
+                ),
                 child: SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -62,7 +68,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           'Task Title',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-      
+
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: TextInput(
@@ -132,7 +138,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             ),
                           ],
                         ),
-      
+
                         SizedBox(height: 25),
                         Text(
                           'Time & Date',
@@ -156,7 +162,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 }
                               },
                             ),
-      
+
                             CustomTaskDateAndTime(
                               text: selectedTime.format(context),
                             ),
@@ -193,7 +199,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             padding: EdgeInsets.symmetric(vertical: 40),
                             child: Text(
                               'Add New',
-                              style: TextStyle(color: Colors.white, fontSize: 18),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),
@@ -222,6 +231,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                               autovalidateMode = AutovalidateMode.always;
                               setState(() {});
                             }
+                           
                           },
                         ),
                       ],
