@@ -4,12 +4,8 @@ import 'package:day_task/widgets/percent_circular.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
-  const OngoingTasks({
-    super.key,
-   required this.task,
-  });
+  const OngoingTasks({super.key, required this.task});
 
- 
   final TaskModel task;
 
   @override
@@ -36,43 +32,56 @@ class OngoingTasks extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
-                const Text(
-                  'Team Members',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                SizedBox(
-  height: 40,
-  child: Stack(
-    children: List.generate(task.teamMembers.length, (index) {
-      final member = task.teamMembers[index];
-
-      return Positioned(
-        left: index * 25, // عشان الصور تتراكب زي الـ screenshot
-        child: CircleAvatar(
-          radius: 18,
-          backgroundColor: kMainColor,
-          backgroundImage: (member.image != null && member.image!.isNotEmpty)
-              ? NetworkImage(member.image!)
-              : null,
-          child: (member.image == null || member.image!.isEmpty)
-              ? Text(
-                  member.name.isNotEmpty ? member.name[0].toUpperCase() : "?",
-                  style: const TextStyle(
-                    color: kBackgroundColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Team Members',
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
-                )
-              : null,
-        ),
-      );
-    }),
-  ),
-),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      width: 150,
+                      child: Stack(
+                        children: List.generate(task.teamMembers.length, (index) {
+                          final member = task.teamMembers[index];
+                    
+                          return Positioned(
+                            left: index * 25,
+                            child: CircleAvatar(
+                              radius: 12,
+                              backgroundColor: kMainColor,
+                              backgroundImage:
+                                  (member.image != null && member.image!.isNotEmpty)
+                                  ? NetworkImage(member.image!)
+                                  : null,
+                              child: (member.image == null || member.image!.isEmpty)
+                                  ? Text(
+                                      member.name.isNotEmpty
+                                          ? member.name[0].toUpperCase()
+                                          : "?",
+                                      style: const TextStyle(
+                                        color: kBackgroundColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : null,
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                                      PercentCircular(backgroundColor: kBackgroundColor,percent: 0.75,),
+
+                  ],
+                ),
 
                 Text(
-                 "Due on: ${task.date}",
+                  "Due on: ${task.date}",
                   style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ],

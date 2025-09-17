@@ -208,10 +208,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 time: selectedTime.format(context),
                                 date: selectedDate == null
                                     ? DateFormat(
-                                        'dd/MM/yyyy',
+                                        'd MMMM',
                                       ).format(DateTime.now())
                                     : DateFormat(
-                                        'dd/MM/yyyy',
+                                        'd MMMM',
                                       ).format(selectedDate!),
                                 teamMembers: teamMembers,
                               );
