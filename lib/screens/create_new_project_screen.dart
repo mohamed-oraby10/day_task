@@ -5,10 +5,12 @@ import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/add_team_member.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_square.dart';
 import 'package:day_task/widgets/custom_task_date_and_time.dart';
+import 'package:day_task/widgets/cutom_tasks.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
@@ -138,34 +140,33 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                           ],
                         ),
 
-                        SizedBox(height: 25),
+                        SizedBox(height: 10),
                         Text(
-                          'Time & Date',
+                          'Date',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 8),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CustomSquare(
-                              icon: "assets/images/clock.svg",
-                              onPress: () async {
-                                TimeOfDay? timePicked = await showTimePicker(
-                                  context: context,
-                                  initialTime: selectedTime,
-                                );
-                                if (timePicked != null) {
-                                  setState(() {
-                                    selectedTime = timePicked;
-                                  });
-                                }
-                              },
-                            ),
-
-                            CustomTaskDateAndTime(
-                              text: selectedTime.format(context),
-                            ),
-                            SizedBox(width: 7),
+                            // CustomSquare(
+                            //   icon: "assets/images/clock.svg",
+                            //   onPress: () async {
+                            //     TimeOfDay? timePicked = await showTimePicker(
+                            //       context: context,
+                            //       initialTime: selectedTime,
+                            //     );
+                            //     if (timePicked != null) {
+                            //       setState(() {
+                            //         selectedTime = timePicked;
+                            //       });
+                            //     }
+                            //   },
+                            // ),
+                            // CustomTaskDateAndTime(
+                            //   text: selectedTime.format(context),
+                            // ),
+                            // SizedBox(width: 7),
                             CustomSquare(
                               icon: "assets/images/calendar.svg",
                               onPress: () async {
@@ -193,11 +194,17 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                             ),
                           ],
                         ),
-                        const Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 40),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutes.createTaskRoute,
+                              );
+                            },
                             child: Text(
-                              'Add New',
+                              'Add task',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -205,6 +212,15 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 160,
+                          child: ListView.builder(
+                            itemBuilder: (context, index) {
+                              return CutomTasks(taskTitle: 'User Interviews');
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 20),
                         MainButton(
                           textButton: 'Create',
                           onPress: () {

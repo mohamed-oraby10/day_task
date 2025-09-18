@@ -193,18 +193,8 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             ),
                           ],
                         ),
-                        const Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 40),
-                            child: Text(
-                              'Add New',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
+                       
+                        SizedBox(height: 50,),
                         MainButton(
                           textButton: 'Create',
                           onPress: () {
