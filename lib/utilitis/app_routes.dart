@@ -1,4 +1,5 @@
 import 'package:day_task/screens/chat_screen.dart';
+import 'package:day_task/screens/create_new_project_screen.dart';
 import 'package:day_task/screens/create_new_task_screen.dart';
 import 'package:day_task/screens/groupes_chat_screen.dart';
 import 'package:day_task/screens/masseges_screen.dart';
@@ -27,6 +28,8 @@ class AppRoutes {
   static const String notificationRoute = '/notification';
   static const String profileRoute = '/profile';
   static const String taskDetailsRoute = '/taskDetails';
+  static const String createNewProjectRoute = '/createNewProhect';
+
 
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -62,6 +65,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => const ChatScreen(),
         );
+     
       case createTaskRoute:
         return MaterialPageRoute(
           builder: (_) => const CreateNewTask(),
@@ -77,6 +81,10 @@ class AppRoutes {
          case taskDetailsRoute:
         return MaterialPageRoute(
           builder: (_) => const TaskDetailsScreen(),
+        );
+        case createNewProjectRoute:
+        return MaterialPageRoute(
+          builder: (_) => const CreateNewProjectScreen(),
         );
       case AppRoutes.splashRoute:
       default:

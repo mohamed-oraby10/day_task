@@ -88,7 +88,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget buildCenterAddButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.createTaskRoute);
+        Navigator.pushNamed(context, AppRoutes.createNewProjectRoute);
       },
       child: Container(
         height: 50,
