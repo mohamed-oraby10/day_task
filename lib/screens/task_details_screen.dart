@@ -80,13 +80,13 @@ class TaskDetailsScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             SizedBox(height: 15),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return CutomTasks(taskTitle: 'User Interviews');
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemBuilder: (context, index) {
+            //       return CutomTasks(taskTitle: 'User Interviews', onCheckChanged: (bool? value) {  },isChecked: false,);
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

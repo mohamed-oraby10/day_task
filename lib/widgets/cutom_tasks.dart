@@ -1,16 +1,25 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/model/task_model.dart';
+import 'package:day_task/widgets/task_check_box.dart';
 import 'package:flutter/material.dart';
 
 class CutomTasks extends StatelessWidget {
-  const CutomTasks({super.key, required this.taskTitle,this.onTap});
-  final String taskTitle;
- final void Function()? onTap;
+  const CutomTasks({
+    super.key,
+    this.onTap,
+    required this.onCheckChanged,
+    required this.isChecked, required this.task,
+  });
+  final void Function()? onTap;
+  final bool isChecked;
+  final ValueChanged<bool?> onCheckChanged;
+  final TaskModel task;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7),
       child: GestureDetector(
-        onTap:onTap ,
+        onTap: onTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12),
           height: 60,
@@ -20,22 +29,14 @@ class CutomTasks extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                taskTitle,
+                task.title,
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
-        
-              Container(
-                height: 40,
-                width: 40,
-                color: kMainColor,
-                child: Center(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.check_circle_outline_outlined,
-                      color: kBackgroundColor,
-                    ),
-                  ),
+
+              Center(
+                child: TaskCheckBox(
+                  value: isChecked,
+                  onChanged: onCheckChanged,
                 ),
               ),
             ],
