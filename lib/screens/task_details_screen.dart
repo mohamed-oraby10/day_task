@@ -71,7 +71,7 @@ class TaskDetailsScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Spacer(),
-                  PercentCircular(backgroundColor: kFillTextFormColor,percent: 0.75,),
+                  PercentCircular(backgroundColor: kFillTextFormColor,percent: 0.6,),
                 ],
               ),
             ),

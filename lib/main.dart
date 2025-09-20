@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
-    Hive.registerAdapter(TeamMemberModelAdapter());
+  Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
   await Hive.openBox<TaskModel>(kTaskBox);
 
