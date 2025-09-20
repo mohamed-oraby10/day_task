@@ -6,3 +6,5 @@ const kMainColor = Color(0xFFFED36A);
 const kLabelTextColor = Color(0xFF8CAAB9);
 const kFillTextFormColor = Color(0xFF455A64);
 const kTaskBox = 'taskBox';
+const kProjectBox = 'projectBox';
+

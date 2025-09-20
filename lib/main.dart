@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -17,6 +18,8 @@ Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
+  Hive.registerAdapter(ProjectModelAdapter());
+  await Hive.openBox<ProjectModel>(kProjectBox);
   await Hive.openBox<TaskModel>(kTaskBox);
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-       BlocProvider(create: (context) =>  TasksCubit() ),
-      ],
+      providers: [BlocProvider(create: (context) => TasksCubit())],
       child: MaterialApp(
         title: 'DayTask',
         debugShowCheckedModeBanner: false,
