@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
-import 'package:day_task/cubits/tasks%20cubit/tasks_state.dart';
+import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
+import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
+import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<TasksCubit>(context).featchAllTasks();
+    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
     super.initState();
   }
 

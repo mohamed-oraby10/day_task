@@ -14,7 +14,7 @@ class PercentCircular extends StatelessWidget {
       lineWidth: 2,
       percent: percent,
       startAngle: 180,
-      center: Text("${(percent*100).toInt().toString()}%", style: TextStyle(fontSize: 14, color: Colors.white)),
+      center: Text("${(percent*100).toInt()}%", style: TextStyle(fontSize: 14, color: Colors.white)),
       progressColor: kMainColor,
       backgroundColor: backgroundColor,
       circularStrokeCap: CircularStrokeCap.round,

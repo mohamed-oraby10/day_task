@@ -1,5 +1,5 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/tasks%20cubit/tasks_cubit.dart';
+import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
@@ -20,7 +20,6 @@ Future<void> main() async {
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(ProjectModelAdapter());
   await Hive.openBox<ProjectModel>(kProjectBox);
-  await Hive.openBox<TaskModel>(kTaskBox);
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
