@@ -24,7 +24,10 @@ class ProjectModel extends HiveObject {
   @HiveField(5)
    List<TaskModel> projectTasks;
 
-  ProjectModel({required this.progressPercent, required this.title, required this.details, required this.date, required this.projectTeam, required this.projectTasks});
+  @HiveField(6)
+  int? id;
+
+  ProjectModel({this.id,required this.progressPercent, required this.title, required this.details, required this.date, required this.projectTeam, required this.projectTasks});
 
 
 }

@@ -1,17 +1,18 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/model/task_model.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/percent_circular.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
-  const OngoingTasks({super.key, required this.task});
+  const OngoingTasks({super.key, required this.project, this.onTap});
 
-  final TaskModel task;
+  final ProjectModel project;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 14),
         child: Container(
@@ -24,7 +25,7 @@ class OngoingTasks extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  task.title,
+                  project.title,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -46,10 +47,10 @@ class OngoingTasks extends StatelessWidget {
                       height: 35,
                       width: 150,
                       child: Stack(
-                        children: List.generate(task.teamMembers.length, (
+                        children: List.generate(project.projectTeam.length, (
                           index,
                         ) {
-                          final member = task.teamMembers[index];
+                          final member = project.projectTeam[index];
 
                           return Positioned(
                             left: index * 25,
@@ -82,13 +83,13 @@ class OngoingTasks extends StatelessWidget {
                     ),
                     PercentCircular(
                       backgroundColor: kBackgroundColor,
-                      percent: 0.75,
+                      percent: project.progressPercent,
                     ),
                   ],
                 ),
 
                 Text(
-                  "Due on: ${task.date}",
+                  "Due on: ${project.date}",
                   style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ],

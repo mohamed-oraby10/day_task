@@ -11,8 +11,10 @@ class AddProjectCubit extends Cubit<AddProjectState> {
     emit(AddProjectLoading());
     try {
       var projectBox = Hive.box<ProjectModel>(kProjectBox);
+        int id = await projectBox.add(project);  
+         project.id = id;                       
+         await project.save();  
       
-       await projectBox.add(project);
         emit(AddProjectSuccess());
       
     } catch (e) {

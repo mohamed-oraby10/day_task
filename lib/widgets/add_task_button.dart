@@ -4,8 +4,8 @@ import 'package:day_task/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 
 class AddTaskButton extends StatelessWidget {
-  const AddTaskButton({super.key});
-
+  const AddTaskButton({super.key, required this.projectIndex});
+  final int projectIndex;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +17,7 @@ class AddTaskButton extends StatelessWidget {
         child: MainButton(
           textButton: "Add Task",
           onPress: () {
-            Navigator.pushNamed(context, AppRoutes.createTaskRoute);
+            Navigator.pushNamed(context, AppRoutes.createTaskRoute, arguments: projectIndex,);
           },
         ),
       ),

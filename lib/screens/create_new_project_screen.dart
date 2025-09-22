@@ -1,9 +1,13 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/cubits/project%20cubit/add%20project%20cubit/add_project_cubit.dart';
+import 'package:day_task/cubits/project%20cubit/add%20project%20cubit/add_project_state.dart';
+import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/add%20task%20cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/add%20task%20cubit/add_task_state.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_state.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/utilitis/app_routes.dart';
@@ -16,6 +20,7 @@ import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -33,31 +38,28 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
   String? title, details;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  TaskModel? task;
-  
-  @override
-  void initState() {
-    BlocProvider.of<TasksCubit>(context).featchAllTasks();
-    super.initState();
-  }
+  ProjectModel? project;
+  int projectIndex = Hive.box<ProjectModel>(kProjectBox).length;
+
+
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddTaskCubit(),
-      child: BlocConsumer<AddTaskCubit, AddTaskState>(
+      create: (context) => AddProjectCubit(),
+      child: BlocConsumer<AddProjectCubit, AddProjectState>(
         listener: (context, state) {
-          if (state is AddTaskFailure) {}
+          if (state is AddProjectFailure) {}
 
-          if (state is AddTaskSuccess) {
-            BlocProvider.of<TasksCubit>(context).featchAllTasks();
+          if (state is AddProjectSuccess) {
+            BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
             Navigator.pop(context);
           }
         },
         builder: (context, state) {
           return ModalProgressHUD(
             progressIndicator: CircularProgressIndicator(color: kMainColor),
-            inAsyncCall: state is AddTaskLoading ? true : false,
+            inAsyncCall: state is AddProjectLoading ? true : false,
             child: Scaffold(
               appBar: CustomAppBar(title: "Create New Project"),
               body: Padding(
@@ -209,6 +211,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                               Navigator.pushNamed(
                                 context,
                                 AppRoutes.createTaskRoute,
+                                arguments: projectIndex,
                               );
                             },
                             child: Text(
@@ -222,9 +225,9 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                         ),
                         BlocBuilder<TasksCubit, TasksState>(
                           builder: (context, state) {
-                            List<TaskModel> tasks = BlocProvider.of<TasksCubit>(
-                              context,
-                            ).tasks!;
+                            List<TaskModel> tasks =
+                                BlocProvider.of<TasksCubit>(context).tasks ??
+                                [];
                             return SizedBox(
                               height: 160,
                               child: ListView.builder(
@@ -246,10 +249,9 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                           onPress: () {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
-                              var taskModel = TaskModel(
+                              var projectModel = ProjectModel(
                                 title: title!,
                                 details: details!,
-                                time: selectedTime.format(context),
                                 date: selectedDate == null
                                     ? DateFormat(
                                         'd MMMM',
@@ -257,11 +259,13 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                     : DateFormat(
                                         'd MMMM',
                                       ).format(selectedDate!),
-                                teamMembers: teamMembers,
+                                projectTeam: teamMembers,
+                                progressPercent: 0,
+                                projectTasks: [],
                               );
-                              BlocProvider.of<AddTaskCubit>(
+                              BlocProvider.of<AddProjectCubit>(
                                 context,
-                              ).addTask(taskModel);
+                              ).addProject(projectModel);
                             } else {
                               autovalidateMode = AutovalidateMode.always;
                               setState(() {});

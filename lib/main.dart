@@ -1,4 +1,5 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
@@ -14,14 +15,15 @@ import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Bloc.observer = SimpleBlocObserver();
   Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(ProjectModelAdapter());
+  
   await Hive.openBox<ProjectModel>(kProjectBox);
 
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ChangeNotifierProvider(create: (_) => UserProvider(), child: const MyApp()),
@@ -34,7 +36,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => TasksCubit())],
+      providers: [
+        BlocProvider(create: (context) => TasksCubit()),
+        BlocProvider(create: (context) => ProjectsCubit()),
+      ],
       child: MaterialApp(
         title: 'DayTask',
         debugShowCheckedModeBanner: false,

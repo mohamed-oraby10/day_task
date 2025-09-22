@@ -5,6 +5,7 @@ import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/add_team_member.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_square.dart';
@@ -36,14 +37,29 @@ class _CreateNewTaskState extends State<CreateNewTask> {
     return BlocProvider(
       create: (context) => AddTaskCubit(),
       child: BlocConsumer<AddTaskCubit, AddTaskState>(
-        listener: (context, state) {
-          if (state is AddTaskFailure) {}
+        // listener: (context, state) {
+        //   if (state is AddTaskFailure) {}
 
-          if (state is AddTaskSuccess) {
-            BlocProvider.of<TasksCubit>(context).featchAllTasks();
-            Navigator.pop(context);
-          }
-        },
+        //   if (state is AddTaskSuccess) {
+        //     // BlocProvider.of<TasksCubit>(context).featchAllTasks();
+        //     Navigator.pop(context);
+        //   }
+        // },
+        listener: (context, state) {
+  if (state is AddTaskFailure) {
+    // ممكن تحط SnackBar هنا لو حابب
+  }
+
+  if (state is AddTaskSuccess) {
+    final projectId = ModalRoute.of(context)!.settings.arguments as int;
+
+    // هنا بعد ما التاسك اتضاف خلاص
+    BlocProvider.of<TasksCubit>(context).featchAllTasks(projectId);
+
+    Navigator.pop(context);
+  }
+},
+
         builder: (context, state) {
           return ModalProgressHUD(
             progressIndicator: CircularProgressIndicator(color: kMainColor),
@@ -195,33 +211,80 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                         ),
 
                         SizedBox(height: 50),
-                        MainButton(
-                          textButton: 'Create',
-                          onPress: () {
-                            if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
-                              var taskModel = TaskModel(
-                                title: title!,
-                                details: details!,
-                                time: selectedTime.format(context),
-                                date: selectedDate == null
-                                    ? DateFormat(
-                                        'd MMMM',
-                                      ).format(DateTime.now())
-                                    : DateFormat(
-                                        'd MMMM',
-                                      ).format(selectedDate!),
-                                teamMembers: teamMembers,
-                              );
-                              BlocProvider.of<AddTaskCubit>(
-                                context,
-                              ).addTask(taskModel);
-                            } else {
-                              autovalidateMode = AutovalidateMode.always;
-                              setState(() {});
-                            }
-                          },
-                        ),
+//                         MainButton(
+//                           textButton: 'Create',
+//                           onPress: () {
+//                             if (formKey.currentState!.validate()) {
+//                               formKey.currentState!.save();
+//                               var taskModel = TaskModel(
+//                                 title: title!,
+//                                 details: details!,
+//                                 time: selectedTime.format(context),
+//                                 date: selectedDate == null
+//                                     ? DateFormat(
+//                                         'd MMMM',
+//                                       ).format(DateTime.now())
+//                                     : DateFormat(
+//                                         'd MMMM',
+//                                       ).format(selectedDate!),
+//                                 teamMembers: teamMembers,
+//                               );
+//                               // final projectIndex =
+//                               //     ModalRoute.of(context)!.settings.arguments
+//                               //         as int;
+
+//                               // BlocProvider.of<AddTaskCubit>(
+//                               //   context,
+//                               // ).addTask(taskModel, projectIndex);
+
+//                               // BlocProvider.of<TasksCubit>(
+//                               //   context,
+//                               // ).featchAllTasks(projectIndex);
+
+//                               final projectId = ModalRoute.of(context)!.settings.arguments as int;
+
+// BlocProvider.of<AddTaskCubit>(context).addTask(taskModel, projectId);
+
+// BlocProvider.of<TasksCubit>(context).featchAllTasks(projectId);
+
+
+//                               Navigator.pop(context);
+//                             } else {
+//                               autovalidateMode = AutovalidateMode.always;
+//                               setState(() {});
+//                             }
+//                           },
+//                         ),
+MainButton(
+  textButton: 'Create',
+  onPress: () {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      var taskModel = TaskModel(
+        title: title!,
+        details: details!,
+        time: selectedTime.format(context),
+        date: selectedDate == null
+            ? DateFormat('d MMMM').format(DateTime.now())
+            : DateFormat('d MMMM').format(selectedDate!),
+        teamMembers: teamMembers,
+      );
+
+      final projectId =
+          ModalRoute.of(context)!.settings.arguments as int;
+
+      BlocProvider.of<AddTaskCubit>(context).addTask(taskModel, projectId);
+
+      // ❌ متحطش Navigator.pop هنا
+      // ❌ ومتعملش featchAllTasks هنا
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
+  },
+),
+
                       ],
                     ),
                   ),

@@ -1,11 +1,13 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
+import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_state.dart';
 import 'package:day_task/enum.dart';
-import 'package:day_task/model/task_model.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/profile_screen.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
@@ -23,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TaskModel? task;
+  ProjectModel? project;
 
   @override
   void initState() {
@@ -124,17 +126,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20),
             CustomRow(title: "Ongoing Projects"),
-            BlocBuilder<TasksCubit, TasksState>(
+            BlocBuilder<ProjectsCubit, ProjectsState>(
               builder: (context, state) {
-                List<TaskModel> tasks = BlocProvider.of<TasksCubit>(
+                List<ProjectModel> projects = BlocProvider.of<ProjectsCubit>(
                   context,
-                ).tasks!;
+                ).projects ?? [];
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: tasks.length,
+                    itemCount: projects.length,
                     itemBuilder: (context, index) {
                       return OngoingTasks(
-                        task: tasks[index] ,
+                        project: projects[index] ,
+                        onTap: ()
+                        {
+                        Navigator.pushNamed(context, AppRoutes.taskDetailsRoute,arguments: index);
+                        },
                       );
                     },
                   ),
