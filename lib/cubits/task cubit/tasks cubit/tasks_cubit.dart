@@ -8,14 +8,14 @@ import 'package:hive/hive.dart';
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TasksInitial());
   List<TaskModel>? tasks;
-  featchAllTasks(int projectIndex) {
-    var projectBox = Hive.box<ProjectModel>(kProjectBox);
-    final project = projectBox.getAt(projectIndex);
 
-    if(project != null)
-    {
-    tasks = project.projectTasks;
-    emit(TasksSuccess());
+  featchAllTasks(int projectKey) {
+    var projectBox = Hive.box<ProjectModel>(kProjectBox);
+    final project = projectBox.get(projectKey);
+
+    if (project != null) {
+      tasks = project.projectTasks;
+      emit(TasksSuccess());
     }
   }
 }

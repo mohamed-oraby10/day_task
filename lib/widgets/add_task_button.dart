@@ -1,11 +1,11 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/utilitis/app_routes.dart';
+import 'package:day_task/screens/create_new_task_screen.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 
 class AddTaskButton extends StatelessWidget {
-  const AddTaskButton({super.key, required this.projectIndex});
-  final int projectIndex;
+  const AddTaskButton({super.key, required this.projectKey});
+  final int projectKey;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,8 +17,13 @@ class AddTaskButton extends StatelessWidget {
         child: MainButton(
           textButton: "Add Task",
           onPress: () {
-            Navigator.pushNamed(context, AppRoutes.createTaskRoute, arguments: projectIndex,);
-          },
+Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateNewTask(),
+                              settings: RouteSettings(arguments: projectKey ),
+                            ),
+                          );          },
         ),
       ),
     );

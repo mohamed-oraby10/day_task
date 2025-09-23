@@ -8,15 +8,18 @@ import 'package:hive_flutter/adapters.dart';
 class AddTaskCubit extends Cubit<AddTaskState> {
   AddTaskCubit() : super(AddTaskInitial());
 
-  addTask(TaskModel task, int projectIndex) async {
+  Future<void> addTask(TaskModel task, int projectKey) async {
     emit(AddTaskLoading());
     try {
       var projectBox = Hive.box<ProjectModel>(kProjectBox);
-      final project = projectBox.getAt(projectIndex);
+      final project = projectBox.get(projectKey);
+
       if (project != null) {
         project.projectTasks.add(task);
         await project.save();
         emit(AddTaskSuccess());
+      } else {
+        emit(AddTaskFailure("Project not found"));
       }
     } catch (e) {
       emit(AddTaskFailure(e.toString()));

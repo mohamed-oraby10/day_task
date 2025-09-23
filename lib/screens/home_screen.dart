@@ -1,13 +1,11 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
-import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_state.dart';
+import 'package:day_task/cubits/project cubit/projects cubit/projects_cubit.dart';
+import 'package:day_task/cubits/project cubit/projects cubit/projects_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/profile_screen.dart';
-import 'package:day_task/utilitis/app_routes.dart';
+import 'package:day_task/screens/task_details_screen.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
@@ -25,12 +23,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ProjectModel? project;
-
   @override
   void initState() {
-    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
     super.initState();
+    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
   }
 
   @override
@@ -46,22 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Welcome Back!',
                         style: TextStyle(color: kMainColor, fontSize: 14),
                       ),
                       Text(
                         user.name ?? "",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontFamily: "PilatExtended",
@@ -70,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 80,
                   width: 50,
@@ -79,9 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return ProfileScreen();
-                          },
+                          builder: (context) => const ProfileScreen(),
                         ),
                       );
                     },
@@ -91,11 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundImage: user.image != null
                           ? NetworkImage(user.image!)
                           : null,
-
                       child: user.image == null
                           ? Text(
                               firstLetter,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 22,
                               ),
@@ -106,16 +97,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            HomeSearchBar(),
-            SizedBox(height: 20),
-            CustomRow(title: "Completed tasks"),
+            const SizedBox(height: 20),
+            const HomeSearchBar(),
+            const SizedBox(height: 20),
+            const CustomRow(title: "Completed tasks"),
             SizedBox(
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return CompletedTasksCrad(
+                  return const CompletedTasksCrad(
                     taskName: 'Real Estate\nWebsite Design',
                     taskColor: kMainColor,
                     fontColor: Colors.black,
@@ -124,22 +115,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            SizedBox(height: 20),
-            CustomRow(title: "Ongoing Projects"),
+            const SizedBox(height: 20),
+            const CustomRow(title: "Ongoing Projects"),
             BlocBuilder<ProjectsCubit, ProjectsState>(
               builder: (context, state) {
-                List<ProjectModel> projects = BlocProvider.of<ProjectsCubit>(
-                  context,
-                ).projects ?? [];
+                List<ProjectModel> projects =
+                    BlocProvider.of<ProjectsCubit>(context).projects ?? [];
                 return Expanded(
                   child: ListView.builder(
                     itemCount: projects.length,
                     itemBuilder: (context, index) {
                       return OngoingTasks(
-                        project: projects[index] ,
-                        onTap: ()
-                        {
-                        Navigator.pushNamed(context, AppRoutes.taskDetailsRoute,arguments: index);
+                        project: projects[index],
+                        onTap: () {
+                          final projectKey = projects[index].key;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetailsScreen(),
+                              settings: RouteSettings(arguments: projectKey as int),
+                            ),
+                          );
                         },
                       );
                     },

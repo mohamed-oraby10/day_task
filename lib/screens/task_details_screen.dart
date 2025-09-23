@@ -1,7 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
-import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
@@ -18,24 +17,24 @@ class TaskDetailsScreen extends StatefulWidget {
 }
 
 class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
-late int projectId;
+  late int projectId;
 
-@override
-void didChangeDependencies() {
-  super.didChangeDependencies();
-  projectId = ModalRoute.of(context)!.settings.arguments as int;
-  BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
-}
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    projectId = ModalRoute.of(context)!.settings.arguments as int;
+    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectsCubit, ProjectsState>(
       builder: (context, state) {
-      final projects = BlocProvider.of<ProjectsCubit>(context).projects ;
-      
+        final projects = BlocProvider.of<ProjectsCubit>(context).projects;
+
         final project = projects![projectId];
         return Scaffold(
-          bottomNavigationBar: AddTaskButton(projectIndex: projectId,),
+          bottomNavigationBar: AddTaskButton(projectKey: projectId),
           appBar: CustomAppBar(
             title: 'Task Details',
             sufImage: "assets/images/edit.svg",
@@ -70,7 +69,7 @@ void didChangeDependencies() {
                       TaskDetailsRow(
                         iconImage: 'assets/images/profile2user.svg',
                         title: 'Project Team',
-                        content: '20',
+                        project: project,
                       ),
                       Spacer(flex: 1),
                     ],
@@ -82,15 +81,15 @@ void didChangeDependencies() {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
-                  style: TextStyle(color: kLabelTextColor, fontSize: 13),
+                  project.details,
+                  style: TextStyle(color: kLabelTextColor, fontSize: 16),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
                     children: [
                       Text(
-                        "Project Prograss",
+                        "Project Progress",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Spacer(),
@@ -108,8 +107,14 @@ void didChangeDependencies() {
                 SizedBox(height: 15),
                 Expanded(
                   child: ListView.builder(
+                    itemCount: project.projectTasks.length,
                     itemBuilder: (context, index) {
-                      // return CutomTasks(onCheckChanged: () {}, isChecked: isChecked, task: task);
+                      final task = project.projectTasks[index];
+                      return CutomTasks(
+                        task: task,
+                        isChecked: false,
+                        onCheckChanged: (value) {},
+                      );
                     },
                   ),
                 ),
@@ -121,7 +126,3 @@ void didChangeDependencies() {
     );
   }
 }
-
-
-
-

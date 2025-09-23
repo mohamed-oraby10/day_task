@@ -81,6 +81,7 @@ class AppRoutes {
          case taskDetailsRoute:
         return MaterialPageRoute(
           builder: (_) => const TaskDetailsScreen(),
+          settings: settings
         );
         case createNewProjectRoute:
         return MaterialPageRoute(

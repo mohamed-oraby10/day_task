@@ -11,8 +11,8 @@ class ProjectsCubit extends Cubit<ProjectsState> {
 
   fetchAllProjects() {
     var projectBox = Hive.box<ProjectModel>(kProjectBox);
-
     projects = projectBox.values.toList();
+
     emit(ProjectsSuccess());
   }
 }

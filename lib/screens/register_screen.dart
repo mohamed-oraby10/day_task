@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
-import 'package:day_task/screens/home_screen.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/helper/snak_bar.dart';
@@ -136,13 +136,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         try {
                           await registerUser();
                          
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return HomeScreen();
-                              },
-                            ),
+                           AppRoutes.homeRoute
                           );
                           showSnakBar(context, 'Account created successfully');
                         } on FirebaseAuthException catch (e) {

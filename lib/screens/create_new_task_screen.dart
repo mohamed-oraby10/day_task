@@ -1,11 +1,10 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/task%20cubit/add%20task%20cubit/add_task_cubit.dart';
-import 'package:day_task/cubits/task%20cubit/add%20task%20cubit/add_task_state.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
+import 'package:day_task/cubits/task cubit/add task cubit/add_task_cubit.dart';
+import 'package:day_task/cubits/task cubit/add task cubit/add_task_state.dart';
+import 'package:day_task/cubits/task cubit/tasks cubit/tasks_cubit.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
-import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/add_team_member.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_square.dart';
@@ -34,38 +33,30 @@ class _CreateNewTaskState extends State<CreateNewTask> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    final int? projectKey = args is int ? args : null;
+
+    if (projectKey == null) {
+      return const Scaffold(body: Center(child: Text("⚠ No Project Selected")));
+    }
+
     return BlocProvider(
       create: (context) => AddTaskCubit(),
       child: BlocConsumer<AddTaskCubit, AddTaskState>(
-        // listener: (context, state) {
-        //   if (state is AddTaskFailure) {}
-
-        //   if (state is AddTaskSuccess) {
-        //     // BlocProvider.of<TasksCubit>(context).featchAllTasks();
-        //     Navigator.pop(context);
-        //   }
-        // },
         listener: (context, state) {
-  if (state is AddTaskFailure) {
-    // ممكن تحط SnackBar هنا لو حابب
-  }
-
-  if (state is AddTaskSuccess) {
-    final projectId = ModalRoute.of(context)!.settings.arguments as int;
-
-    // هنا بعد ما التاسك اتضاف خلاص
-    BlocProvider.of<TasksCubit>(context).featchAllTasks(projectId);
-
-    Navigator.pop(context);
-  }
-},
-
+          if (state is AddTaskSuccess) {
+            BlocProvider.of<TasksCubit>(context).featchAllTasks(projectKey);
+            Navigator.pop(context);
+          }
+        },
         builder: (context, state) {
           return ModalProgressHUD(
-            progressIndicator: CircularProgressIndicator(color: kMainColor),
-            inAsyncCall: state is AddTaskLoading ? true : false,
+            progressIndicator: const CircularProgressIndicator(
+              color: kMainColor,
+            ),
+            inAsyncCall: state is AddTaskLoading,
             child: Scaffold(
-              appBar: CustomAppBar(title: "Create New Task"),
+              appBar: const CustomAppBar(title: "Create New Task"),
               body: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
@@ -74,24 +65,24 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                 child: SingleChildScrollView(
                   child: Form(
                     key: formKey,
+                    autovalidateMode: autovalidateMode,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Task Title',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: TextInput(
                             hint: "Title",
-                            onSaved: (value) async {
-                              title = value;
-                            },
+                            onSaved: (value) => title = value,
                           ),
                         ),
-                        SizedBox(height: 15),
+
+                        const SizedBox(height: 15),
+
                         const Text(
                           'Task Details',
                           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -101,25 +92,25 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           child: TextInput(
                             hint: "Details",
                             maxLines: 3,
-                            onSaved: (value) async {
-                              details = value;
-                            },
+                            onSaved: (value) => details = value,
                           ),
                         ),
-                        SizedBox(height: 15),
+
+                        const SizedBox(height: 15),
+
                         const Text(
                           'Add team members',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         Row(
                           children: [
                             SizedBox(
                               height: 45,
                               width: 300,
                               child: ListView.builder(
-                                itemCount: teamMembers.length,
                                 scrollDirection: Axis.horizontal,
+                                itemCount: teamMembers.length,
                                 itemBuilder: (context, index) {
                                   final member = teamMembers[index];
                                   return AddTeamMember(
@@ -134,7 +125,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 },
                               ),
                             ),
-                            SizedBox(width: 25),
+                            const SizedBox(width: 25),
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
@@ -154,12 +145,13 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           ],
                         ),
 
-                        SizedBox(height: 25),
-                        Text(
+                        const SizedBox(height: 25),
+
+                        const Text(
                           'Time & Date',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -177,11 +169,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 }
                               },
                             ),
-
                             CustomTaskDateAndTime(
                               text: selectedTime.format(context),
                             ),
-                            SizedBox(width: 7),
+                            const SizedBox(width: 7),
                             CustomSquare(
                               icon: "assets/images/calendar.svg",
                               onPress: () async {
@@ -210,81 +201,37 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           ],
                         ),
 
-                        SizedBox(height: 50),
-//                         MainButton(
-//                           textButton: 'Create',
-//                           onPress: () {
-//                             if (formKey.currentState!.validate()) {
-//                               formKey.currentState!.save();
-//                               var taskModel = TaskModel(
-//                                 title: title!,
-//                                 details: details!,
-//                                 time: selectedTime.format(context),
-//                                 date: selectedDate == null
-//                                     ? DateFormat(
-//                                         'd MMMM',
-//                                       ).format(DateTime.now())
-//                                     : DateFormat(
-//                                         'd MMMM',
-//                                       ).format(selectedDate!),
-//                                 teamMembers: teamMembers,
-//                               );
-//                               // final projectIndex =
-//                               //     ModalRoute.of(context)!.settings.arguments
-//                               //         as int;
+                        const SizedBox(height: 50),
 
-//                               // BlocProvider.of<AddTaskCubit>(
-//                               //   context,
-//                               // ).addTask(taskModel, projectIndex);
+                        MainButton(
+                          textButton: 'Create',
+                          onPress: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
 
-//                               // BlocProvider.of<TasksCubit>(
-//                               //   context,
-//                               // ).featchAllTasks(projectIndex);
+                              var task = TaskModel(
+                                title: title!,
+                                details: details!,
+                                time: selectedTime.format(context),
+                                date: selectedDate == null
+                                    ? DateFormat(
+                                        'd MMMM',
+                                      ).format(DateTime.now())
+                                    : DateFormat(
+                                        'd MMMM',
+                                      ).format(selectedDate!),
+                                teamMembers: teamMembers,
+                              );
 
-//                               final projectId = ModalRoute.of(context)!.settings.arguments as int;
-
-// BlocProvider.of<AddTaskCubit>(context).addTask(taskModel, projectId);
-
-// BlocProvider.of<TasksCubit>(context).featchAllTasks(projectId);
-
-
-//                               Navigator.pop(context);
-//                             } else {
-//                               autovalidateMode = AutovalidateMode.always;
-//                               setState(() {});
-//                             }
-//                           },
-//                         ),
-MainButton(
-  textButton: 'Create',
-  onPress: () {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-
-      var taskModel = TaskModel(
-        title: title!,
-        details: details!,
-        time: selectedTime.format(context),
-        date: selectedDate == null
-            ? DateFormat('d MMMM').format(DateTime.now())
-            : DateFormat('d MMMM').format(selectedDate!),
-        teamMembers: teamMembers,
-      );
-
-      final projectId =
-          ModalRoute.of(context)!.settings.arguments as int;
-
-      BlocProvider.of<AddTaskCubit>(context).addTask(taskModel, projectId);
-
-      // ❌ متحطش Navigator.pop هنا
-      // ❌ ومتعملش featchAllTasks هنا
-    } else {
-      autovalidateMode = AutovalidateMode.always;
-      setState(() {});
-    }
-  },
-),
-
+                              BlocProvider.of<AddTaskCubit>(
+                                context,
+                              ).addTask(task, projectKey);
+                            } else {
+                              autovalidateMode = AutovalidateMode.always;
+                              setState(() {});
+                            }
+                          },
+                        ),
                       ],
                     ),
                   ),
