@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
+import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
@@ -18,7 +19,7 @@ class TaskDetailsScreen extends StatefulWidget {
 
 class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   late int projectId;
-
+  // Set<TaskModel> completedTasks = {};
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -33,6 +34,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         final projects = BlocProvider.of<ProjectsCubit>(context).projects;
 
         final project = projects![projectId];
+        
+        project.progressPercent = project.completedTasks.length / project.projectTasks.length;
+        
         return Scaffold(
           bottomNavigationBar: AddTaskButton(projectKey: projectId),
           appBar: CustomAppBar(
@@ -110,10 +114,19 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                     itemCount: project.projectTasks.length,
                     itemBuilder: (context, index) {
                       final task = project.projectTasks[index];
+                      final isCompletedTask = project.completedTasks.contains(task);
                       return CutomTasks(
                         task: task,
-                        isChecked: false,
-                        onCheckChanged: (value) {},
+                        isChecked: isCompletedTask,
+                        onCheckChanged: (value) {
+                          setState(() {
+                            if (value == true) {
+                             project.completedTasks.add(task);
+                            } else {
+                               project.completedTasks.remove(task);
+                            }
+                          });
+                        },
                       );
                     },
                   ),

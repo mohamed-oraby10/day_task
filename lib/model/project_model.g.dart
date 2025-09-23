@@ -21,15 +21,16 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       title: fields[0] as String,
       details: fields[1] as String,
       date: fields[2] as String,
-      projectTeam: (fields[3] as List).cast<TeamMemberModel>(),
-      projectTasks: (fields[5] as List).cast<TaskModel>(),
+      projectTeam: (fields[3] as List?)?.cast<TeamMemberModel>() ?? [],
+      projectTasks: (fields[5] as List?)?.cast<TaskModel>() ?? [],
+      completedTasks: (fields[6] as List?)?.cast<TaskModel>() ?? [],
     );
   }
 
   @override
   void write(BinaryWriter writer, ProjectModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       ..writeByte(4)
       ..write(obj.progressPercent)
       ..writeByte(5)
-      ..write(obj.projectTasks);
+      ..write(obj.projectTasks)
+      ..writeByte(6)
+      ..write(obj.completedTasks);
   }
 
   @override

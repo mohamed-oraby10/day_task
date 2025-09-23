@@ -193,7 +193,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                       ).format(selectedDate!),
                                 projectTeam: teamMembers,
                                 progressPercent: 0,
-                                projectTasks: [],
+                                projectTasks: [], completedTasks: [],
                               );
 
                               final cubit = BlocProvider.of<AddProjectCubit>(
