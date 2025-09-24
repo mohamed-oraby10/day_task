@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
 import 'package:day_task/cubits/task%20cubit/add%20completed%20tasks%20cubit/add_completed_tasks_cubit.dart';
+import 'package:day_task/cubits/task%20cubit/remove%20completed%20tasks%20cubit/remove_completed_tasks_cubit.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
@@ -35,24 +36,27 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
 
         final project = projects![projectId];
 
-        project.progressPercent =
+        project.progressPercent = project.projectTasks.isEmpty ? 0 :
             project.completedTasks.length / project.projectTasks.length;
 
-        return BlocProvider(
-          create: (context) => AddCompletedTasksCubit(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => AddCompletedTasksCubit()) ,
+                        BlocProvider(create: (context) => RemoveCompletedTasksCubit()) 
 
+          ],
           child: Scaffold(
             bottomNavigationBar: AddTaskButton(projectKey: projectId),
             appBar: CustomAppBar(
               title: 'Task Details',
               sufImage: "assets/images/edit.svg",
             ),
-
+          
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
+          
                 children: [
                   SizedBox(height: 30),
                   Text(
@@ -63,7 +67,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       fontSize: 21,
                     ),
                   ),
-
+          
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Row(
@@ -119,7 +123,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       itemBuilder: (context, index) {
                         final task = project.projectTasks[index];
                         final isCompletedTask = project.completedTasks.any(
-                          (t) => t.title == task.title,
+                          (t) => t.details == task.details,
                         );
                         return CutomTasks(
                           task: task,
@@ -131,7 +135,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                                   context,
                                 ).addCompletedTask(task, projectId);
                               } else {
-                                project.completedTasks.remove(task);
+                                BlocProvider.of<RemoveCompletedTasksCubit>(
+                                  context,
+                                ).removeCompletedTask(task, projectId);
                               }
                             });
                           },

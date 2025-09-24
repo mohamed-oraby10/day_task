@@ -19,7 +19,7 @@ class ProjectModel extends HiveObject {
   final List<TeamMemberModel> projectTeam;
 
   @HiveField(4)
-  double progressPercent;
+  double progressPercent = 0;
 
   @HiveField(5)
   List<TaskModel> projectTasks;
