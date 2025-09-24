@@ -25,7 +25,7 @@ class TaskCheckBox extends StatelessWidget {
         ),
         child: Center(
           child: Icon(
-            value ?  Icons.circle_outlined : Icons.check_circle_outline,
+            value ? Icons.check_circle_outline : Icons.circle_outlined  ,
             color: kBackgroundColor, 
             size: 28,
           ),

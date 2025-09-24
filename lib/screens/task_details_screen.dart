@@ -1,7 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_state.dart';
-import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
