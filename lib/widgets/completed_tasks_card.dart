@@ -55,7 +55,7 @@ class CompletedTasksCrad extends StatelessWidget {
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                   Text(
-                    "100%",
+                    "${(project.progressPercent * 100).toInt()}%",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 11,
@@ -65,7 +65,7 @@ class CompletedTasksCrad extends StatelessWidget {
                 ],
               ),
               LinearProgressIndicator(
-                value: 1.0,
+                value: project.progressPercent,
                 color: Colors.black,
                 minHeight: 6,
                 borderRadius: BorderRadius.circular(50),

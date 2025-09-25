@@ -105,15 +105,20 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 List<ProjectModel> projects =
                     BlocProvider.of<ProjectsCubit>(context).projects ?? [];
+                final completedProjects = projects
+                    .where((p) => p.progressPercent == 1)
+                    .toList();
                 return SizedBox(
                   height: 200,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: projects.length,
+                    itemCount: completedProjects.length,
                     itemBuilder: (context, index) {
-                      return CompletedTasksCrad(project: projects[index],onTap: () {
-                           final projectKey = projects[index].key;
-                         Navigator.push(
+                      return CompletedTasksCrad(
+                        project: completedProjects[index],
+                        onTap: () {
+                          final projectKey = completedProjects[index].key;
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => TaskDetailsScreen(),
@@ -122,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           );
-                      },);
+                        },
+                      );
                     },
                   ),
                 );
@@ -134,14 +140,17 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 List<ProjectModel> projects =
                     BlocProvider.of<ProjectsCubit>(context).projects ?? [];
+                final ongoingProjects = projects
+                    .where((p) => p.progressPercent < 1)
+                    .toList();
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: projects.length,
+                    itemCount: ongoingProjects.length,
                     itemBuilder: (context, index) {
                       return OngoingTasks(
-                        project: projects[index],
+                        project: ongoingProjects[index],
                         onTap: () {
-                          final projectKey = projects[index].key;
+                          final projectKey = ongoingProjects[index].key;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
