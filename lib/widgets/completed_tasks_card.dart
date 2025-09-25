@@ -26,7 +26,7 @@ class CompletedTasksCrad extends StatelessWidget {
                 project.title,
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 21,
                   fontFamily: "PilatExtended",
                   fontWeight: FontWeight.bold,
                 ),
@@ -64,7 +64,12 @@ class CompletedTasksCrad extends StatelessWidget {
                   ),
                 ],
               ),
-              LinearProgressIndicator(value: 1.0, color: Colors.black),
+              LinearProgressIndicator(
+                value: 1.0,
+                color: Colors.black,
+                minHeight: 6,
+                borderRadius: BorderRadius.circular(50),
+              ),
             ],
           ),
         ),
