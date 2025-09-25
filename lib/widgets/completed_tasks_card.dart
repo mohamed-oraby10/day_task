@@ -1,20 +1,18 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/project_model.dart';
-import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/team_members_images.dart';
 import 'package:flutter/material.dart';
 
 class CompletedTasksCrad extends StatelessWidget {
-  const CompletedTasksCrad({super.key, required this.project});
+  const CompletedTasksCrad({super.key, required this.project, this.onTap});
   final ProjectModel project;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 7),
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, AppRoutes.taskDetailsRoute);
-        },
+        onTap: onTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 7),
           width: 200,

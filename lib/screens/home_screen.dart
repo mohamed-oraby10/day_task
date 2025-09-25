@@ -111,7 +111,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: projects.length,
                     itemBuilder: (context, index) {
-                      return CompletedTasksCrad(project: projects[index]);
+                      return CompletedTasksCrad(project: projects[index],onTap: () {
+                           final projectKey = projects[index].key;
+                         Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetailsScreen(),
+                              settings: RouteSettings(
+                                arguments: projectKey as int,
+                              ),
+                            ),
+                          );
+                      },);
                     },
                   ),
                 );

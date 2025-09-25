@@ -22,7 +22,6 @@ class TaskDetailsScreen extends StatefulWidget {
 
 class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   late int projectId;
-  // Set<TaskModel> completedTasks = {};
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
