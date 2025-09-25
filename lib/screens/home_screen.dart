@@ -101,19 +101,21 @@ class _HomeScreenState extends State<HomeScreen> {
             const HomeSearchBar(),
             const SizedBox(height: 20),
             const CustomRow(title: "Completed tasks"),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return const CompletedTasksCrad(
-                    taskName: 'Real Estate\nWebsite Design',
-                    taskColor: kMainColor,
-                    fontColor: Colors.black,
-                    taskImage: 'assets/images/Rectangle 12.png',
-                  );
-                },
-              ),
+            BlocBuilder<ProjectsCubit, ProjectsState>(
+              builder: (context, state) {
+                List<ProjectModel> projects =
+                    BlocProvider.of<ProjectsCubit>(context).projects ?? [];
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: projects.length,
+                    itemBuilder: (context, index) {
+                      return CompletedTasksCrad(project: projects[index]);
+                    },
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             const CustomRow(title: "Ongoing Projects"),
@@ -133,7 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => TaskDetailsScreen(),
-                              settings: RouteSettings(arguments: projectKey as int),
+                              settings: RouteSettings(
+                                arguments: projectKey as int,
+                              ),
                             ),
                           );
                         },

@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/container_button.dart';
+import 'package:day_task/widgets/team_members_images.dart';
 import 'package:flutter/material.dart';
 
 class TaskDetailsRow extends StatefulWidget {
@@ -8,7 +9,8 @@ class TaskDetailsRow extends StatefulWidget {
     super.key,
     required this.iconImage,
     required this.title,
-    this.content,  this.project,
+    this.content,
+    this.project,
   });
   final String iconImage;
   final String title;
@@ -32,43 +34,7 @@ class _TaskDetailsRowState extends State<TaskDetailsRow> {
             Text(widget.title, style: TextStyle(color: kLabelTextColor)),
             SizedBox(height: 5),
             widget.content == null
-                ? SizedBox(
-                    height: 20,
-                    width: 100,
-                    child: Stack(
-                      children: List.generate(widget.project!.projectTeam.length, (
-                        index,
-                      ) {
-                        final member = widget.project!.projectTeam[index];
-
-                        return Positioned(
-                          left: index * 25,
-                          child: CircleAvatar(
-                            radius: 10,
-                            backgroundColor: kMainColor,
-                            backgroundImage:
-                                (member.image != null &&
-                                    member.image!.isNotEmpty)
-                                ? NetworkImage(member.image!)
-                                : null,
-                            child:
-                                (member.image == null || member.image!.isEmpty)
-                                ? Text(
-                                    member.name.isNotEmpty
-                                        ? member.name[0].toUpperCase()
-                                        : "?",
-                                    style: const TextStyle(
-                                      color: kBackgroundColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                : null,
-                          ),
-                        );
-                      }),
-                    ),
-                  )
+                ? TeamMembersImages(project: widget.project!)
                 : Text(
                     widget.content!,
                     style: TextStyle(color: Colors.white, fontSize: 17),

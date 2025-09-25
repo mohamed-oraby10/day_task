@@ -1,18 +1,12 @@
+import 'package:day_task/constants.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/utilitis/app_routes.dart';
+import 'package:day_task/widgets/team_members_images.dart';
 import 'package:flutter/material.dart';
 
 class CompletedTasksCrad extends StatelessWidget {
-  const CompletedTasksCrad({
-    super.key,
-    required this.taskName,
-    required this.taskColor,
-    required this.fontColor,
-    required this.taskImage,
-  });
-  final String taskName;
-  final Color taskColor;
-  final Color fontColor;
-  final String taskImage;
+  const CompletedTasksCrad({super.key, required this.project});
+  final ProjectModel project;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,18 +16,18 @@ class CompletedTasksCrad extends StatelessWidget {
           Navigator.pushNamed(context, AppRoutes.taskDetailsRoute);
         },
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(horizontal: 7),
           width: 200,
-          height: 180,
-          color: taskColor,
+          height: 170,
+          color: kMainColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                taskName,
+                project.title,
                 style: TextStyle(
-                  color: fontColor,
+                  color: Colors.black,
                   fontSize: 20,
                   fontFamily: "PilatExtended",
                   fontWeight: FontWeight.bold,
@@ -42,35 +36,37 @@ class CompletedTasksCrad extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Team Members',
-                      style: TextStyle(color: fontColor, fontSize: 14),
+                      style: TextStyle(color: Colors.black, fontSize: 12),
                     ),
-                    const Spacer(flex: 2),
-                    Image.asset('assets/images/Ellipse 1.png'),
-                    Image.asset('assets/images/Ellipse 2.png'),
-                    Image.asset('assets/images/Ellipse 3.png'),
-                    Image.asset('assets/images/Ellipse 4.png'),
-                    const Spacer(flex: 1),
+                    TeamMembersImages(
+                      project: project,
+                      imagesColor: Colors.white,
+                    ),
                   ],
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Completed',
-                    style: TextStyle(color: fontColor, fontSize: 14),
+                    style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
-                  const Spacer(flex: 4),
                   Text(
-                    '100%',
-                    style: TextStyle(color: fontColor, fontSize: 14),
+                    "100%",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const Spacer(flex: 1),
                 ],
               ),
-              Image.asset(taskImage),
+              LinearProgressIndicator(value: 1.0, color: Colors.black),
             ],
           ),
         ),

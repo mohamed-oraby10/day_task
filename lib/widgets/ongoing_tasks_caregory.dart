@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/percent_circular.dart';
+import 'package:day_task/widgets/team_members_images.dart';
 import 'package:flutter/material.dart';
 
 class OngoingTasks extends StatelessWidget {
@@ -43,44 +44,7 @@ class OngoingTasks extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      height: 35,
-                      width: 150,
-                      child: Stack(
-                        children: List.generate(project.projectTeam.length, (
-                          index,
-                        ) {
-                          final member = project.projectTeam[index];
-
-                          return Positioned(
-                            left: index * 25,
-                            child: CircleAvatar(
-                              radius: 12,
-                              backgroundColor: kMainColor,
-                              backgroundImage:
-                                  (member.image != null &&
-                                      member.image!.isNotEmpty)
-                                  ? NetworkImage(member.image!)
-                                  : null,
-                              child:
-                                  (member.image == null ||
-                                      member.image!.isEmpty)
-                                  ? Text(
-                                      member.name.isNotEmpty
-                                          ? member.name[0].toUpperCase()
-                                          : "?",
-                                      style: const TextStyle(
-                                        color: kBackgroundColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
+                    TeamMembersImages(project: project,),
                     PercentCircular(
                       backgroundColor: kBackgroundColor,
                       percent: project.progressPercent,
