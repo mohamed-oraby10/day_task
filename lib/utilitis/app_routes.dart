@@ -12,6 +12,7 @@ import 'package:day_task/screens/register_screen.dart';
 import 'package:day_task/screens/schedule_screen.dart';
 import 'package:day_task/screens/splash_screen.dart';
 import 'package:day_task/screens/project_details_screen.dart';
+import 'package:day_task/screens/task_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -27,8 +28,10 @@ class AppRoutes {
   static const String createTaskRoute = '/createTask';
   static const String notificationRoute = '/notification';
   static const String profileRoute = '/profile';
-  static const String taskDetailsRoute = '/taskDetails';
+  static const String projectDetailsRoute = '/projectDetails';
   static const String createNewProjectRoute = '/createNewProhect';
+    static const String taskDetailsRoute = '/taskDetails';
+
 
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -55,7 +58,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case profileRoute:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
-      case taskDetailsRoute:
+         case taskDetailsRoute:
+        return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
+      case projectDetailsRoute:
         return MaterialPageRoute(
           builder: (_) => const ProjectDetailsScreen(),
           settings: settings,

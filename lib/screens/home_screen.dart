@@ -34,81 +34,84 @@ class _HomeScreenState extends State<HomeScreen> {
     var user = Provider.of<UserProvider>(context);
     final firstLetter = user.name?[0].toUpperCase() ?? '?';
 
-    return Scaffold(
-      bottomNavigationBar: const CustomBottomNavigationBar(
-        selectedMenu: MenuState.home,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            Row(
+    return BlocBuilder<ProjectsCubit, ProjectsState>(
+      builder: (context, state) {
+        List<ProjectModel> projects =
+            BlocProvider.of<ProjectsCubit>(context).projects ?? [];
+        final completedProjects = projects
+            .where((p) => p.progressPercent == 1)
+            .toList();
+        final ongoingProjects = projects
+            .where((p) => p.progressPercent < 1)
+            .toList();
+        return Scaffold(
+          bottomNavigationBar: const CustomBottomNavigationBar(
+            selectedMenu: MenuState.home,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Welcome Back!',
-                        style: TextStyle(color: kMainColor, fontSize: 14),
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Welcome Back!',
+                            style: TextStyle(color: kMainColor, fontSize: 14),
+                          ),
+                          Text(
+                            user.name ?? "",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: "PilatExtended",
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        user.name ?? "",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: "PilatExtended",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 80,
-                  width: 50,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
-                        ),
-                      );
-                    },
-                    icon: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: kMainColor,
-                      backgroundImage: user.image != null
-                          ? NetworkImage(user.image!)
-                          : null,
-                      child: user.image == null
-                          ? Text(
-                              firstLetter,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 22,
-                              ),
-                            )
-                          : null,
                     ),
-                  ),
+                    SizedBox(
+                      height: 80,
+                      width: 50,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileScreen(),
+                            ),
+                          );
+                        },
+                        icon: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: kMainColor,
+                          backgroundImage: user.image != null
+                              ? NetworkImage(user.image!)
+                              : null,
+                          child: user.image == null
+                              ? Text(
+                                  firstLetter,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                  ),
+                                )
+                              : null,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const HomeSearchBar(),
-            const SizedBox(height: 20),
-            const CustomRow(title: "Completed tasks"),
-            BlocBuilder<ProjectsCubit, ProjectsState>(
-              builder: (context, state) {
-                List<ProjectModel> projects =
-                    BlocProvider.of<ProjectsCubit>(context).projects ?? [];
-                final completedProjects = projects
-                    .where((p) => p.progressPercent == 1)
-                    .toList();
-                return SizedBox(
+                const SizedBox(height: 20),
+                const HomeSearchBar(),
+                const SizedBox(height: 20),
+                const CustomRow(title: "Completed tasks"),
+                SizedBox(
                   height: 200,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -131,19 +134,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            const CustomRow(title: "Ongoing Projects"),
-            BlocBuilder<ProjectsCubit, ProjectsState>(
-              builder: (context, state) {
-                List<ProjectModel> projects =
-                    BlocProvider.of<ProjectsCubit>(context).projects ?? [];
-                final ongoingProjects = projects
-                    .where((p) => p.progressPercent < 1)
-                    .toList();
-                return Expanded(
+                ),
+                const SizedBox(height: 20),
+                const CustomRow(title: "Ongoing Projects"),
+                Expanded(
                   child: ListView.builder(
                     itemCount: ongoingProjects.length,
                     itemBuilder: (context, index) {
@@ -164,12 +158,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
