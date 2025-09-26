@@ -11,7 +11,7 @@ import 'package:day_task/screens/profile_screen.dart';
 import 'package:day_task/screens/register_screen.dart';
 import 'package:day_task/screens/schedule_screen.dart';
 import 'package:day_task/screens/splash_screen.dart';
-import 'package:day_task/screens/task_details_screen.dart';
+import 'package:day_task/screens/project_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -30,68 +30,43 @@ class AppRoutes {
   static const String taskDetailsRoute = '/taskDetails';
   static const String createNewProjectRoute = '/createNewProhect';
 
-
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.loginRoute:
-        return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case registerRoute:
-        return MaterialPageRoute(
-          builder: (_) => const RegisterScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case homeRoute:
-        return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case messageRoute:
-        return MaterialPageRoute(
-          builder: (_) => const MassegesScraan(),
-        );
+        return MaterialPageRoute(builder: (_) => const MassegesScraan());
       case groupRoute:
-        return MaterialPageRoute(
-          builder: (_) => const GroupesChatScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const GroupesChatScreen());
       case newMessageRoute:
-        return MaterialPageRoute(
-          builder: (_) => const NewMessage(),
-        );
+        return MaterialPageRoute(builder: (_) => const NewMessage());
       case scheduleRoute:
-        return MaterialPageRoute(
-          builder: (_) => const ScheduleSceen(),
-        );
+        return MaterialPageRoute(builder: (_) => const ScheduleSceen());
       case chatingRoute:
-        return MaterialPageRoute(
-          builder: (_) => const ChatScreen(),
-        );
-     
+        return MaterialPageRoute(builder: (_) => const ChatScreen());
+
       case createTaskRoute:
-        return MaterialPageRoute(
-          builder: (_) => const CreateNewTask(),
-        );
+        return MaterialPageRoute(builder: (_) => const CreateNewTask());
       case notificationRoute:
-        return MaterialPageRoute(
-          builder: (_) => const NotificationsScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case profileRoute:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+      case taskDetailsRoute:
         return MaterialPageRoute(
-          builder: (_) => const ProfileScreen(),
+          builder: (_) => const ProjectDetailsScreen(),
+          settings: settings,
         );
-         case taskDetailsRoute:
-        return MaterialPageRoute(
-          builder: (_) => const TaskDetailsScreen(),
-          settings: settings
-        );
-        case createNewProjectRoute:
+      case createNewProjectRoute:
         return MaterialPageRoute(
           builder: (_) => const CreateNewProjectScreen(),
         );
       case AppRoutes.splashRoute:
       default:
-        return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
     }
   }
 }

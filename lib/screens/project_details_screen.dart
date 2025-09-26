@@ -13,14 +13,14 @@ import 'package:day_task/widgets/task_details_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TaskDetailsScreen extends StatefulWidget {
-  const TaskDetailsScreen({super.key});
+class ProjectDetailsScreen extends StatefulWidget {
+  const ProjectDetailsScreen({super.key});
 
   @override
-  State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
+  State<ProjectDetailsScreen> createState() => _ProjectDetailsScreenState();
 }
 
-class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
+class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   late int projectId;
   @override
   void didChangeDependencies() {
@@ -36,42 +36,53 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         final projects = BlocProvider.of<ProjectsCubit>(context).projects;
 
         final project = projects![projectId];
-        
+
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => AddCompletedTasksCubit(BlocProvider.of<ProjectsCubit>(context))),
-            BlocProvider(create: (context) => RemoveCompletedTasksCubit(BlocProvider.of<ProjectsCubit>(context))),
+            BlocProvider(
+              create: (context) => AddCompletedTasksCubit(
+                BlocProvider.of<ProjectsCubit>(context),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => RemoveCompletedTasksCubit(
+                BlocProvider.of<ProjectsCubit>(context),
+              ),
+            ),
           ],
-          
+
           child: MultiBlocListener(
             listeners: [
-      BlocListener<AddCompletedTasksCubit, AddCompletedTasksState>(
-        listener: (context, state) {
-          if (state is AddCompletedTasksSuccess) {
-            BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
-          }
-        },
-      ),
-      BlocListener<RemoveCompletedTasksCubit, RemoveCompletedTasksState>(
-        listener: (context, state) {
-          if (state is RemoveCompletedTasksSuccess) {
-            BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
-          }
-        },
-      ),
-    ],
+              BlocListener<AddCompletedTasksCubit, AddCompletedTasksState>(
+                listener: (context, state) {
+                  if (state is AddCompletedTasksSuccess) {
+                    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
+                  }
+                },
+              ),
+              BlocListener<
+                RemoveCompletedTasksCubit,
+                RemoveCompletedTasksState
+              >(
+                listener: (context, state) {
+                  if (state is RemoveCompletedTasksSuccess) {
+                    BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
+                  }
+                },
+              ),
+            ],
             child: Scaffold(
               bottomNavigationBar: AddTaskButton(projectKey: projectId),
               appBar: CustomAppBar(
-                title: 'Task Details',
+                title: 'Project Details',
                 sufImage: "assets/images/edit.svg",
               ),
-            
+
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-            
+
                   children: [
                     SizedBox(height: 30),
                     Text(
@@ -82,7 +93,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                         fontSize: 21,
                       ),
                     ),
-            
+
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Row(
@@ -111,7 +122,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       child: SingleChildScrollView(
                         child: Text(
                           project.details,
-                          style: TextStyle(color: kLabelTextColor, fontSize: 16),
+                          style: TextStyle(
+                            color: kLabelTextColor,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -148,17 +162,15 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                             task: task,
                             isChecked: isCompletedTask,
                             onCheckChanged: (value) {
-                          
-                                if (value == true) {
-                                  BlocProvider.of<AddCompletedTasksCubit>(
-                                    context,
-                                  ).addCompletedTask(task, projectId);
-                                } else {
-                                  BlocProvider.of<RemoveCompletedTasksCubit>(
-                                    context,
-                                  ).removeCompletedTask(task, projectId);
-                                }
-                               
+                              if (value == true) {
+                                BlocProvider.of<AddCompletedTasksCubit>(
+                                  context,
+                                ).addCompletedTask(task, projectId);
+                              } else {
+                                BlocProvider.of<RemoveCompletedTasksCubit>(
+                                  context,
+                                ).removeCompletedTask(task, projectId);
+                              }
                             },
                           );
                         },

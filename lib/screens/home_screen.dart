@@ -5,7 +5,7 @@ import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/profile_screen.dart';
-import 'package:day_task/screens/task_details_screen.dart';
+import 'package:day_task/screens/project_details_screen.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => TaskDetailsScreen(),
+                              builder: (context) => ProjectDetailsScreen(),
                               settings: RouteSettings(
                                 arguments: projectKey as int,
                               ),
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => TaskDetailsScreen(),
+                              builder: (context) => ProjectDetailsScreen(),
                               settings: RouteSettings(
                                 arguments: projectKey as int,
                               ),
