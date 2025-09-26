@@ -14,7 +14,7 @@ class CompletedTasksCrad extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 7),
+          padding: EdgeInsets.symmetric(horizontal: 8),
           width: 200,
           height: 170,
           color: kMainColor,
@@ -22,13 +22,18 @@ class CompletedTasksCrad extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                project.title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 21,
-                  fontFamily: "PilatExtended",
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 65,
+                child: Text(
+                  project.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 21,
+                    fontFamily: "PilatExtended",
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(

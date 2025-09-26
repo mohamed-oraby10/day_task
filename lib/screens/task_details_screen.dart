@@ -36,11 +36,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         final projects = BlocProvider.of<ProjectsCubit>(context).projects;
 
         final project = projects![projectId];
-
-        // project.progressPercent = project.projectTasks.isEmpty
-        //     ? 0
-        //     : project.completedTasks.length / project.projectTasks.length;
-
+        
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => AddCompletedTasksCubit(BlocProvider.of<ProjectsCubit>(context))),
@@ -111,9 +107,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     SizedBox(height: 10),
-                    Text(
-                      project.details,
-                      style: TextStyle(color: kLabelTextColor, fontSize: 16),
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          project.details,
+                          style: TextStyle(color: kLabelTextColor, fontSize: 16),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
