@@ -16,6 +16,10 @@ class AddTaskCubit extends Cubit<AddTaskState> {
 
       if (project != null) {
         project.projectTasks.add(task);
+        project.completedTasks.removeWhere((t) => t.details == task.details);
+        project.progressPercent = project.projectTasks.isEmpty
+            ? 0
+            : project.completedTasks.length / project.projectTasks.length;
         await project.save();
         emit(AddTaskSuccess());
       } else {

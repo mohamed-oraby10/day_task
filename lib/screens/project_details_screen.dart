@@ -118,7 +118,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     SizedBox(height: 10),
-                    Flexible(
+                    SizedBox(
+                      height: 80,
                       child: SingleChildScrollView(
                         child: Text(
                           project.details,
