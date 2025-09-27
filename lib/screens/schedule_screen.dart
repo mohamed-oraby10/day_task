@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_state.dart';
 import 'package:day_task/enum.dart';
+import 'package:day_task/screens/task_details_screen.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/schedule_category.dart';
 import 'package:day_task/widgets/taskes_category.dart';
@@ -109,15 +110,15 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                       itemBuilder: (context, index) {
                         return TaskesCategory(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) {
-                            //       return TaskDetailsScreen();
-                            //     },
-                            //     settings: RouteSettings(arguments: projectId),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return TaskDetailsScreen();
+                                },
+                                settings: RouteSettings(arguments: tasksOfToday[index]),
+                              ),
+                            );
                           },
                           task: tasksOfToday[index],
                         );

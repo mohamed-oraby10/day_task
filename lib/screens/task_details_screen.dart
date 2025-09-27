@@ -20,12 +20,11 @@ class TaskDetailsScreen extends StatefulWidget {
 }
 
 class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
-  TaskModel? task;
-  late int projectId;
+  late  TaskModel task;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    projectId = ModalRoute.of(context)!.settings.arguments as int;
+    task = ModalRoute.of(context)!.settings.arguments as TaskModel;
     BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
   }
 
@@ -33,9 +32,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectsCubit, ProjectsState>(
       builder: (context, state) {
-        final projects = BlocProvider.of<ProjectsCubit>(context).projects;
+        // final projects = BlocProvider.of<ProjectsCubit>(context).projects;
 
-        final project = projects![projectId];
+        // final project = projects![projectId];
 
         return MultiBlocProvider(
           providers: [
@@ -85,7 +84,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                   children: [
                     SizedBox(height: 30),
                     Text(
-                      task!.title,
+                      task.title,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "PilatExtended",
@@ -100,13 +99,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                           TaskDetailsRow(
                             iconImage: 'assets/images/calendarremove.svg',
                             title: 'Due Date',
-                            content: task!.date,
+                            content: task.date,
                           ),
                           Spacer(flex: 2),
                           TaskDetailsRow(
                             iconImage: 'assets/images/profile2user.svg',
                             title: 'Task members',
-                            project: project,
+                           task: task,
                           ),
                           Spacer(flex: 1),
                         ],
@@ -120,7 +119,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                     Flexible(
                       child: SingleChildScrollView(
                         child: Text(
-                          project.details,
+                          task.details,
                           style: TextStyle(
                             color: kLabelTextColor,
                             fontSize: 16,
