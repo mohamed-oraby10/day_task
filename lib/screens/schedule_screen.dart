@@ -20,11 +20,19 @@ class ScheduleSceen extends StatefulWidget {
 
 class _ScheduleSceenState extends State<ScheduleSceen> {
   late int selectedIndex;
-  ScrollController? scrollController;
+  late ScrollController scrollController;
 
   @override
   void initState() {
     selectedIndex = DateTime.now().day;
+    scrollController = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.animateTo(
+        (selectedIndex - 1) * 70,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
     super.initState();
   }
 
@@ -116,7 +124,9 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                                 builder: (context) {
                                   return TaskDetailsScreen();
                                 },
-                                settings: RouteSettings(arguments: tasksOfToday[index]),
+                                settings: RouteSettings(
+                                  arguments: tasksOfToday[index],
+                                ),
                               ),
                             );
                           },
