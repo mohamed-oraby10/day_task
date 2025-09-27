@@ -1,6 +1,6 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_cubit.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20cubit/tasks_state.dart';
+import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_cubit.dart';
+import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/schedule_category.dart';
@@ -32,105 +32,104 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
     DateTime now = DateTime.now();
     int daysInMonth = DateUtils.getDaysInMonth(now.year, now.month);
 
-    return BlocBuilder<TasksCubit, TasksState>(
-      builder: (context, state) {
-        final tasks = BlocProvider.of<TasksCubit>(context).tasks ?? [];
-        final todayFormatted = DateFormat('d MMMM').format(DateTime.now());
+    return BlocProvider(
+      create: (context) => TasksOfTodayCubit()..fetchAllTasksOfToday(),
+      child: BlocBuilder<TasksOfTodayCubit, TasksOfTodayState>(
+        builder: (context, state) {
+          final tasksOfToday = BlocProvider.of<TasksOfTodayCubit>(
+            context,
+          ).tasks;
+          return Scaffold(
+            bottomNavigationBar: const CustomBottomNavigationBar(
+              selectedMenu: MenuState.calendar,
+            ),
+            appBar: CustomAppBar(
+              title: "Schedule",
+              sufImage: "assets/images/addsquare.svg",
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    DateFormat('MMMM').format(now),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: SizedBox(
+                      height: 75,
+                      child: ListView.builder(
+                        controller: scrollController,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: daysInMonth,
+                        itemBuilder: (context, index) {
+                          DateTime date = DateTime(
+                            now.year,
+                            now.month,
+                            index + 1,
+                          );
+                          String dayNumber = DateFormat('d').format(date);
+                          String dayName = DateFormat('EEE').format(date);
+                          bool isSelected = (index + 1) == selectedIndex;
 
-        final tasksOfToday = tasks
-            .where((t) => t.date == todayFormatted)
-            .toList();
+                          return ScheduleCategory(
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = index + 1;
+                              });
+                            },
+                            color: isSelected ? kMainColor : kSecondColor,
+                            dayNameColor: isSelected
+                                ? kBackgroundColor
+                                : Colors.white,
+                            dayNumberColor: isSelected
+                                ? kBackgroundColor
+                                : Colors.white,
+                            number: dayNumber,
+                            day: dayName,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
 
-        return Scaffold(
-          bottomNavigationBar: const CustomBottomNavigationBar(
-            selectedMenu: MenuState.calendar,
-          ),
-          appBar: CustomAppBar(
-            title: "Schedule",
-            sufImage: "assets/images/addsquare.svg",
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  DateFormat('MMMM').format(now),
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SizedBox(
-                    height: 75,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'Today\'s Tasks',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+
+                  Expanded(
                     child: ListView.builder(
-                      controller: scrollController,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: daysInMonth,
+                      itemCount: tasksOfToday.length,
                       itemBuilder: (context, index) {
-                        DateTime date = DateTime(
-                          now.year,
-                          now.month,
-                          index + 1,
-                        );
-                        String dayNumber = DateFormat('d').format(date);
-                        String dayName = DateFormat('EEE').format(date);
-                        bool isSelected = (index + 1) == selectedIndex;
-
-                        return ScheduleCategory(
+                        return TaskesCategory(
                           onTap: () {
-                            setState(() {
-                              selectedIndex = index + 1;
-                            });
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) {
+                            //       return TaskDetailsScreen();
+                            //     },
+                            //     settings: RouteSettings(arguments: projectId),
+                            //   ),
+                            // );
                           },
-                          color: isSelected ? kMainColor : kSecondColor,
-                          dayNameColor: isSelected
-                              ? kBackgroundColor
-                              : Colors.white,
-                          dayNumberColor: isSelected
-                              ? kBackgroundColor
-                              : Colors.white,
-                          number: dayNumber,
-                          day: dayName,
+                          task: tasksOfToday[index],
                         );
                       },
                     ),
                   ),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    'Today\'s Tasks',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: tasksOfToday.length,
-                    itemBuilder: (context, index) {
-                      return TaskesCategory(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) {
-                          //       return TaskDetailsScreen();
-                          //     },
-                          //     settings: RouteSettings(arguments: projectId),
-                          //   ),
-                          // );
-                        },
-                        task: tasksOfToday[index],
-                      );
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

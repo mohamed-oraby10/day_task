@@ -21,9 +21,9 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       title: fields[0] as String,
       details: fields[1] as String,
       date: fields[2] as String,
-      projectTeam: (fields[3] as List?)?.cast<TeamMemberModel>() ?? [],
-      projectTasks: (fields[5] as List?)?.cast<TaskModel>() ?? [],
-      completedTasks: (fields[6] as List?)?.cast<TaskModel>() ?? [],
+      projectTeam: (fields[3] as List).cast<TeamMemberModel>(),
+      projectTasks: (fields[5] as List).cast<TaskModel>(),
+      completedTasks: (fields[6] as List).cast<TaskModel>(),
     );
   }
 

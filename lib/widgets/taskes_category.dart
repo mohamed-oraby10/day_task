@@ -49,7 +49,7 @@ class TaskesCategory extends StatelessWidget {
                       ),
                     ),
 
-                    TaskMembersImages(task: task),
+                    TaskMembersImages(task: task, imagesColor: Colors.white),
                   ],
                 ),
               ),
