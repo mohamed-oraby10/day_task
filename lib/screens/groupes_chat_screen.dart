@@ -6,9 +6,14 @@ import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
-class GroupesChatScreen extends StatelessWidget {
+class GroupesChatScreen extends StatefulWidget {
   const GroupesChatScreen({super.key});
 
+  @override
+  State<GroupesChatScreen> createState() => _GroupesChatScreenState();
+}
+
+class _GroupesChatScreenState extends State<GroupesChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +40,9 @@ class GroupesChatScreen extends StatelessWidget {
                   onPress: () {
                     Navigator.pop(context);
                   },
+                  isMessage: false,
                 ),
-                CustomButton(text: "Groupes"),
+                CustomButton(text: "Groupes", isMessage: true),
               ],
             ),
           ),

@@ -6,9 +6,14 @@ import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
-class MassegesScraan extends StatelessWidget {
+class MassegesScraan extends StatefulWidget {
   const MassegesScraan({super.key});
 
+  @override
+  State<MassegesScraan> createState() => _MassegesScraanState();
+}
+
+class _MassegesScraanState extends State<MassegesScraan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,7 @@ class MassegesScraan extends StatelessWidget {
         },
       ),
       body: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -35,6 +40,7 @@ class MassegesScraan extends StatelessWidget {
                   onPress: () {
                     Navigator.pushNamed(context, AppRoutes.messageRoute);
                   },
+                  isMessage: true,
                 ),
                 SizedBox(width: 20),
                 CustomButton(
@@ -42,12 +48,13 @@ class MassegesScraan extends StatelessWidget {
                   onPress: () {
                     Navigator.pushNamed(context, AppRoutes.groupRoute);
                   },
+                  isMessage: false,
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Row(
               children: [
                 Image.asset('assets/images/Ellipse 381.png'),
@@ -66,29 +73,36 @@ class MassegesScraan extends StatelessWidget {
                             'Olivia Anna',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
+                          SizedBox(height: 5),
                           Text(
-                            ' Hi please check the task, that i.... 43 min',
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            'Hi please check the task, that i',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Color(0xffB8B8B8),
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                Spacer(),
+                Text(
+                  '31 min',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Color(0xffB8B8B8), fontSize: 12),
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: CustomButton(
-                text: "Start Chat",
-                // buttonColor: AppColors.mainColor,
-              ),
-            ),
-          ),
         ],
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 10),
+        child: CustomButton(text: "Start Chat", isMessage: true),
       ),
     );
   }
