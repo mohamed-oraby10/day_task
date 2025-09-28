@@ -1,4 +1,5 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/task cubit/add task cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/task cubit/add task cubit/add_task_state.dart';
 import 'package:day_task/cubits/task cubit/tasks cubit/tasks_cubit.dart';
@@ -30,7 +31,6 @@ class _CreateNewTaskState extends State<CreateNewTask> {
   String? title, details;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
@@ -129,6 +129,9 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
+                                 final projects = BlocProvider.of<ProjectsCubit>(context).projects;
+
+        final project = projects![projectKey];
                                 await showUsersDialog(context, (users) {
                                   setState(() {
                                     for (var user in users) {
@@ -139,7 +142,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                       }
                                     }
                                   });
-                                });
+                                },projectTeam: project.projectTeam);
                               },
                             ),
                           ],
