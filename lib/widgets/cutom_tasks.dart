@@ -8,7 +8,8 @@ class CutomTasks extends StatelessWidget {
     super.key,
     this.onTap,
     required this.onCheckChanged,
-    required this.isChecked, required this.task,
+    required this.isChecked,
+    required this.task,
   });
   final void Function()? onTap;
   final bool isChecked;
@@ -21,16 +22,17 @@ class CutomTasks extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          height: 60,
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           width: double.infinity,
           color: kFillTextFormColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                task.title,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+              Expanded(
+                child: Text(
+                  task.title,
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
               ),
 
               Center(
