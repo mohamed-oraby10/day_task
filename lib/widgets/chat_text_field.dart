@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ChatTextField extends StatefulWidget {
-  const ChatTextField({super.key});
+class ChatTextField extends StatelessWidget {
+ const  ChatTextField({super.key, this.onSubmitted,required this.controller});
+  final void Function(String)? onSubmitted;
+ final TextEditingController controller ;
 
-  @override
-  State<ChatTextField> createState() => _ChatTextFieldState();
-}
-
-class _ChatTextFieldState extends State<ChatTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55,
       width: 300,
-      child: TextFormField(
+      child: TextField(
+        controller: controller,
+        onSubmitted: onSubmitted,
         style: TextStyle(color: Colors.white),
         maxLines: 3,
         decoration: InputDecoration(

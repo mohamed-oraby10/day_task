@@ -1,12 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
 import 'package:day_task/widgets/recieved_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  CollectionReference messages = FirebaseFirestore.instance.collection(
+    kChats,
+  ).doc("chatId").collection(kMessage);
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +93,13 @@ class ChatScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ChatTextField(),
+                      ChatTextField(
+                        controller: controller,
+                        onSubmitted: (data) {
+                          messages.add({'text': data});
+                          controller.clear();
+                        },
+                      ),
                       SizedBox(width: 10),
 
                       Container(
