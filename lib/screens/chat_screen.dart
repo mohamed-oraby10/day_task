@@ -64,6 +64,7 @@ class ChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    itemCount: 5,
                     itemBuilder: (context, index) {
                       return RecievedMessage(
                         text: 'Hi, please check the new task.',
@@ -82,7 +83,7 @@ class ChatScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: 60, width: 300, child: ChatTextField()),
+                      ChatTextField(),
                       SizedBox(width: 10),
 
                       Container(
