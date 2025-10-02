@@ -102,7 +102,13 @@ class _MassegesScraanState extends State<MassegesScraan> {
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 10),
-        child: CustomButton(text: "Start Chat", isMessage: true),
+        child: CustomButton(
+          text: "Start Chat",
+          isMessage: true,
+          onPress: () {
+            Navigator.pushNamed(context, AppRoutes.newMessageRoute);
+          },
+        ),
       ),
     );
   }

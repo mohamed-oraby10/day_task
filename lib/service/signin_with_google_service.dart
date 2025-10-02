@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 Future<UserCredential> signWithGoogle() async {
  final GoogleSignIn googleSignIn = GoogleSignIn();
-  //  await googleSignIn.signOut();
+   await googleSignIn.signOut();
 final googleUser = await googleSignIn.signIn();
 
   final GoogleSignInAuthentication? googleAuth =

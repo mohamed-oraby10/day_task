@@ -1,20 +1,31 @@
+import 'package:day_task/model/user_model.dart';
+import 'package:day_task/widgets/default_image.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class NewMessageCategory extends StatelessWidget {
-  NewMessageCategory({this.image, this.name});
-  String? image;
-  String? name;
+  const NewMessageCategory({super.key, required this.user, this.onTap});
+  final UserModel user;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: ListTile(
-        leading: Image.asset(image!),
-        title: Text(
-          name!,
-          style: const TextStyle(color: Colors.white),
+      child: GestureDetector(
+        onTap: onTap,
+        child: ListTile(
+          leading: user.image == null
+              ? DefaultImage(name: user.name)
+              : CircleAvatar(
+                  radius: 22,
+                  backgroundImage: NetworkImage(user.image!),
+                ),
+          title: Text(
+            user.name,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

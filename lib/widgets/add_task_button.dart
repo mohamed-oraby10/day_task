@@ -17,13 +17,14 @@ class AddTaskButton extends StatelessWidget {
         child: MainButton(
           textButton: "Add Task",
           onPress: () {
-Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateNewTask(),
-                              settings: RouteSettings(arguments: projectKey ),
-                            ),
-                          );          },
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateNewTask(),
+                settings: RouteSettings(arguments: projectKey),
+              ),
+            );
+          },
         ),
       ),
     );
