@@ -1,9 +1,10 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/model/message_model.dart';
 import 'package:flutter/material.dart';
 
 class RecievedMessage extends StatelessWidget {
-  const RecievedMessage({super.key, required this.text});
-  final String text;
+  const RecievedMessage({super.key, required this.message});
+  final MessageModel message;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +18,7 @@ class RecievedMessage extends StatelessWidget {
           ),
           color: kSecondColor,
           child: Text(
-            text,
+            message.message,
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),

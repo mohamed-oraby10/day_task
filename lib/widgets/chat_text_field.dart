@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatTextField extends StatelessWidget {
- const  ChatTextField({super.key, this.onSubmitted,required this.controller});
+  const ChatTextField({super.key, this.onSubmitted, required this.controller});
   final void Function(String)? onSubmitted;
- final TextEditingController controller ;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +14,7 @@ class ChatTextField extends StatelessWidget {
       height: 55,
       width: 300,
       child: TextField(
+        textInputAction: TextInputAction.send,
         controller: controller,
         onSubmitted: onSubmitted,
         style: TextStyle(color: Colors.white),
