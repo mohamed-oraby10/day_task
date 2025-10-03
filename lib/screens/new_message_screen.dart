@@ -24,7 +24,10 @@ class _NewMessageState extends State<NewMessage> {
         if (snapshot.hasData) {
           List<UserModel> userslist = [];
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            userslist.add(UserModel.fromJson(snapshot.data!.docs[i].data()));
+            var doc = snapshot.data!.docs[i];
+            userslist.add(
+              UserModel.fromJson(doc.id, doc.data() as Map<String, dynamic>),
+            );
           }
           return Scaffold(
             appBar: CustomAppBar(
@@ -60,7 +63,7 @@ class _NewMessageState extends State<NewMessage> {
                   child: ListView.builder(
                     itemCount: userslist.length,
                     itemBuilder: (context, index) {
-                     final user = userslist[index] ;
+                      final user = userslist[index];
                       return NewMessageCategory(
                         user: user,
                         onTap: () {

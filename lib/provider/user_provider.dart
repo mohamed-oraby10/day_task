@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../model/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
-  String? name, email, image;
+  UserModel? userModel;
   Stream<DocumentSnapshot>? userStream;
 
   UserProvider() {
@@ -21,16 +22,15 @@ class UserProvider extends ChangeNotifier {
       userStream!.listen((doc) {
         if (doc.exists) {
           final data = doc.data() as Map<String, dynamic>;
-
-          name = data['name'] ?? user.displayName;
-          email = data['email'] ?? user.email;
-          image = data['image'] ?? user.photoURL;
+          userModel = UserModel.fromJson(user.uid, data);
         } else {
-          name = user.displayName;
-          email = user.email;
-          image = user.photoURL;
+          userModel = UserModel(
+            uid: user.uid,
+            name: user.displayName ?? "",
+            email: user.email ?? "",
+            image: user.photoURL,
+          );
         }
-
         notifyListeners();
       });
     }
@@ -40,7 +40,7 @@ class UserProvider extends ChangeNotifier {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
 
-    final data = {'name': name, 'email': user.email, 'image': image};
+    final data = {'name': name, 'email': user.email, 'photo': image};
 
     await FirebaseFirestore.instance
         .collection("users")

@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
-    final firstLetter = user.name?[0].toUpperCase() ?? '?';
+    final firstLetter = user.userModel?.name[0].toUpperCase() ?? '?';
     return ModalProgressHUD(
       inAsyncCall: inAsyncCall,
       child: Scaffold(
@@ -39,10 +39,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundColor: kMainColor,
                     child: CircleAvatar(
                       radius: 67,
-                      backgroundImage: user.image != null
-                          ? NetworkImage(user.image!)
+                      backgroundImage: user.userModel?.image != null
+                          ? NetworkImage(user.userModel!.image!)
                           : null,
-                      child: user.image == null
+                      child: user.userModel?.image == null
                           ? Text(firstLetter, style: TextStyle(fontSize: 30))
                           : null,
                     ),
@@ -51,12 +51,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 20),
               ProfileCategory(
-                text: user.name ?? "",
+                text: user.userModel?.name ?? "",
                 preImage: 'assets/images/useradd.svg',
                 postImage: 'assets/images/edit.svg',
               ),
               ProfileCategory(
-                text: user.email ?? '',
+                text: user.userModel?.email ?? '',
                 preImage: 'assets/images/usertag.svg',
                 postImage: 'assets/images/edit.svg',
               ),

@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
-    final firstLetter = user.name?[0].toUpperCase() ?? '?';
+    final firstLetter = user.userModel?.name[0].toUpperCase() ?? '?';
 
     return BlocBuilder<ProjectsCubit, ProjectsState>(
       builder: (context, state) {
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(color: kMainColor, fontSize: 14),
                           ),
                           Text(
-                            user.name ?? "",
+                            user.userModel?.name ?? "",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -90,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: CircleAvatar(
                           radius: 20,
                           backgroundColor: kMainColor,
-                          backgroundImage: user.image != null
-                              ? NetworkImage(user.image!)
+                          backgroundImage: user.userModel?.image != null
+                              ? NetworkImage(user.userModel!.image!)
                               : null,
-                          child: user.image == null
+                          child: user.userModel?.image == null
                               ? Text(
                                   firstLetter,
                                   style: const TextStyle(

@@ -19,23 +19,66 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  CollectionReference messages = FirebaseFirestore.instance
-      .collection(kChats)
-      .doc("chatId")
-      .collection(kMessages);
-  TextEditingController controller = TextEditingController();
+  late CollectionReference messages;
+  late String chatId;
   late UserModel user;
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    user = ModalRoute.of(context)!.settings.arguments as UserModel;
+
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    chatId = currentUser.uid.hashCode <= user.uid.hashCode
+        ? "${currentUser.uid}_${user.uid}"
+        : "${user.uid}_${currentUser.uid}";
+
+    messages = FirebaseFirestore.instance
+        .collection(kChats)
+        .doc(chatId)
+        .collection(kMessages);
+  }
+
+  Future<void> sendMessage(String data) async {
+    if (data.trim().isEmpty) return;
+
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    final messageData = {
+      'text': data,
+      'senderEmail': userProvider.userModel?.email ?? currentUser.email,
+      'senderId': currentUser.uid,
+      'timestamp': FieldValue.serverTimestamp(),
+      'type': 'text',
+      'isSeen': false,
+    };
+
+    await messages.add(messageData);
+
+    await FirebaseFirestore.instance.collection(kChats).doc(chatId).set({
+      'lastMessage': data,
+      'lastMessageTime': FieldValue.serverTimestamp(),
+      'lastMessageType': 'text',
+      'members': [currentUser.uid, user.uid],
+      'createdAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+
+    controller.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
-    user = ModalRoute.of(context)!.settings.arguments as UserModel;
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.snapshots(),
+      stream: messages.orderBy('timestamp', descending: false).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MessageModel> messagesList = [];
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             messagesList.add(MessageModel.fromJson(snapshot.data!.docs[i]));
           }
+
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -47,7 +90,6 @@ class _ChatScreenState extends State<ChatScreen> {
               backgroundColor: kBackgroundColor,
               elevation: 0,
               foregroundColor: Colors.white,
-
               title: Row(
                 children: [
                   user.image == null
@@ -56,7 +98,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           radius: 22,
                           backgroundImage: NetworkImage(user.image!),
                         ),
-
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
@@ -67,7 +108,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           Text(
                             user.name,
                             softWrap: true,
-                            overflow: TextOverflow.visible,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 14),
                           ),
                           const Text(
@@ -94,61 +135,38 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ],
             ),
-            body: Stack(
+            body: Column(
               children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: messagesList.length,
+                    itemBuilder: (context, index) {
+                      return SendingMeaasge(message: messagesList[index]);
+                    },
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 20,
+                    vertical: 10,
                     horizontal: 10,
                   ),
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: messagesList.length,
-                          itemBuilder: (context, index) {
-                            return SendingMeaasge(message: messagesList[index]);
-                          },
-                        ),
+                      ChatTextField(
+                        controller: controller,
+                        onSubmitted: (data) => sendMessage(data),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ChatTextField(
-                              controller: controller,
-                              onSubmitted: (data) {
-                                messages.add({
-                                  'text': data,
-                                  'senderEmail': Provider.of<UserProvider>(
-                                    context,
-                                    listen: false,
-                                  ).email,
-                                  'senderId':
-                                      FirebaseAuth.instance.currentUser!.uid,
-                                  'timestamp': FieldValue.serverTimestamp(),
-                                });
-                                controller.clear();
-                              },
-                            ),
-                            SizedBox(width: 10),
-
-                            Container(
-                              height: 55,
-                              width: 55,
-                              color: kSecondColor,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: SvgPicture.asset(
-                                  'assets/images/microphone2.svg',
-                                ),
-                              ),
-                            ),
-                          ],
+                      const SizedBox(width: 10),
+                      Container(
+                        height: 55,
+                        width: 55,
+                        color: kSecondColor,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: SvgPicture.asset(
+                            'assets/images/microphone2.svg',
+                          ),
                         ),
                       ),
                     ],
