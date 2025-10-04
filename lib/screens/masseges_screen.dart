@@ -8,6 +8,7 @@ import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_button.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MassegesScraan extends StatefulWidget {
@@ -21,8 +22,12 @@ class _MassegesScraanState extends State<MassegesScraan> {
   CollectionReference chats = FirebaseFirestore.instance.collection(kChats);
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+
     return StreamBuilder<QuerySnapshot>(
-      stream: chats.snapshots(),
+      stream: chats
+          .where('members', arrayContains: currentUser.uid)
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<ChatModel> chatList = [];
@@ -71,6 +76,9 @@ class _MassegesScraanState extends State<MassegesScraan> {
                     itemCount: chatList.length,
                     itemBuilder: (context, index) {
                       final chat = chatList[index];
+                      final otherUserId = chat.userId == currentUser.uid
+                          ? chat.currentUserId
+                          : chat.userId;
                       return FutureBuilder<DocumentSnapshot>(
                         future: FirebaseFirestore.instance
                             .collection('users')
@@ -84,7 +92,7 @@ class _MassegesScraanState extends State<MassegesScraan> {
                           final userData = userSnapshot.data!.data();
 
                           final user = UserModel.fromJson(
-                            chat.userId,
+                            otherUserId,
                             userData as Map<String, dynamic>,
                           );
 

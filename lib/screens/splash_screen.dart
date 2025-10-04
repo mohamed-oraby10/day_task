@@ -37,18 +37,18 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
               ),
-          
+
               CustomText(
                 text: "Manage \nyour \nTasks with",
                 textColor: Colors.white,
               ),
               CustomText(text: "DayTask", textColor: kMainColor),
-          
+
               SizedBox(height: 40),
               MainButton(
                 textButton: 'Let\'s Start',
                 onPress: () {
-                  Navigator.pushNamed(context, AppRoutes.homeRoute);
+                  Navigator.pushNamed(context, AppRoutes.loginRoute);
                 },
               ),
             ],

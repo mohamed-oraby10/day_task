@@ -4,9 +4,11 @@ class ChatModel {
   final String lastMessage;
   final Timestamp lastMessageTime;
   final String userId;
+  final String currentUserId;
 
   ChatModel({
     required this.userId,
+    required this.currentUserId,
     required this.lastMessageTime,
     required this.lastMessage,
   });
@@ -16,6 +18,7 @@ class ChatModel {
       lastMessage: jsonData['lastMessage'],
       lastMessageTime: jsonData['lastMessageTime'],
       userId: jsonData['members'][1],
+      currentUserId: jsonData['members'][0],
     );
   }
 }
