@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/chat_model.dart';
+import 'package:day_task/model/user_model.dart';
 import 'package:day_task/widgets/chat_person.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_button.dart';
@@ -69,7 +70,27 @@ class _MassegesScraanState extends State<MassegesScraan> {
                   child: ListView.builder(
                     itemCount: chatList.length,
                     itemBuilder: (context, index) {
-                      return ChatPerson(chat: chatList[index]);
+                      final chat = chatList[index];
+                      return FutureBuilder<DocumentSnapshot>(
+                        future: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(chat.userId)
+                            .get(),
+                        builder: (context, userSnapshot) {
+                          if (!userSnapshot.hasData) {
+                            return const Center(child: Text('No chats yet'));
+                          }
+
+                          final userData = userSnapshot.data!.data();
+
+                          final user = UserModel.fromJson(
+                            chat.userId,
+                            userData as Map<String, dynamic>,
+                          );
+
+                          return ChatPerson(chat: chatList[index], user: user);
+                        },
+                      );
                     },
                   ),
                 ),
