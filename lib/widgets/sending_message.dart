@@ -7,11 +7,16 @@ class SendingMeaasge extends StatelessWidget {
   final MessageModel message;
   @override
   Widget build(BuildContext context) {
+        final screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Align(
         alignment: Alignment.centerRight,
         child: Container(
+          constraints: BoxConstraints(
+            maxWidth: screenWidth*0.7
+          ),
           padding: EdgeInsetsDirectional.symmetric(
             vertical: 12,
             horizontal: 20,

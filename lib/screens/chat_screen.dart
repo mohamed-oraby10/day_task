@@ -5,6 +5,7 @@ import 'package:day_task/model/user_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
 import 'package:day_task/widgets/default_image.dart';
+import 'package:day_task/widgets/recieved_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,13 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: ListView.builder(
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
-                      return SendingMeaasge(message: messagesList[index]);
+                      final message = messagesList[index];
+                      final currentUser = FirebaseAuth.instance.currentUser!;
+                      if (message.userId == currentUser.uid) {
+                        return SendingMeaasge(message: message);
+                      } else {
+                        return RecievedMessage(message: message);
+                      }
                     },
                   ),
                 ),

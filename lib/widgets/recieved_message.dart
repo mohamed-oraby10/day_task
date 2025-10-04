@@ -7,14 +7,17 @@ class RecievedMessage extends StatelessWidget {
   final MessageModel message;
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Container(
+          constraints: BoxConstraints(maxWidth: screenWidth * 0.7),
           padding: EdgeInsetsDirectional.symmetric(
             vertical: 12,
-            horizontal: 20,
+            horizontal: 12,
           ),
           color: kSecondColor,
           child: Text(
