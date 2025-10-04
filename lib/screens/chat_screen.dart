@@ -74,117 +74,112 @@ class _ChatScreenState extends State<ChatScreen> {
     return StreamBuilder<QuerySnapshot>(
       stream: messages.orderBy('timestamp', descending: false).snapshots(),
       builder: (context, snapshot) {
+        List<MessageModel> messagesList = [];
         if (snapshot.hasData) {
-          List<MessageModel> messagesList = [];
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             messagesList.add(MessageModel.fromJson(snapshot.data!.docs[i]));
           }
-
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: SvgPicture.asset("assets/images/arrowleft.svg"),
-              ),
-              backgroundColor: kBackgroundColor,
-              elevation: 0,
-              foregroundColor: Colors.white,
-              title: Row(
-                children: [
-                  user.image == null
-                      ? DefaultImage(name: user.name)
-                      : CircleAvatar(
-                          radius: 22,
-                          backgroundImage: NetworkImage(user.image!),
-                        ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            user.name,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                          const Text(
-                            'Online',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                        ],
+        }
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: SvgPicture.asset("assets/images/arrowleft.svg"),
+            ),
+            backgroundColor: kBackgroundColor,
+            elevation: 0,
+            foregroundColor: Colors.white,
+            title: Row(
+              children: [
+                user.image == null
+                    ? DefaultImage(name: user.name)
+                    : CircleAvatar(
+                        radius: 22,
+                        backgroundImage: NetworkImage(user.image!),
                       ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          user.name,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        const Text(
+                          'Online',
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset('assets/images/video.svg'),
               ),
-              actions: [
-                IconButton(
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
                   onPressed: () {},
-                  icon: SvgPicture.asset('assets/images/video.svg'),
+                  icon: SvgPicture.asset('assets/images/callcalling.svg'),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset('assets/images/callcalling.svg'),
-                  ),
+              ),
+            ],
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: messagesList.length,
+                  itemBuilder: (context, index) {
+                    final message = messagesList[index];
+                    final currentUser = FirebaseAuth.instance.currentUser!;
+                    if (message.userId == currentUser.uid) {
+                      return SendingMeaasge(message: message);
+                    } else {
+                      return RecievedMessage(message: message);
+                    }
+                  },
                 ),
-              ],
-            ),
-            body: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: messagesList.length,
-                    itemBuilder: (context, index) {
-                      final message = messagesList[index];
-                      final currentUser = FirebaseAuth.instance.currentUser!;
-                      if (message.userId == currentUser.uid) {
-                        return SendingMeaasge(message: message);
-                      } else {
-                        return RecievedMessage(message: message);
-                      }
-                    },
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 10,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ChatTextField(
-                        controller: controller,
-                        onSubmitted: (data) => sendMessage(data),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ChatTextField(
+                      controller: controller,
+                      onSubmitted: (data) => sendMessage(data),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      height: 55,
+                      width: 55,
+                      color: kSecondColor,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset('assets/images/microphone2.svg'),
                       ),
-                      const SizedBox(width: 10),
-                      Container(
-                        height: 55,
-                        width: 55,
-                        color: kSecondColor,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/images/microphone2.svg',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
+              ),
+            ],
+          ),
+        );
       },
     );
   }

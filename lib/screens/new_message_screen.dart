@@ -85,7 +85,7 @@ class _NewMessageState extends State<NewMessage> {
             ),
           );
         } else {
-          return Text("data");
+          return Center(child: CircularProgressIndicator(color: kMainColor));
         }
       },
     );
