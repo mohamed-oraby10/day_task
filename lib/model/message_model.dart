@@ -1,5 +1,3 @@
-
-
 class MessageModel {
   final String message;
 
