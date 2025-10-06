@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_state.dart';
 import 'package:day_task/enum.dart';
+import 'package:day_task/helper/animation_to_selected_day.dart';
 import 'package:day_task/screens/task_details_screen.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/schedule_category.dart';
@@ -26,12 +27,9 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
   void initState() {
     selectedIndex = DateTime.now().day;
     scrollController = ScrollController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollController.animateTo(
-        (selectedIndex - 1) * 70,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
+      animationToSelectedDay(context, selectedIndex, scrollController);
     });
     super.initState();
   }
