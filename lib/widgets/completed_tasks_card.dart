@@ -10,7 +10,7 @@ class CompletedTasksCrad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 7),
+      padding: const EdgeInsets.only(right: 7, top: 10),
       child: GestureDetector(
         onTap: onTap,
         child: Container(

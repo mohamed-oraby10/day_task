@@ -4,6 +4,8 @@ import 'package:day_task/cubits/project cubit/projects cubit/projects_state.dart
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/screens/all_completed_projects.dart';
+import 'package:day_task/screens/all_ongoing_projects_screen.dart';
 import 'package:day_task/screens/profile_screen.dart';
 import 'package:day_task/screens/project_details_screen.dart';
 import 'package:day_task/widgets/custom_row.dart';
@@ -110,7 +112,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 const HomeSearchBar(),
                 const SizedBox(height: 20),
-                const CustomRow(title: "Completed tasks"),
+                 CustomRow(title: "Completed tasks",onTap: () {
+                   Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return AllCompletedProjects(
+                            projects: completedProjects,
+                          );
+                        },
+                      ),
+                    );
+                  
+                },),
                 SizedBox(
                   height: 200,
                   child: ListView.builder(
@@ -136,7 +150,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const CustomRow(title: "Ongoing Projects"),
+                CustomRow(
+                  title: "Ongoing Projects",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return AllOngoingProjectsScreen(
+                            projects: ongoingProjects,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: ongoingProjects.length,

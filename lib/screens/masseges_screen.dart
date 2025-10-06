@@ -87,7 +87,12 @@ class _MassegesScraanState extends State<MassegesScraan> {
                           .get(),
                       builder: (context, userSnapshot) {
                         if (!userSnapshot.hasData) {
-                          return const Center(child: Text('No chats yet'));
+                          return const Center(
+                            child: Text(
+                              'No chats yet',
+                              style: TextStyle(color: kMainColor, fontSize: 16),
+                            ),
+                          );
                         }
 
                         final userData = userSnapshot.data!.data();

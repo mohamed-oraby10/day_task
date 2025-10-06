@@ -2,8 +2,9 @@ import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomRow extends StatelessWidget {
-  const CustomRow({super.key, required this.title});
+  const CustomRow({super.key, required this.title, this.onTap});
   final String title;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,7 +19,7 @@ class CustomRow extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: onTap,
           child: const Text(
             'See all',
             style: TextStyle(fontSize: 15, color: kMainColor),
