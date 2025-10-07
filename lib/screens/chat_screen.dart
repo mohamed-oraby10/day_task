@@ -158,7 +158,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   horizontal: 10,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ChatTextField(
                       controller: controller,

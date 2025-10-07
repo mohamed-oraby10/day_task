@@ -16,15 +16,17 @@ class ChatTextField extends StatelessWidget {
       child: TextField(
         textInputAction: TextInputAction.send,
         controller: controller,
-        onSubmitted: onSubmitted,
+        onSubmitted: (value) {
+          if (value.trim().isNotEmpty) {
+            onSubmitted?.call(value);
+            controller.clear();
+          }
+        },
         style: TextStyle(color: Colors.white),
         maxLines: 3,
         decoration: InputDecoration(
-          hint: Text(
-            "Type a message",
-            style: TextStyle(color: kLabelTextColor, fontSize: 16),
-          ),
-
+          hintText: "Type a message",
+          hintStyle: TextStyle(color: kLabelTextColor, fontSize: 16),
           prefixIcon: PopupMenuButton(
             icon: SvgPicture.asset("assets/images/elementequal.svg"),
             color: kSecondColor,
@@ -53,7 +55,13 @@ class ChatTextField extends StatelessWidget {
           ),
 
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              final text = controller.text.trim();
+              if (text.isNotEmpty) {
+                onSubmitted?.call(text);
+                controller.clear();
+              }
+            },
             icon: SvgPicture.asset("assets/images/send.svg"),
           ),
 
