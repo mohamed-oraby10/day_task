@@ -3,9 +3,15 @@ import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomeSearchBar extends StatelessWidget {
-  const HomeSearchBar({super.key});
+class HomeSearchBar extends StatefulWidget {
+  const HomeSearchBar({super.key, this.onChanged});
+  final void Function(String)? onChanged;
 
+  @override
+  State<HomeSearchBar> createState() => _HomeSearchBarState();
+}
+
+class _HomeSearchBarState extends State<HomeSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,6 +20,7 @@ class HomeSearchBar extends StatelessWidget {
           height: 60,
           width: 310,
           child: TextInput(
+            onChanged: widget.onChanged,
             hint: 'Search Tasks',
             prefixIcon: FontAwesomeIcons.magnifyingGlass,
           ),
