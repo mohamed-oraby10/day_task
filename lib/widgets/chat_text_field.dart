@@ -27,6 +27,7 @@ class ChatTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: "Type a message",
           hintStyle: TextStyle(color: kLabelTextColor, fontSize: 16),
+
           prefixIcon: PopupMenuButton(
             icon: SvgPicture.asset("assets/images/elementequal.svg"),
             color: kSecondColor,
