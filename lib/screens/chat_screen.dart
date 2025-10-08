@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
   late UserModel user;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  String userStatus = 'Offline';
+  String userStatus = '';
   DatabaseReference? statusRef;
   StreamSubscription<DatabaseEvent>? statusSub;
 
@@ -42,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
       final data = event.snapshot.value as Map<dynamic, dynamic>?;
       if (data != null && mounted) {
         setState(() {
-          userStatus = data['state'] ?? 'Offline';
+          userStatus = data['state'] ?? '';
         });
       }
     });

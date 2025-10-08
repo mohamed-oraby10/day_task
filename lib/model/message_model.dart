@@ -5,6 +5,10 @@ class MessageModel {
   MessageModel(this.message, this.userId, this.isSeen);
 
   factory MessageModel.fromJson(jsonData) {
-    return MessageModel(jsonData["text"], jsonData["senderId"],jsonData["isSeen"]);
+    return MessageModel(
+      jsonData["text"],
+      jsonData["senderId"],
+      jsonData["isSeen"],
+    );
   }
 }

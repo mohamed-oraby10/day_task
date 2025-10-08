@@ -21,7 +21,7 @@ class PresenceService {
           'last_changed': ServerValue.timestamp,
         });
         await _statusRef.onDisconnect().set({
-          'state': 'offline',
+          'state': '',
           'last_changed': ServerValue.timestamp,
         });
       }
@@ -31,7 +31,7 @@ class PresenceService {
   Future<void> stop() async {
     await _connSub?.cancel();
     await _statusRef.set({
-      'state': 'offline',
+      'state': '',
       'last_changed': ServerValue.timestamp,
     });
   }
