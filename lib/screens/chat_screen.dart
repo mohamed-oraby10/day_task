@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
+import 'package:day_task/helper/chat%20methods/mark_message_as_seen.dart';
 import 'package:day_task/model/message_model.dart';
 import 'package:day_task/model/user_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -33,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
   StreamSubscription<DatabaseEvent>? statusSub;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async{
     super.didChangeDependencies();
     user = ModalRoute.of(context)!.settings.arguments as UserModel;
 
@@ -56,6 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
         .collection(kChats)
         .doc(chatId)
         .collection(kMessages);
+  await  markMessagesAsSeen(messages);
   }
 
   Future<void> sendMessage(String data) async {
@@ -71,7 +73,6 @@ class _ChatScreenState extends State<ChatScreen> {
       'timestamp': FieldValue.serverTimestamp(),
       'type': 'text',
       'isSeen': false,
-      'mediaUrl': '',
     };
 
     await messages.add(messageData);
