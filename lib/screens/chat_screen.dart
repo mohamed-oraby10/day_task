@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/message_model.dart';
@@ -8,6 +10,7 @@ import 'package:day_task/widgets/default_image.dart';
 import 'package:day_task/widgets/recieved_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -25,11 +28,24 @@ class _ChatScreenState extends State<ChatScreen> {
   late UserModel user;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
+  String userStatus = 'Offline';
+  DatabaseReference? statusRef;
+  StreamSubscription<DatabaseEvent>? statusSub;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     user = ModalRoute.of(context)!.settings.arguments as UserModel;
+
+    statusRef = FirebaseDatabase.instance.ref('status/${user.uid}');
+    statusSub = statusRef!.onValue.listen((event) {
+      final data = event.snapshot.value as Map<dynamic, dynamic>?;
+      if (data != null && mounted) {
+        setState(() {
+          userStatus = data['state'] ?? 'Offline';
+        });
+      }
+    });
 
     final currentUser = FirebaseAuth.instance.currentUser!;
     chatId = currentUser.uid.hashCode <= user.uid.hashCode
@@ -55,7 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
       'timestamp': FieldValue.serverTimestamp(),
       'type': 'text',
       'isSeen': false,
-      'mediaUrl': ''
+      'mediaUrl': '',
     };
 
     await messages.add(messageData);
@@ -121,8 +137,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 14),
                         ),
-                        const Text(
-                          'Online',
+                        Text(
+                          userStatus,
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                       ],
@@ -192,5 +208,11 @@ class _ChatScreenState extends State<ChatScreen> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    statusSub?.cancel();
+    super.dispose();
   }
 }

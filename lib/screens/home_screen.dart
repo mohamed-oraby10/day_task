@@ -7,12 +7,14 @@ import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/screens/all_completed_projects_screen.dart';
 import 'package:day_task/screens/all_ongoing_projects_screen.dart';
 import 'package:day_task/screens/project_details_screen.dart';
+import 'package:day_task/service/presence_service.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/custom_list_view.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +28,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String searchQuery = '';
+  late PresenceService presenceService;
+
   @override
   void initState() {
     super.initState();
+    final user = FirebaseAuth.instance.currentUser!;
+    presenceService = PresenceService(user.uid);
+    presenceService.start();
     BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
   }
 

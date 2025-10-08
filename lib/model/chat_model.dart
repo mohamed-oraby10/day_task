@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatModel {
   final String lastMessage;
-  final Timestamp lastMessageTime;
+  final Timestamp? lastMessageTime;
   final String userId;
   final String currentUserId;
 
   ChatModel({
     required this.userId,
     required this.currentUserId,
-    required this.lastMessageTime,
+     this.lastMessageTime,
     required this.lastMessage,
   });
 
