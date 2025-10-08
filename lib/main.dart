@@ -21,7 +21,7 @@ Future<void> main() async {
   Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(ProjectModelAdapter());
-  
+
   await Hive.openBox<ProjectModel>(kProjectBox);
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

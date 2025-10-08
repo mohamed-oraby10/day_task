@@ -4,10 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatTextField extends StatelessWidget {
-  const ChatTextField({super.key, this.onSubmitted, required this.controller});
+  const ChatTextField({
+    super.key,
+    this.onSubmitted,
+    required this.controller,
+  });
   final void Function(String)? onSubmitted;
   final TextEditingController controller;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,12 +31,13 @@ class ChatTextField extends StatelessWidget {
           hintText: "Type a message",
           hintStyle: TextStyle(color: kLabelTextColor, fontSize: 16),
 
-          prefixIcon: PopupMenuButton(
+          prefixIcon: PopupMenuButton<String>(
+           
             icon: SvgPicture.asset("assets/images/elementequal.svg"),
             color: kSecondColor,
             itemBuilder: (context) => [
               PopupMenuItem(
-                value: 'data',
+                value: 'image',
                 child: ListTile(
                   title: Text(
                     "Photos & videos",

@@ -30,7 +30,6 @@ class _MassegesScraanState extends State<MassegesScraan> {
           .snapshots(),
       builder: (context, snapshot) {
         List<ChatModel> chatList = [];
-
         if (snapshot.hasData) {
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             chatList.add(ChatModel.formJson(snapshot.data!.docs[i]));

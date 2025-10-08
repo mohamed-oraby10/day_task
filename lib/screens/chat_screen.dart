@@ -24,6 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
   late String chatId;
   late UserModel user;
   final TextEditingController controller = TextEditingController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void didChangeDependencies() {
@@ -54,6 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
       'timestamp': FieldValue.serverTimestamp(),
       'type': 'text',
       'isSeen': false,
+      'mediaUrl': ''
     };
 
     await messages.add(messageData);
@@ -67,6 +69,13 @@ class _ChatScreenState extends State<ChatScreen> {
     }, SetOptions(merge: true));
 
     controller.clear();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
   }
 
   @override
@@ -140,6 +149,7 @@ class _ChatScreenState extends State<ChatScreen> {
             children: [
               Expanded(
                 child: ListView.builder(
+                  controller: scrollController,
                   itemCount: messagesList.length,
                   itemBuilder: (context, index) {
                     final message = messagesList[index];

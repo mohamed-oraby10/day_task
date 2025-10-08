@@ -1,5 +1,5 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/helper/get_smart_time_method.dart';
+import 'package:day_task/helper/chat%20methods/get_smart_time_method.dart';
 import 'package:day_task/model/chat_model.dart';
 import 'package:day_task/model/user_model.dart';
 import 'package:day_task/screens/chat_screen.dart';
