@@ -1,4 +1,5 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,22 +43,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                     ),
                   ),
-                   const SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
-                        'Welcome Back!',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                 
+                    'Welcome Back!',
+                    style: const TextStyle(fontSize: 28, color: Colors.white),
+                  ),
+                  const SizedBox(height: 15),
+
                   const Text(
                     'Email Address',
-                    style: TextStyle(
-                      color: kLabelTextColor,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18),
                   ),
                   const SizedBox(height: 10),
                   TextInput(
@@ -69,10 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25),
                   const Text(
                     'Password',
-                    style: TextStyle(
-                      color: kLabelTextColor,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18),
                   ),
                   const SizedBox(height: 10),
                   TextInput(
@@ -89,10 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {},
                       child: const Text(
                         'Forgot Password?',
-                        style: TextStyle(
-                          color: kLabelTextColor,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: kLabelTextColor, fontSize: 16),
                       ),
                     ),
                   ),
@@ -105,7 +95,29 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {});
                         try {
                           await loginUser();
-                          Navigator.pushNamed(context, AppRoutes.homeRoute);
+
+                          final userProvider = Provider.of<UserProvider>(
+                            context,
+                            listen: false,
+                          );
+                          final currentUser =
+                              FirebaseAuth.instance.currentUser!;
+                          userProvider.clearUser(); 
+                          userProvider
+                              .saveUserData(
+                                currentUser.displayName ?? "",
+                                image: currentUser.photoURL,
+                              )
+                              .then((_) {
+                                userProvider
+                                    .listenToUser(currentUser.uid)
+                                    .then(
+                                      (_) => Navigator.pushReplacementNamed(
+                                        context,
+                                        AppRoutes.homeRoute,
+                                      ),
+                                    );
+                              });
 
                           showSnakBar(context, 'You login successfully');
                         } on FirebaseAuthException catch (e) {
@@ -126,8 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-                  const SizedBox(height: 20),
-                 
+
                   const Continue(),
                 ],
               ),
@@ -139,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> loginUser() async {
- await FirebaseAuth.instance.signInWithEmailAndPassword(
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email!,
       password: password!,
     );

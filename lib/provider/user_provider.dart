@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,35 +7,52 @@ import '../model/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
   UserModel? userModel;
-  Stream<DocumentSnapshot>? userStream;
+  StreamSubscription<DocumentSnapshot>? _userSub;
+  StreamSubscription<User?>? _authSub;
 
   UserProvider() {
-    listenToUser();
+    _authSub = FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        listenToUser(user.uid);
+      } else {
+        clearUser();
+      }
+    });
+  }
+  Future<void> listenToUser(String uid) async {
+    _userSub?.cancel();
+    _userSub = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .listen((doc) {
+          if (doc.exists) {
+            final data = doc.data() as Map<String, dynamic>;
+            userModel = UserModel.fromJson(uid, data);
+          } else {
+            final user = FirebaseAuth.instance.currentUser;
+            userModel = UserModel(
+              uid: user?.uid ?? "",
+              name: user?.displayName ?? "",
+              email: user?.email ?? "",
+              image: user?.photoURL,
+            );
+          }
+          notifyListeners();
+        });
   }
 
-  void listenToUser() {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      userStream = FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .snapshots();
+  void clearUser() {
+    userModel = null;
+    _userSub?.cancel();
+    notifyListeners();
+  }
 
-      userStream!.listen((doc) {
-        if (doc.exists) {
-          final data = doc.data() as Map<String, dynamic>;
-          userModel = UserModel.fromJson(user.uid, data);
-        } else {
-          userModel = UserModel(
-            uid: user.uid,
-            name: user.displayName ?? "",
-            email: user.email ?? "",
-            image: user.photoURL,
-          );
-        }
-        notifyListeners();
-      });
-    }
+  @override
+  void dispose() {
+    _userSub?.cancel();
+    _authSub?.cancel();
+    super.dispose();
   }
 
   Future<void> saveUserData(String name, {String? image}) async {

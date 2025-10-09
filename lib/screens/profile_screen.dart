@@ -1,6 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/service/signOut.dart';
+import 'package:day_task/service/sign_out_service.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/logout_button.dart';
 import 'package:day_task/widgets/profile_category.dart';

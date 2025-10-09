@@ -82,8 +82,9 @@ class _MassegesScraanState extends State<MassegesScraan> {
                     return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
                           .collection('users')
-                          .doc(chat.userId)
+                          .doc(otherUserId)
                           .get(),
+
                       builder: (context, userSnapshot) {
                         if (!userSnapshot.hasData) {
                           return const Center(
