@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/user_model.dart';
 import 'package:day_task/screens/chat_screen.dart';
+import 'package:day_task/widgets/create_group_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/new_message_category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NewMessage extends StatefulWidget {
   const NewMessage({super.key});
@@ -37,28 +37,7 @@ class _NewMessageState extends State<NewMessage> {
 
             body: Column(
               children: [
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: kMainColor,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/images/profile2user.svg",
-                        ),
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    "Create a group",
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
+                CreateGroupButton(),
                 Expanded(
                   child: ListView.builder(
                     itemCount: userslist.length,

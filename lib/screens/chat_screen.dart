@@ -34,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
   StreamSubscription<DatabaseEvent>? statusSub;
 
   @override
-  void didChangeDependencies() async{
+  void didChangeDependencies() async {
     super.didChangeDependencies();
     user = ModalRoute.of(context)!.settings.arguments as UserModel;
 
@@ -57,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
         .collection(kChats)
         .doc(chatId)
         .collection(kMessages);
-  await  markMessagesAsSeen(messages);
+    await markMessagesAsSeen(messages);
   }
 
   Future<void> sendMessage(String data) async {
@@ -140,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         Text(
                           userStatus,
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                          style: TextStyle(fontSize: 12, color: kMainColor),
                         ),
                       ],
                     ),
