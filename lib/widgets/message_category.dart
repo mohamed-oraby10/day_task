@@ -1,13 +1,10 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/model/group_chat_model.dart';
 import 'package:flutter/material.dart';
 
-
 class MessageCategory extends StatelessWidget {
- const MessageCategory({super.key, required this.image, required this.name, required this.text});
-
- final String image;
- final String name;
- final String text;
+  const MessageCategory({super.key, required this.group});
+  final GroupChatModel group;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +12,13 @@ class MessageCategory extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
       child: Row(
         children: [
-          Image.asset(image),
+          group.icon != null
+              ? Image.network(group.icon!)
+              : CircleAvatar(
+                  radius: 22,
+                  backgroundColor: Colors.grey[300],
+                  child: const Icon(Icons.group, size: 30, color: Colors.grey),
+                ),
           Material(
             color: kBackgroundColor,
             child: InkWell(
@@ -26,18 +29,12 @@ class MessageCategory extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
+                      group.name,
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     Text(
-                      text,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
+                      group.lastMessage ?? '',
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                   ],
                 ),

@@ -8,7 +8,7 @@ class TextInput extends StatefulWidget {
   final int maxLines;
   final Function(String)? onChanged;
   final Function(String?)? onSaved;
-
+final TextEditingController? controller;
   const TextInput({
     super.key,
     required this.hint,
@@ -16,7 +16,7 @@ class TextInput extends StatefulWidget {
     this.isPassword = false,
     this.maxLines = 1,
     this.onChanged,
-    this.onSaved,
+    this.onSaved, this.controller,
   });
 
   @override
@@ -34,6 +34,7 @@ class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       validator: (data) {
         if (data!.isEmpty) {
           return "Field is required";

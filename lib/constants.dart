@@ -9,3 +9,4 @@ const kTaskBox = 'taskBox';
 const kProjectBox = 'projectBox';
 const kMessages = "messages";
 const kChats = "chats";
+const kGroups = "groups";

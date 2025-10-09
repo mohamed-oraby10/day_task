@@ -1,7 +1,7 @@
 import 'package:day_task/screens/chat_screen.dart';
 import 'package:day_task/screens/create_new_project_screen.dart';
 import 'package:day_task/screens/create_new_task_screen.dart';
-import 'package:day_task/screens/groupes_chat_screen.dart';
+import 'package:day_task/screens/groupes_messages_screen.dart';
 import 'package:day_task/screens/masseges_screen.dart';
 import 'package:day_task/screens/home_screen.dart';
 import 'package:day_task/screens/login_screen.dart';
