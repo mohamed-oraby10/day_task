@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/group_chat_model.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class MessageCategory extends StatelessWidget {
@@ -9,7 +10,7 @@ class MessageCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
       child: Row(
         children: [
           group.icon != null
@@ -22,7 +23,13 @@ class MessageCategory extends StatelessWidget {
           Material(
             color: kBackgroundColor,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.chatGroupRoute,
+                  arguments: group,
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: Column(
