@@ -84,7 +84,17 @@ class _GroupesChatScreenState extends State<GroupesChatScreen> {
                     : ListView.builder(
                         itemCount: groupsList.length,
                         itemBuilder: (context, index) {
-                          return MessageCategory(group: groupsList[index]);
+                          final sortedGroups = [...groupsList]
+                            ..sort((a, b) {
+                              final aTime =
+                                  a.lastMessageTime ?? Timestamp(0, 0);
+                              final bTime =
+                                  b.lastMessageTime ?? Timestamp(0, 0);
+                              return bTime.compareTo(aTime); 
+                            });
+
+                          final group = sortedGroups[index];
+                          return MessageCategory(group: group);
                         },
                       ),
               ),

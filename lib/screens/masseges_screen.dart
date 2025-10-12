@@ -75,34 +75,38 @@ class _MassegesScraanState extends State<MassegesScraan> {
                 child: ListView.builder(
                   itemCount: chatList.length,
                   itemBuilder: (context, index) {
-                    final chat = chatList[index];
+                    final sortedChats = chatList
+                      ..sort((a, b) {
+                        final aTime = a.lastMessageTime ?? Timestamp(0, 0);
+                        final bTime = b.lastMessageTime ?? Timestamp(0, 0);
+                        return bTime.compareTo(aTime); 
+                      });
+
+                    final chat = sortedChats[index];
                     final otherUserId = chat.userId == currentUser.uid
                         ? chat.currentUserId
                         : chat.userId;
+
                     return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
                           .collection('users')
                           .doc(otherUserId)
                           .get(),
-
                       builder: (context, userSnapshot) {
                         if (!userSnapshot.hasData) {
-                          return const Center(
-                            child: Text(
-                              'No chats yet',
-                              style: TextStyle(color: kMainColor, fontSize: 16),
-                            ),
-                          );
+                          return const SizedBox();
                         }
 
                         final userData = userSnapshot.data!.data();
+
+                        if (userData == null) return const SizedBox();
 
                         final user = UserModel.fromJson(
                           otherUserId,
                           userData as Map<String, dynamic>,
                         );
 
-                        return ChatPerson(chat: chatList[index], user: user);
+                        return ChatPerson(chat: chat, user: user);
                       },
                     );
                   },
