@@ -7,8 +7,9 @@ class GroupChatModel {
   final String id;
   final String? lastMessage;
   final Timestamp? lastMessageTime;
-
+  final String? lastMessageSenderName;
   GroupChatModel({
+    required this.lastMessageSenderName,
     required this.id,
     this.lastMessage,
     this.lastMessageTime,
@@ -29,6 +30,7 @@ class GroupChatModel {
       lastMessageTime: data['lastMessageTime'] is Timestamp
           ? data['lastMessageTime']
           : null,
+      lastMessageSenderName: data['lastMessageSenderName'],
     );
   }
 }

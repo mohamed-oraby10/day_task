@@ -10,7 +10,10 @@ class GroupDatails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Group details'),
+      appBar: CustomAppBar(
+        title: 'Group details',
+        sufImage: 'assets/images/edit.svg',
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),

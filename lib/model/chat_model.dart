@@ -5,20 +5,31 @@ class ChatModel {
   final Timestamp? lastMessageTime;
   final String userId;
   final String currentUserId;
+  final bool lastMessageSeen;
+  final String? lastMessageSenderId;
 
   ChatModel({
+    required this.lastMessageSeen,
+    required this.lastMessageSenderId,
+
     required this.userId,
     required this.currentUserId,
-     this.lastMessageTime,
+    this.lastMessageTime,
     required this.lastMessage,
   });
 
-  factory ChatModel.formJson(jsonData) {
+  factory ChatModel.formJson(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
     return ChatModel(
-      lastMessage: jsonData['lastMessage'],
-      lastMessageTime: jsonData['lastMessageTime'],
-      userId: jsonData['members'][1],
-      currentUserId: jsonData['members'][0],
+      lastMessage: data['lastMessage'] ?? '',
+      lastMessageTime: data['lastMessageTime'],
+      userId: data['members'][1],
+      currentUserId: data['members'][0],
+      lastMessageSeen: data.containsKey('lastMessageSeen')
+          ? data['lastMessageSeen']
+          : true,
+      lastMessageSenderId: data['lastMessageSenderId'],
     );
   }
 }

@@ -46,7 +46,7 @@ class MessageCategory extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        group.lastMessage ?? '',
+                        "${group.lastMessageSenderName}: ${group.lastMessage}" ,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

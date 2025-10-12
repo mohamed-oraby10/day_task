@@ -4,6 +4,7 @@ import 'package:day_task/model/chat_model.dart';
 import 'package:day_task/model/user_model.dart';
 import 'package:day_task/screens/chat_screen.dart';
 import 'package:day_task/widgets/default_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatPerson extends StatelessWidget {
@@ -13,6 +14,8 @@ class ChatPerson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+    final isReceivedMessage = chat.lastMessageSenderId != currentUserId;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
 
@@ -53,7 +56,9 @@ class ChatPerson extends StatelessWidget {
                         chat.lastMessage,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: Color(0xffB8B8B8),
+                          color: chat.lastMessageSeen
+                              ? Color(0xffB8B8B8)
+                              : Colors.white,
                           fontSize: 14,
                         ),
                       ),
@@ -63,11 +68,25 @@ class ChatPerson extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            getSmartTime(chat.lastMessageTime),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Color(0xffB8B8B8), fontSize: 12),
+          Column(
+            children: [
+              Text(
+                getSmartTime(chat.lastMessageTime),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Color(0xffB8B8B8), fontSize: 12),
+              ),
+              SizedBox(height: 4),
+              if (isReceivedMessage && !chat.lastMessageSeen)
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: kMainColor,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+            ],
           ),
         ],
       ),

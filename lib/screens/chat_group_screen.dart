@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
-import 'package:day_task/helper/chat%20methods/mark_message_as_seen.dart';
 import 'package:day_task/model/group_chat_model.dart';
 import 'package:day_task/model/message_model.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -39,8 +38,6 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
         .collection(kGroups)
         .doc(groupId)
         .collection(kMessages);
-
-    await markMessagesAsSeen(messages);
   }
 
   Future<void> sendMessage(String data) async {
@@ -48,7 +45,7 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
 
     final currentUser = FirebaseAuth.instance.currentUser!;
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-
+    final currentUserName = userProvider.userModel?.name ?? 'Unknown';
     final messageData = {
       'text': data,
       'senderEmail': userProvider.userModel?.email ?? currentUser.email,
@@ -66,6 +63,7 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
       'groupMembers': group.groupMembers,
       'lastMessage': data,
       'lastMessageTime': FieldValue.serverTimestamp(),
+      'lastMessageSenderName': currentUserName.split(' ')[0],
     }, SetOptions(merge: true));
 
     controller.clear();

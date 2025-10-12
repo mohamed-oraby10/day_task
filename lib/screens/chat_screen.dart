@@ -57,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
         .collection(kChats)
         .doc(chatId)
         .collection(kMessages);
-    await markMessagesAsSeen(messages);
+    await markMessagesAsSeen(messages,chatId);
   }
 
   Future<void> sendMessage(String data) async {
@@ -83,6 +83,8 @@ class _ChatScreenState extends State<ChatScreen> {
       'lastMessageType': 'text',
       'members': [currentUser.uid, user.uid],
       'createdAt': FieldValue.serverTimestamp(),
+      'lastMessageSeen': false,
+      'lastMessageSenderId': currentUser.uid,
     }, SetOptions(merge: true));
 
     controller.clear();
