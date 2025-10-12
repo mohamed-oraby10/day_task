@@ -6,6 +6,7 @@ import 'package:day_task/model/group_chat_model.dart';
 import 'package:day_task/model/message_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
+import 'package:day_task/widgets/group_datails.dart';
 import 'package:day_task/widgets/recieved_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +23,7 @@ class ChatGroupScreen extends StatefulWidget {
 
 class _ChatGroupScreenState extends State<ChatGroupScreen> {
   late CollectionReference messages;
-  late String chatId;
+  late String groupId;
   late GroupChatModel group;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -32,16 +33,13 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     group = ModalRoute.of(context)!.settings.arguments as GroupChatModel;
-
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    chatId = currentUser.uid.hashCode <= group.id.hashCode
-        ? "${currentUser.uid}_${group.id}"
-        : "${group.id}_${currentUser.uid}";
+    groupId = group.id;
 
     messages = FirebaseFirestore.instance
-        .collection(kChats)
-        .doc(chatId)
+        .collection(kGroups)
+        .doc(groupId)
         .collection(kMessages);
+
     await markMessagesAsSeen(messages);
   }
 
@@ -62,15 +60,16 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
 
     await messages.add(messageData);
 
-    await FirebaseFirestore.instance.collection(kChats).doc(chatId).set({
+    await FirebaseFirestore.instance.collection(kGroups).doc(groupId).set({
+      'name': group.name,
+      'icon': group.icon,
+      'groupMembers': group.groupMembers,
       'lastMessage': data,
       'lastMessageTime': FieldValue.serverTimestamp(),
-      'lastMessageType': 'text',
-      'members': [currentUser.uid, group.id],
-      'createdAt': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
 
     controller.clear();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
@@ -91,6 +90,7 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
             messagesList.add(MessageModel.fromJson(snapshot.data!.docs[i]));
           }
         }
+
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
@@ -125,11 +125,23 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          group.name,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 14),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return GroupDatails(group: group);
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(
+                            group.name,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 14),
+                          ),
                         ),
                         Text(
                           userStatus,
