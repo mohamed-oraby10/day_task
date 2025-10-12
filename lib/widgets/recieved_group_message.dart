@@ -42,7 +42,10 @@ class RecievedGroupMessage extends StatelessWidget {
                       radius: 13,
                       backgroundImage: NetworkImage(userImage),
                     )
-                  : DefaultImage(name: userName),
+                  : CircleAvatar(
+                      radius: 13,
+                      child: DefaultImage(name: userName),
+                    ),
             ),
             RecievedMessage(message: message),
           ],

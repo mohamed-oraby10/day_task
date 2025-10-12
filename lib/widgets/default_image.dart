@@ -14,7 +14,7 @@ class DefaultImage extends StatelessWidget {
         name.isNotEmpty ? name[0].toUpperCase() : "?",
         style: const TextStyle(
           color: kBackgroundColor,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),
