@@ -7,7 +7,7 @@ import 'package:day_task/model/message_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
 import 'package:day_task/widgets/group_datails.dart';
-import 'package:day_task/widgets/recieved_message.dart';
+import 'package:day_task/widgets/recieved_group_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -179,7 +179,7 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
                     if (message.userId == currentUser.uid) {
                       return SendingMeaasge(message: message);
                     } else {
-                      return RecievedMessage(message: message);
+                      return RecievedGroupMessage(message: message);
                     }
                   },
                 ),

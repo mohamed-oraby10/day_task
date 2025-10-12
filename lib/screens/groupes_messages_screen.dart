@@ -7,6 +7,7 @@ import 'package:day_task/widgets/custom_button.dart';
 import 'package:day_task/widgets/message_category.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class GroupesChatScreen extends StatefulWidget {
@@ -20,14 +21,23 @@ class _GroupesChatScreenState extends State<GroupesChatScreen> {
   CollectionReference groups = FirebaseFirestore.instance.collection(kGroups);
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+
     return StreamBuilder(
       stream: groups.snapshots(),
       builder: (context, snapshot) {
         List<GroupChatModel> groupsList = [];
         if (snapshot.hasData) {
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            final doc = snapshot.data!.docs[i];
-            groupsList.add(GroupChatModel.fromJson(doc));
+          for (var doc in snapshot.data!.docs) {
+            final group = GroupChatModel.fromJson(doc);
+
+            final bool isMember = group.groupMembers.any(
+              (member) => member['id'] == currentUser.uid,
+            );
+
+            if (isMember) {
+              groupsList.add(group);
+            }
           }
         }
         return Scaffold(
@@ -64,12 +74,19 @@ class _GroupesChatScreenState extends State<GroupesChatScreen> {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: groupsList.length,
-                  itemBuilder: (context, index) {
-                    return MessageCategory(group: groupsList[index]);
-                  },
-                ),
+                child: groupsList.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No groups yet.',
+                          style: TextStyle(color: kMainColor, fontSize: 17),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: groupsList.length,
+                        itemBuilder: (context, index) {
+                          return MessageCategory(group: groupsList[index]);
+                        },
+                      ),
               ),
             ],
           ),
