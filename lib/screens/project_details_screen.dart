@@ -5,6 +5,7 @@ import 'package:day_task/cubits/task%20cubit/add%20completed%20tasks%20cubit/add
 import 'package:day_task/cubits/task%20cubit/add%20completed%20tasks%20cubit/add_completed_tasks_state.dart';
 import 'package:day_task/cubits/task%20cubit/remove%20completed%20tasks%20cubit/remove_completed_tasks_cubit.dart';
 import 'package:day_task/cubits/task%20cubit/remove%20completed%20tasks%20cubit/remove_completed_tasks_state.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/add_task_button.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/cutom_tasks.dart';
@@ -12,6 +13,7 @@ import 'package:day_task/widgets/percent_circular.dart';
 import 'package:day_task/widgets/task_details_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   const ProjectDetailsScreen({super.key});
@@ -33,10 +35,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectsCubit, ProjectsState>(
       builder: (context, state) {
-        final projects = BlocProvider.of<ProjectsCubit>(context).projects;
+        // final projects = BlocProvider.of<ProjectsCubit>(context).projects;
 
-        final project = projects![projectId];
-
+        final box = Hive.box<ProjectModel>(kProjectBox);
+        final project = box.get(projectId)!;
         return MultiBlocProvider(
           providers: [
             BlocProvider(

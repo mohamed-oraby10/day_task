@@ -11,6 +11,7 @@ import 'package:day_task/widgets/custom_square.dart';
 import 'package:day_task/widgets/custom_task_date_and_time.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -180,6 +181,8 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                           textButton: 'Create',
                           onPress: () async {
                             if (formKey.currentState!.validate()) {
+                              final currentUser = FirebaseAuth.instance.currentUser!;
+
                               formKey.currentState!.save();
                               var projectModel = ProjectModel(
                                 title: title!,
@@ -193,7 +196,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                       ).format(selectedDate!),
                                 projectTeam: teamMembers,
                                 progressPercent: 0,
-                                projectTasks: [], completedTasks: [],
+                                projectTasks: [], completedTasks: [], userId:currentUser.uid ,
                               );
 
                               final cubit = BlocProvider.of<AddProjectCubit>(

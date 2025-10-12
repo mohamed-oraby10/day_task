@@ -26,8 +26,10 @@ class ProjectModel extends HiveObject {
 
   @HiveField(6)
   List<TaskModel> completedTasks = [];
+    @HiveField(7)
+  final String userId;
 
-  ProjectModel({
+  ProjectModel( { required this.userId,
     required this.progressPercent,
     required this.title,
     required this.details,

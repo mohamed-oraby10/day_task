@@ -17,6 +17,7 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProjectModel(
+      userId: fields[7] as String,
       progressPercent: fields[4] as double,
       title: fields[0] as String,
       details: fields[1] as String,
@@ -30,7 +31,7 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
   @override
   void write(BinaryWriter writer, ProjectModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       ..writeByte(5)
       ..write(obj.projectTasks)
       ..writeByte(6)
-      ..write(obj.completedTasks);
+      ..write(obj.completedTasks)
+      ..writeByte(7)
+      ..write(obj.userId);
   }
 
   @override

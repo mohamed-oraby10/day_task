@@ -1,9 +1,9 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/project%20cubit/projects%20cubit/projects_cubit.dart';
 import 'package:day_task/cubits/task cubit/add task cubit/add_task_cubit.dart';
 import 'package:day_task/cubits/task cubit/add task cubit/add_task_state.dart';
 import 'package:day_task/cubits/task cubit/tasks cubit/tasks_cubit.dart';
 import 'package:day_task/helper/show_user_dialog.dart';
+import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/widgets/add_team_member.dart';
@@ -14,6 +14,7 @@ import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -129,9 +130,9 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
-                                 final projects = BlocProvider.of<ProjectsCubit>(context).projects;
-
-        final project = projects![projectKey];
+                                
+                                final box = Hive.box<ProjectModel>(kProjectBox);
+                                final project = box.get(projectKey)!;
                                 await showUsersDialog(context, (users) {
                                   setState(() {
                                     for (var user in users) {
@@ -142,7 +143,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                       }
                                     }
                                   });
-                                },projectTeam: project.projectTeam);
+                                }, projectTeam: project.projectTeam);
                               },
                             ),
                           ],

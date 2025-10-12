@@ -1,5 +1,5 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/screens/create_new_task_screen.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +17,10 @@ class AddTaskButton extends StatelessWidget {
         child: MainButton(
           textButton: "Add Task",
           onPress: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => CreateNewTask(),
-                settings: RouteSettings(arguments: projectKey),
-              ),
+              AppRoutes.createTaskRoute,
+              arguments: projectKey,
             );
           },
         ),
