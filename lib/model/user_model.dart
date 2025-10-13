@@ -13,7 +13,7 @@ class UserModel {
 
   factory UserModel.fromJson(String uid, jsonData) {
     return UserModel(
-      uid: uid,
+      uid: jsonData['uid'],
       name: jsonData['name'],
       image: jsonData['photo'],
       email: jsonData['email'],

@@ -48,7 +48,7 @@ class SplashScreen extends StatelessWidget {
               MainButton(
                 textButton: 'Let\'s Start',
                 onPress: () {
-                  Navigator.pushNamed(context, AppRoutes.homeRoute);
+                  Navigator.pushNamed(context, AppRoutes.loginRoute);
                 },
               ),
             ],

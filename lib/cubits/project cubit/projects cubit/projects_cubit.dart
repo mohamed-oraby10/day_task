@@ -11,10 +11,12 @@ class ProjectsCubit extends Cubit<ProjectsState> {
   List<ProjectModel>? projects;
 
   fetchAllProjects() async {
- final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     var box = Hive.box<ProjectModel>(kProjectBox);
 
-    projects = box.values.where((p) => p.userId == userId).toList();
+    projects = box.values
+        .where((p) => p.teamMemberIds.contains(userId) || p.userId == userId)
+        .toList();
 
     emit(ProjectsSuccess());
   }

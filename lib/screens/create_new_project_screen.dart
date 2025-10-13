@@ -181,9 +181,14 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                           textButton: 'Create',
                           onPress: () async {
                             if (formKey.currentState!.validate()) {
-                              final currentUser = FirebaseAuth.instance.currentUser!;
+                              final currentUserId =
+                                  FirebaseAuth.instance.currentUser!.uid;
 
                               formKey.currentState!.save();
+                              final memberIds = [
+                                currentUserId,
+                                ...teamMembers.map((m) => m.id),
+                              ];
                               var projectModel = ProjectModel(
                                 title: title!,
                                 details: details!,
@@ -196,7 +201,9 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                       ).format(selectedDate!),
                                 projectTeam: teamMembers,
                                 progressPercent: 0,
-                                projectTasks: [], completedTasks: [], userId:currentUser.uid ,
+                                projectTasks: [],
+                                completedTasks: [],
+                                teamMemberIds: memberIds, userId: currentUserId,
                               );
 
                               final cubit = BlocProvider.of<AddProjectCubit>(

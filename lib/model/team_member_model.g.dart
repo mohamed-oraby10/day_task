@@ -8,7 +8,7 @@ part of 'team_member_model.dart';
 
 class TeamMemberModelAdapter extends TypeAdapter<TeamMemberModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 4;
 
   @override
   TeamMemberModel read(BinaryReader reader) {
@@ -16,20 +16,24 @@ class TeamMemberModelAdapter extends TypeAdapter<TeamMemberModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
+
     return TeamMemberModel(
-      name: fields[0] as String,
-      image: fields[1] as String?,
+      name: fields[0] as String? ?? '', 
+      image: fields[1] as String?,      
+      id: fields[2] as String? ?? '',   
     );
   }
 
   @override
   void write(BinaryWriter writer, TeamMemberModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(2)
+      ..write(obj.id);
   }
 
   @override

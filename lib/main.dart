@@ -17,12 +17,15 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  
   Bloc.observer = SimpleBlocObserver();
+
   Hive.registerAdapter(TeamMemberModelAdapter());
   Hive.registerAdapter(TaskModelAdapter());
   Hive.registerAdapter(ProjectModelAdapter());
 
   await Hive.openBox<ProjectModel>(kProjectBox);
+
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(

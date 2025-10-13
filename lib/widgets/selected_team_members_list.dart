@@ -25,9 +25,11 @@ class SelectedTeamMembersList extends StatelessWidget {
 
               final name = data['name'] ?? "Unknown";
               final image = data['photo'];
+final id = (data['uid'] ?? users![index].id) as String;
+
               final member = TeamMemberModel(
                 name: name,
-                image: (image != null && image.isNotEmpty) ? image : null,
+                image: (image != null && image.isNotEmpty) ? image : null, id: id,
               );
 
               final isSelected = selectedMembers.any(
@@ -55,9 +57,10 @@ class SelectedTeamMembersList extends StatelessWidget {
               final data = projectTeam![index];
               final name = data.name;
               final image = data.image;
+              final id = data.id;
               final member = TeamMemberModel(
                 name: name,
-                image: (image != null && image.isNotEmpty) ? image : null,
+                image: (image != null && image.isNotEmpty) ? image : null, id: id,
               );
 
               final isSelected = selectedMembers.any(
