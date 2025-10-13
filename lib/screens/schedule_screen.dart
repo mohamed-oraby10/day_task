@@ -11,6 +11,8 @@ import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:day_task/provider/user_provider.dart';
 
 class ScheduleSceen extends StatefulWidget {
   const ScheduleSceen({super.key});
@@ -27,7 +29,6 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
   void initState() {
     selectedIndex = DateTime.now().day;
     scrollController = ScrollController();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       animationToSelectedDay(context, selectedIndex, scrollController);
     });
@@ -43,9 +44,16 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
       create: (context) => TasksOfTodayCubit()..fetchAllTasksOfToday(),
       child: BlocBuilder<TasksOfTodayCubit, TasksOfTodayState>(
         builder: (context, state) {
-          final tasksOfToday = BlocProvider.of<TasksOfTodayCubit>(
-            context,
-          ).tasks;
+         final currentUser = Provider.of<UserProvider>(context, listen: false).userModel;
+
+          final allTasks = BlocProvider.of<TasksOfTodayCubit>(context).tasks;
+          final userTasks = allTasks.where((task) {
+            if (task.teamMembers.isNotEmpty) {
+              return task.teamMembers.any((m) => m.id == currentUser?.uid);
+            }
+            return false;
+          }).toList();
+
           return Scaffold(
             bottomNavigationBar: const CustomBottomNavigationBar(
               selectedMenu: MenuState.calendar,
@@ -61,7 +69,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                 children: [
                   Text(
                     DateFormat('MMMM').format(now),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -101,18 +109,16 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                       ),
                     ),
                   ),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      'Today\'s Tasks',
+                      "Today's Tasks",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-
                   Expanded(
                     child: ListView.builder(
-                      itemCount: tasksOfToday.length,
+                      itemCount: userTasks.length,
                       itemBuilder: (context, index) {
                         return TaskesCategory(
                           onTap: () {
@@ -120,15 +126,15 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return TaskDetailsScreen();
+                                  return const TaskDetailsScreen();
                                 },
                                 settings: RouteSettings(
-                                  arguments: tasksOfToday[index],
+                                  arguments: userTasks[index],
                                 ),
                               ),
                             );
                           },
-                          task: tasksOfToday[index],
+                          task: userTasks[index],
                         );
                       },
                     ),
