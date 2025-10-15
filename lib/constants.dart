@@ -10,3 +10,4 @@ const kProjectBox = 'projectBox';
 const kMessages = "messages";
 const kChats = "chats";
 const kGroups = "groups";
+const kNotifications = "notifications";

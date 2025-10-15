@@ -5,6 +5,7 @@ import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,9 +16,9 @@ import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  
+
   Bloc.observer = SimpleBlocObserver();
 
   Hive.registerAdapter(TeamMemberModelAdapter());
@@ -26,8 +27,15 @@ Future<void> main() async {
 
   await Hive.openBox<ProjectModel>(kProjectBox);
 
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.init();
+  NotificationService().scheduleDailyNotification(
+    title: "Here’s your daily tasks",
+    body: "Let’s get today’s tasks done!",
+    hour: 9,
+    minute: 0,
+  );
+
   runApp(
     ChangeNotifierProvider(create: (_) => UserProvider(), child: const MyApp()),
   );

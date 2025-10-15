@@ -1,6 +1,6 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_cubit.dart';
-import 'package:day_task/cubits/task%20cubit/tasks%20of%20today%20cubit/tasks_of_today_state.dart';
+import 'package:day_task/cubits/task cubit/tasks of today cubit/tasks_of_today_cubit.dart';
+import 'package:day_task/cubits/task cubit/tasks of today cubit/tasks_of_today_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/helper/animation_to_selected_day.dart';
 import 'package:day_task/screens/task_details_screen.dart';
@@ -27,12 +27,13 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
 
   @override
   void initState() {
+    super.initState();
     selectedIndex = DateTime.now().day;
     scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       animationToSelectedDay(context, selectedIndex, scrollController);
     });
-    super.initState();
   }
 
   @override
@@ -42,11 +43,17 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
 
     return BlocProvider(
       create: (context) => TasksOfTodayCubit()..fetchAllTasksOfToday(),
-      child: BlocBuilder<TasksOfTodayCubit, TasksOfTodayState>(
+      child: BlocConsumer<TasksOfTodayCubit, TasksOfTodayState>(
+        listener: (context, state) async {
+          if (state is TasksOfTodaySuccess) {}
+        },
         builder: (context, state) {
-         final currentUser = Provider.of<UserProvider>(context, listen: false).userModel;
+          final currentUser = Provider.of<UserProvider>(
+            context,
+            listen: false,
+          ).userModel;
 
-          final allTasks = BlocProvider.of<TasksOfTodayCubit>(context).tasks;
+          final allTasks = context.read<TasksOfTodayCubit>().tasks;
           final userTasks = allTasks.where((task) {
             if (task.teamMembers.isNotEmpty) {
               return task.teamMembers.any((m) => m.id == currentUser?.uid);
@@ -125,9 +132,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) {
-                                  return const TaskDetailsScreen();
-                                },
+                                builder: (context) => const TaskDetailsScreen(),
                                 settings: RouteSettings(
                                   arguments: userTasks[index],
                                 ),
