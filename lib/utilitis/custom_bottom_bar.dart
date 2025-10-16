@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -12,8 +13,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      height: 87.h,
+      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
       color: const Color(0xFF263238),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,12 +71,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(iconPath, width: 24, height: 24, color: color),
-          const SizedBox(height: 4),
+          SvgPicture.asset(iconPath, width: 24.w, height: 24.h, color: color),
+          SizedBox(height: 4.h),
           Text(
             label,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 10.sp,
               color: color,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),
@@ -91,14 +92,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
         Navigator.pushNamed(context, AppRoutes.createNewProjectRoute);
       },
       child: Container(
-        height: 50,
-        width: 50,
+        height: 54.h,
+        width: 54.w,
         decoration: BoxDecoration(color: kMainColor),
         child: Center(
           child: SvgPicture.asset(
             'assets/images/addsquare.svg',
-            width: 28,
-            height: 28,
+            width: 24.w,
+            height: 24.h,
             fit: BoxFit.contain,
             color: kBackgroundColor,
           ),

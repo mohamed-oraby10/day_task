@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({super.key, required this.text, required this.textColor});
@@ -7,10 +8,10 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-     text,
+      text,
       style: TextStyle(
         fontFamily: "PilatExtended",
-        fontSize: 53,
+        fontSize: 61.sp,
         height: 1,
         color: textColor,
         fontWeight: FontWeight.bold,

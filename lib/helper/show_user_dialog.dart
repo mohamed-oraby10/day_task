@@ -3,6 +3,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/widgets/selected_team_members_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> showUsersDialog(
   BuildContext context,
@@ -24,7 +25,7 @@ Future<void> showUsersDialog(
             ),
             content: SizedBox(
               width: double.maxFinite,
-              height: 300,
+              height: 300.h,
               child: projectTeam == null
                   ? StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance

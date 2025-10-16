@@ -5,6 +5,7 @@ import 'package:day_task/model/notification_model.dart';
 import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
+import 'package:day_task/widgets/custom_sized_box.dart';
 import 'package:day_task/widgets/notifiy_category.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,12 +71,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   ),
                 ),
                 notificationsList.isEmpty
-                    ? Center(
-                        child: Text(
-                          "No notifications yet ",
-                          style: TextStyle(color: kMainColor, fontSize: 15),
-                        ),
-                      )
+                    ? CustomSizedBox(messageText: 'No new notifications yet.')
                     : SizedBox(
                         height: 300,
                         child: ListView.builder(
@@ -94,11 +90,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   ),
                 ),
                 earlierNotifications.isEmpty
-                    ? Center(
-                        child: Text(
-                          "No notifications yet ",
-                          style: TextStyle(color: kMainColor, fontSize: 15),
-                        ),
+                    ? CustomSizedBox(
+                        messageText: 'No earlier notifications yet.',
                       )
                     : Expanded(
                         child: ListView.builder(

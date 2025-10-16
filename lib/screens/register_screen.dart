@@ -6,6 +6,7 @@ import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -25,40 +26,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      progressIndicator :CircularProgressIndicator(color: kMainColor,),
+      progressIndicator: CircularProgressIndicator(color: kMainColor),
       inAsyncCall: inAsyncCall,
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.only(
+            left: 16.w,
+            right: 16.w,
+            top: 45.h,
+            bottom: 16.h,
+          ),
           child: SingleChildScrollView(
             child: Form(
               key: formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
                   Center(
                     child: SvgPicture.asset(
                       'assets/images/Group 5.svg',
-                      height: 90,
+                      height: 92.h,
                       width: double.infinity,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   Text(
-                    'Create your Account',
-                    style: const TextStyle(fontSize: 28, color: Colors.white),
+                    'Create your account',
+                    style: TextStyle(
+                      fontSize: 26.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
 
                   Text(
                     'Full Name',
-                    style: TextStyle(
-                      color: kLabelTextColor,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18.sp),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   TextInput(
                     hint: 'Enter your Full Name',
                     prefixIcon: Icons.person,
@@ -66,15 +72,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       name = data;
                     },
                   ),
-                  const SizedBox(height: 25),
-                  const Text(
+                  SizedBox(height: 25.h),
+                  Text(
                     'Email Address',
-                    style: TextStyle(
-                      color: kLabelTextColor,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18.sp),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   TextInput(
                     hint: 'Enter your Email',
                     prefixIcon: Icons.email,
@@ -82,15 +85,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       email = data;
                     },
                   ),
-                  const SizedBox(height: 25),
-                  const Text(
+                  SizedBox(height: 25.h),
+                  Text(
                     'Password',
-                    style: TextStyle(
-                      color: kLabelTextColor,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18.sp),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   TextInput(
                     hint: 'Enter your Password',
                     prefixIcon: Icons.lock,
@@ -100,71 +100,73 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     isPassword: true,
                   ),
 
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: check,
-                        onChanged: (value) {
-                          check = value!;
-                          setState(() {});
-                        },
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Checkbox(
+                          value: check,
+                          onChanged: (value) {
+                            check = value!;
+                            setState(() {});
+                          },
 
-                        checkColor: kBackgroundColor,
-                        fillColor: const WidgetStatePropertyAll(
-                          kMainColor,
+                          checkColor: kBackgroundColor,
+                          fillColor: const WidgetStatePropertyAll(kMainColor),
                         ),
-                      ),
-                      const Expanded(
-                        child: Text(
-                          'I have read & agreed to DayTask Privacy Policy, Terms & Condition',
-                          style: TextStyle(
-                            color: kLabelTextColor,
-                            fontSize: 15,
+                        Expanded(
+                          child: Text(
+                            'I have read & agreed to DayTask Privacy Policy, Terms & Condition',
+                            style: TextStyle(
+                              color: kLabelTextColor,
+                              fontSize: 14.sp,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  MainButton(
-                    textButton: 'Sign Up',
-                    onPress: () async {
-                      if (formkey.currentState!.validate() && check) {
-                        inAsyncCall = true;
-                        setState(() {});
-                        try {
-                          await registerUser();
-                         
-                          Navigator.pushNamed(
-                            context,
-                           AppRoutes.homeRoute
-                          );
-                          showSnakBar(context, 'Account created successfully');
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    child: MainButton(
+                      textButton: 'Sign Up',
+                      onPress: () async {
+                        if (formkey.currentState!.validate() && check) {
+                          inAsyncCall = true;
+                          setState(() {});
+                          try {
+                            await registerUser();
+
+                            Navigator.pushNamed(context, AppRoutes.homeRoute);
                             showSnakBar(
                               context,
-                              'The password provided is too weak.',
+                              'Account created successfully',
                             );
-                          } else if (e.code == 'email-already-in-use') {
-                            showSnakBar(
-                              context,
-                              'The account already exists for that email.',
-                            );
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'weak-password') {
+                              showSnakBar(
+                                context,
+                                'The password provided is too weak.',
+                              );
+                            } else if (e.code == 'email-already-in-use') {
+                              showSnakBar(
+                                context,
+                                'The account already exists for that email.',
+                              );
+                            }
                           }
+                          inAsyncCall = false;
+                          setState(() {});
+                        } else if (!check) {
+                          showSnakBar(
+                            context,
+                            "You must agree to DayTask policy",
+                          );
                         }
-                        inAsyncCall = false;
-                        setState(() {});
-                      } else if (!check) {
-                        showSnakBar(
-                          context,
-                          "You must agree to DayTask policy",
-                        );
-                      }
-                    },
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 20),
                   const Continue(isRegisterScreen: true),
                 ],
               ),

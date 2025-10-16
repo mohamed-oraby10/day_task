@@ -7,6 +7,7 @@ import 'package:day_task/helper/snak_bar.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       inAsyncCall: inAsyncCall,
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 45.h, horizontal: 16.w),
           child: SingleChildScrollView(
             child: Form(
               key: formKey,
@@ -39,22 +40,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: SvgPicture.asset(
                       'assets/images/Group 5.svg',
-                      height: 90,
+                      height: 92.h,
                       width: double.infinity,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   Text(
                     'Welcome Back!',
-                    style: const TextStyle(fontSize: 28, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 26.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
 
-                  const Text(
+                  Text(
                     'Email Address',
-                    style: TextStyle(color: kLabelTextColor, fontSize: 18),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18.sp),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   TextInput(
                     hint: 'Enter your Email',
                     prefixIcon: Icons.email,
@@ -62,12 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       email = value;
                     },
                   ),
-                  const SizedBox(height: 25),
-                  const Text(
+                  SizedBox(height: 25.h),
+                  Text(
                     'Password',
-                    style: TextStyle(color: kLabelTextColor, fontSize: 18),
+                    style: TextStyle(color: kLabelTextColor, fontSize: 18.sp),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   TextInput(
                     hint: 'Enter your Password',
                     prefixIcon: Icons.lock,
@@ -80,13 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: AlignmentDirectional.centerEnd,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         'Forgot Password?',
-                        style: TextStyle(color: kLabelTextColor, fontSize: 16),
+                        style: TextStyle(
+                          color: kLabelTextColor,
+                          fontSize: 16.sp,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 25.h),
                   MainButton(
                     textButton: 'Log In',
                     onPress: () async {
@@ -102,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                           final currentUser =
                               FirebaseAuth.instance.currentUser!;
-                          userProvider.clearUser(); 
+                          userProvider.clearUser();
                           userProvider
                               .saveUserData(
                                 currentUser.displayName ?? "",

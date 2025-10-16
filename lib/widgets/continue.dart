@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/google_button.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Continue extends StatelessWidget {
   final bool isRegisterScreen;
@@ -11,33 +12,28 @@ class Continue extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Container(height: 1, color: kLabelTextColor),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                'Or continue with',
-                style: TextStyle(color:kLabelTextColor , fontSize: 17),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 35.h),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(height: 1.h, color: kLabelTextColor),
               ),
-            ),
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: kLabelTextColor,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Text(
+                  'Or continue with',
+                  style: TextStyle(color: kLabelTextColor, fontSize: 16.sp),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Divider(height: 1, thickness: 1, color: kLabelTextColor),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 20),
         GoogleButton(),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,10 +41,7 @@ class Continue extends StatelessWidget {
               isRegisterScreen
                   ? 'Already have an account?'
                   : 'Don\'t have an account?',
-              style: const TextStyle(
-                color:kLabelTextColor,
-                fontSize: 17,
-              ),
+              style: TextStyle(color: kLabelTextColor, fontSize: 16.sp),
             ),
             TextButton(
               onPressed: () {
@@ -58,10 +51,7 @@ class Continue extends StatelessWidget {
               },
               child: Text(
                 isRegisterScreen ? 'Log In' : 'Sign Up',
-                style: const TextStyle(
-                  color: kMainColor,
-                  fontSize: 17,
-                ),
+                style: TextStyle(color: kMainColor, fontSize: 16.sp),
               ),
             ),
           ],

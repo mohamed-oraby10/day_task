@@ -5,11 +5,13 @@ import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/screens/splash_screen.dart';
 import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -51,16 +53,24 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => TasksCubit()),
         BlocProvider(create: (context) => ProjectsCubit()),
       ],
-      child: MaterialApp(
-        title: 'DayTask',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: "Inter",
-          scaffoldBackgroundColor: kBackgroundColor,
-          useMaterial3: false,
-        ),
-        initialRoute: AppRoutes.splashRoute,
-        onGenerateRoute: AppRoutes.generateRoutes,
+      child: ScreenUtilInit(
+        designSize: Size(428, 926),
+        minTextAdapt: true,
+        builder: (context, child) {
+          return MaterialApp(
+            home: child,
+            title: 'DayTask',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              fontFamily: "Inter",
+              scaffoldBackgroundColor: kBackgroundColor,
+              useMaterial3: false,
+            ),
+            initialRoute: AppRoutes.splashRoute,
+            onGenerateRoute: AppRoutes.generateRoutes,
+          );
+        },
+        child: SplashScreen(),
       ),
     );
   }

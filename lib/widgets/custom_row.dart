@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({super.key, required this.title, this.onTap});
@@ -14,15 +15,15 @@ class CustomRow extends StatelessWidget {
           title,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 20.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
         TextButton(
           onPressed: onTap,
-          child: const Text(
+          child:  Text(
             'See all',
-            style: TextStyle(fontSize: 15, color: kMainColor),
+            style: TextStyle(fontSize: 16.sp, color: kMainColor),
           ),
         ),
       ],

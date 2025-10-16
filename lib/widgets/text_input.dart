@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextInput extends StatefulWidget {
   final String hint;
@@ -50,7 +51,7 @@ class _TextInputState extends State<TextInput> {
       decoration: InputDecoration(
         hintText: widget.hint,
 
-        hintStyle: const TextStyle(color: Colors.white, fontSize: 18),
+        hintStyle:  TextStyle(color: Colors.white, fontSize: 18.sp),
         border: const OutlineInputBorder(),
         fillColor: kFillTextFormColor,
         filled: true,

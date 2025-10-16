@@ -54,12 +54,17 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ChatScreen());
 
       case createTaskRoute:
-        return MaterialPageRoute(builder: (_) => const CreateNewTask(),          settings: settings,
-);
+        return MaterialPageRoute(
+          builder: (_) => const CreateNewTask(),
+          settings: settings,
+        );
       case notificationRoute:
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       case profileRoute:
-        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+        return MaterialPageRoute(
+          builder: (_) => const ProfileScreen(),
+          settings: settings,
+        );
       case taskDetailsRoute:
         return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
       case chatGroupRoute:

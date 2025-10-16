@@ -4,19 +4,21 @@ import 'package:day_task/cubits/project cubit/projects cubit/projects_state.dart
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/screens/all_completed_projects_screen.dart';
-import 'package:day_task/screens/all_ongoing_projects_screen.dart';
-import 'package:day_task/screens/project_details_screen.dart';
+import 'package:day_task/widgets/all_completed_projects.dart';
+import 'package:day_task/widgets/all_ongoing_projects.dart';
 import 'package:day_task/service/presence_service.dart';
 import 'package:day_task/utilitis/app_routes.dart';
+import 'package:day_task/widgets/circuler_avatar_image.dart';
 import 'package:day_task/widgets/custom_list_view.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
+import 'package:day_task/widgets/custom_sized_box.dart';
 import 'package:day_task/widgets/home_search_bar.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -68,26 +70,29 @@ class _HomeScreenState extends State<HomeScreen> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
 
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   Row(
                     children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Welcome Back!',
-                              style: TextStyle(color: kMainColor, fontSize: 14),
+                              style: TextStyle(
+                                color: kMainColor,
+                                fontSize: 12.sp,
+                              ),
                             ),
                             Text(
                               user.userModel?.name ?? "",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 22.sp,
                                 fontFamily: "PilatExtended",
                               ),
                             ),
@@ -95,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 80,
-                        width: 50,
+                        height: 80.h,
+                        width: 50.w,
                         child: IconButton(
                           onPressed: () {
                             Navigator.pushNamed(
@@ -104,27 +109,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               AppRoutes.profileRoute,
                             );
                           },
-                          icon: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: kMainColor,
-                            backgroundImage: user.userModel?.image != null
-                                ? NetworkImage(user.userModel!.image!)
-                                : null,
-                            child: user.userModel?.image == null
-                                ? Text(
-                                    firstLetter,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                    ),
-                                  )
-                                : null,
+                          icon: CirculerAvatarImage(
+                            name: firstLetter,
+                            urlImage: user.userModel!.image!,
+                            image: user.userModel?.image,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   HomeSearchBar(
                     onChanged: (value) {
                       setState(() {
@@ -132,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   searchQuery.isNotEmpty
                       ? projects.isEmpty
                             ? Center(
@@ -140,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   'No matching projects found.',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                   ),
                                 ),
                               )
@@ -160,31 +154,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                         ),
-                  SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: completedProjects.length,
-                      itemBuilder: (context, index) {
-                        return CompletedTasksCrad(
-                          project: completedProjects[index],
-                          onTap: () {
-                            final projectKey = completedProjects[index].key;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProjectDetailsScreen(),
-                                settings: RouteSettings(
-                                  arguments: projectKey as int,
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                  completedProjects.isNotEmpty
+                      ? SizedBox(
+                          height: 200.h,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: completedProjects.length,
+                            itemBuilder: (context, index) {
+                              return CompletedTasksCrad(
+                                project: completedProjects[index],
+                                onTap: () {
+                                  final projectKey =
+                                      completedProjects[index].key;
+                                  Navigator.pushNamed(
+                                    context,
+                                    AppRoutes.projectDetailsRoute,
+                                    arguments: projectKey as int,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        )
+                      : CustomSizedBox(messageText: 'No completed tasks yet.'),
+                  SizedBox(height: 20.h),
                   CustomRow(
                     title: "Ongoing Projects",
                     onTap: () {
@@ -192,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return AllOngoingProjectsScreen(
+                            return AllOngoingProjects(
                               projects: ongoingProjects,
                             );
                           },
@@ -200,7 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  CustomListView(selectedList: ongoingProjects),
+                  ongoingProjects.isNotEmpty
+                      ? CustomListView(selectedList: ongoingProjects)
+                      : CustomSizedBox(messageText: 'No ongoing tasks yet.'),
                 ],
               ),
             ),

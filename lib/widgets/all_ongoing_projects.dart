@@ -2,9 +2,10 @@ import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/ongoing_tasks_caregory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AllOngoingProjectsScreen extends StatelessWidget {
-  const AllOngoingProjectsScreen({super.key, required this.projects});
+class AllOngoingProjects extends StatelessWidget {
+  const AllOngoingProjects({super.key, required this.projects});
   final List<ProjectModel> projects;
 
   @override
@@ -12,7 +13,7 @@ class AllOngoingProjectsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(title: 'All ongoing projects'),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         child: ListView.builder(
           itemCount: projects.length,
           itemBuilder: (context, index) {

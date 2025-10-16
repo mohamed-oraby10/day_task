@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainButton extends StatelessWidget {
   final String textButton;
@@ -21,7 +22,7 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 60,
+      height: 67.h,
       child: ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
@@ -30,7 +31,7 @@ class MainButton extends StatelessWidget {
           side: border,
         ),
         child: Text(
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           textButton,
         ),
       ),
