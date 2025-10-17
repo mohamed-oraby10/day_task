@@ -100,7 +100,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: [
                     ChatTextField(
                       controller: controller,
-                      onSubmitted: (data) => sendMessage(data, context, messages, chatId, user, controller, scrollController),
+                      onSubmitted: (data) async => await sendMessage(
+                        data,
+                        context,
+                        messages,
+                        chatId,
+                        user,
+                        controller,
+                        scrollController,
+                      ),
                     ),
                     SizedBox(width: 10.w),
                     Container(
