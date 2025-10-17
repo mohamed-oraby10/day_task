@@ -58,27 +58,7 @@ This project demonstrates:
 
 ---
 
-## ⚙️ Getting Started
-
-### Prerequisites
-- Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
-- Configure Firebase project
-- Create required collections:
-  - `users`
-  - `chats`
-  - `groups`
-
----
-
-## 📸 Screenshots
-
-### Run
-```bash
-flutter pub get
-flutter run
-
-
-🔮 Future Improvements
+## 🔮 Future Improvements
 
 🔍 Add advanced search and filtering for projects and tasks.
 
@@ -90,15 +70,21 @@ flutter run
 
 🗂️ Export project reports as PDF.
 
+----
 
+## ⚙️ Getting Started
 
-👨‍💻 About the Developer
+### Prerequisites
+- Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- Configure Firebase project
+- Create required collections:
+  - `users`
+  - `chats`
+  - `groups`
 
-Developed by Mohamed Oraby
+### Run
+```bash
+flutter pub get
+flutter run
 
-📫 Connect with me on:
-
-LinkedIn: https://www.linkedin.com/in/mohamedoraby/
-
-GitHub: https://github.com/mohamed-oraby10
-
+---
