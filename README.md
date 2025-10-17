@@ -20,7 +20,7 @@ This project demonstrates:
 
 - 📋 **Projects & Tasks**
   - Create new projects with title, details, and team members.
-  - Add, update, and remove tasks.
+  - Add tasks and mark them as completed.
   - Track completed and ongoing tasks with progress indicators.
   - Store tasks locally using **Hive**.
 
@@ -56,33 +56,56 @@ This project demonstrates:
 - **UI Tools:** Flutter ScreenUtil, Modal Progress HUD NSN  
 - **Icons & Assets:** SVGs, FontAwesome Icons  
 
----
-
-## 🔮 Future Improvements
-
-🔍 Add advanced search and filtering for projects and tasks.
-
-🌗 Implement dark mode.
-
-📱 Add push notifications.
-
-💾 Cloud backup for Hive data.
-
-🗂️ Export project reports as PDF.
-
 ----
 
-## ⚙️ Getting Started
+## 🧩 Getting Started
 
 ### Prerequisites
 - Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
-- Configure Firebase project
-- Create required collections:
-  - `users`
-  - `chats`
-  - `groups`
+- Have an Android or iOS device/emulator ready
 
-### Run
-```bash
-flutter pub get
-flutter run
+### Run the Project
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mohamed-oraby10/day_task.git
+   
+2. Navigate to the folder:
+    ```bash
+   cd day_task
+
+
+3. Install dependencies:
+    ```bash
+    flutter pub get
+
+
+4. Run the app:
+    ```bash
+   flutter run
+
+---
+## 📸 Screenshots (Example placeholders)
+Home Screen	Update Product Screen
+
+---
+## 🔮 Future Improvements
+
+- 🔍 Add advanced search and filtering for projects and tasks.  
+- 🌗 Implement multi-mode (Dark / Light).  
+- 📱 Add push notifications for new messages, tasks, and updates.  
+- 🗣️ Add **voice, image, and video sharing** inside team/group chats.  
+- 🖼️ Allow team members to **change group icons** and manage group settings.  
+- 🚪 Add the ability for users to **leave or delete groups**.  
+- 🧩 Apply **MVVM architecture** throughout the entire project for better scalability and separation of concerns.  
+
+
+---
+
+## 👨‍💻 About the Developer
+
+Developed by Mohamed Oraby
+📫 Connect with me:
+
+LinkedIn: https://www.linkedin.com/in/mohamedoraby/
+
+GitHub: https://github.com/mohamed-oraby10
