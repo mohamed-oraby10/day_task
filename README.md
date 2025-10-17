@@ -86,5 +86,3 @@ This project demonstrates:
 ```bash
 flutter pub get
 flutter run
-
----
