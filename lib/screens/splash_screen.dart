@@ -1,13 +1,26 @@
 import 'package:day_task/constants.dart';
+import 'package:day_task/service/navigate_after_delay_service.dart';
 import 'package:day_task/widgets/custom_text.dart';
-import 'package:day_task/utilitis/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../widgets/main_button.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      navigateAfterDelay(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,7 @@ class SplashScreen extends StatelessWidget {
               MainButton(
                 textButton: 'Let\'s Start',
                 onPress: () {
-                  Navigator.pushNamed(context, AppRoutes.loginRoute);
+                  // await navigateAfterDelay(context);
                 },
               ),
             ],

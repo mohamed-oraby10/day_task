@@ -8,6 +8,7 @@ import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:day_task/utilitis/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => TasksCubit()),
@@ -64,7 +66,9 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: kBackgroundColor,
               useMaterial3: false,
             ),
-            initialRoute: AppRoutes.splashRoute,
+            initialRoute: user != null
+                ? AppRoutes.homeRoute
+                : AppRoutes.splashRoute,
             onGenerateRoute: AppRoutes.generateRoutes,
           );
         },

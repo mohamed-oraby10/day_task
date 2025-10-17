@@ -120,9 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 userProvider
                                     .listenToUser(currentUser.uid)
                                     .then(
-                                      (_) => Navigator.pushReplacementNamed(
+                                      (_) => Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         AppRoutes.homeRoute,
+                                        (route) => false,
                                       ),
                                     );
                               });

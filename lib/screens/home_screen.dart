@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 45.h),
                   Row(
                     children: [
                       Expanded(
@@ -108,24 +108,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               AppRoutes.profileRoute,
                             );
                           },
-                          icon:CircleAvatar(
-                          radius: 20,
-                          backgroundColor: kMainColor,
-                          backgroundImage: user.userModel?.image != null
-                              ? NetworkImage(user.userModel!.image!)
-                              : null,
-                          child: user.userModel?.image == null
-                              ? Text(
-                                  firstLetter,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22,
-                                  ),
-                                )
-                              : null
+                          icon: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: kMainColor,
+                            backgroundImage: user.userModel?.image != null
+                                ? NetworkImage(user.userModel!.image!)
+                                : null,
+                            child: user.userModel?.image == null
+                                ? Text(
+                                    firstLetter,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                    ),
+                                  )
+                                : null,
+                          ),
                         ),
                       ),
-                      )
                     ],
                   ),
                   SizedBox(height: 20.h),

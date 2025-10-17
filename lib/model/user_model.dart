@@ -11,12 +11,13 @@ class UserModel {
     required this.image,
   });
 
-  factory UserModel.fromJson(String uid, jsonData) {
-    return UserModel(
-      uid: jsonData['uid'],
-      name: jsonData['name'],
-      image: jsonData['photo'],
-      email: jsonData['email'],
-    );
-  }
+ factory UserModel.fromJson(String uid, Map<String, dynamic> jsonData) {
+  return UserModel(
+    uid: uid, 
+    name: (jsonData['name'] ?? '').toString(),
+    email: (jsonData['email'] ?? '').toString(),
+    image: jsonData['photo']?.toString(),
+  );
+}
+
 }
