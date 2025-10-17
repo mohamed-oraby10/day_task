@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
+import 'package:day_task/service/register_service.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/continue.dart';
 import 'package:day_task/widgets/main_button.dart';
@@ -136,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           inAsyncCall = true;
                           setState(() {});
                           try {
-                            await registerUser();
+                            await registerUser(email: email, name: name!, password: password);
 
                             Navigator.pushNamed(context, AppRoutes.homeRoute);
                             showSnakBar(
@@ -177,20 +177,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Future<void> registerUser() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email!, password: password!);
-
-    await user.user!.updateDisplayName(name);
-    await user.user!.updatePhotoURL(null);
-
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.user!.uid)
-        .set({
-          'name': name,
-          'email': email,
-          'photo': null,
-        }, SetOptions(merge: true));
-  }
 }
