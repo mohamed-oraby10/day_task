@@ -5,7 +5,6 @@ import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/screens/splash_screen.dart';
 import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:day_task/utilitis/app_routes.dart';
@@ -58,7 +57,6 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp(
-            home: child,
             title: 'DayTask',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -70,7 +68,6 @@ class MyApp extends StatelessWidget {
             onGenerateRoute: AppRoutes.generateRoutes,
           );
         },
-        child: SplashScreen(),
       ),
     );
   }
