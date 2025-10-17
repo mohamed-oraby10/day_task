@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScheduleCategory extends StatelessWidget {
   const ScheduleCategory({
@@ -20,13 +21,13 @@ class ScheduleCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 12),
+      padding: EdgeInsets.only(right: 12.w),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           alignment: Alignment.center,
-          height: 70,
-          width: 45,
+          height: 70.h,
+          width: 45.w,
           color: color,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -35,11 +36,14 @@ class ScheduleCategory extends StatelessWidget {
                 number,
                 style: TextStyle(
                   color: dayNumberColor,
-                  fontSize: 20,
+                  fontSize: 19.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(day, style: TextStyle(color: dayNumberColor, fontSize: 15)),
+              Text(
+                day,
+                style: TextStyle(color: dayNumberColor, fontSize: 10.sp),
+              ),
             ],
           ),
         ),

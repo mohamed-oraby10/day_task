@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddTaskButton extends StatelessWidget {
   const AddTaskButton({super.key, required this.projectKey});
@@ -9,8 +10,8 @@ class AddTaskButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 50),
-      height: 115,
+      padding: EdgeInsets.symmetric(horizontal: 50.w),
+      height: 114.h,
       width: double.maxFinite,
       color: kSecondColor,
       child: Center(

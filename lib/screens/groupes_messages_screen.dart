@@ -9,6 +9,7 @@ import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GroupesChatScreen extends StatefulWidget {
   const GroupesChatScreen({super.key});
@@ -55,9 +56,9 @@ class _GroupesChatScreenState extends State<GroupesChatScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 10,
+                padding:  EdgeInsets.symmetric(
+                  vertical: 10.h,
+                  horizontal: 10.w,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,7 +79,7 @@ class _GroupesChatScreenState extends State<GroupesChatScreen> {
                     ? Center(
                         child: Text(
                           'No groups yet.',
-                          style: TextStyle(color: kMainColor, fontSize: 17),
+                          style: TextStyle(color: kMainColor, fontSize: 17.sp),
                         ),
                       )
                     : ListView.builder(

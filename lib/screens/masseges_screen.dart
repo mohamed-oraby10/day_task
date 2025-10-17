@@ -10,6 +10,7 @@ import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MassegesScraan extends StatefulWidget {
   const MassegesScraan({super.key});
@@ -49,7 +50,7 @@ class _MassegesScraanState extends State<MassegesScraan> {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding:  EdgeInsets.symmetric(vertical: 10.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,7 +61,7 @@ class _MassegesScraanState extends State<MassegesScraan> {
                       },
                       isMessage: true,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: 20.w),
                     CustomButton(
                       text: 'Groupes',
                       onPress: () {
@@ -115,7 +116,7 @@ class _MassegesScraanState extends State<MassegesScraan> {
             ],
           ),
           floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 10),
+            padding:  EdgeInsets.symmetric(vertical: 70.h, horizontal: 10.w),
             child: CustomButton(
               text: "Start Chat",
               isMessage: true,

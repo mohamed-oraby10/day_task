@@ -2,11 +2,7 @@ import 'package:day_task/widgets/check_box_list.dart';
 import 'package:flutter/material.dart';
 
 class GroupMembers extends StatelessWidget {
-  const GroupMembers({
-    super.key,
-    this.users,
-    required this.selectedMembers,
-  });
+  const GroupMembers({super.key, this.users, required this.selectedMembers});
 
   final List<Map<String, dynamic>>? users;
   final List<Map<String, dynamic>> selectedMembers;
@@ -29,11 +25,7 @@ class GroupMembers extends StatelessWidget {
           image: image,
           onChanged: (checked) {
             if (checked == true) {
-              selectedMembers.add({
-                'id': id,
-                'name': name,
-                'photo': image,
-              });
+              selectedMembers.add({'id': id, 'name': name, 'photo': image});
             } else {
               selectedMembers.removeWhere((m) => m['id'] == id);
             }

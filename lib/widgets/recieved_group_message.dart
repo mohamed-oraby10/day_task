@@ -3,6 +3,7 @@ import 'package:day_task/model/message_model.dart';
 import 'package:day_task/widgets/recieved_message.dart';
 import 'package:day_task/widgets/default_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecievedGroupMessage extends StatelessWidget {
   const RecievedGroupMessage({super.key, required this.message});
@@ -19,9 +20,9 @@ class RecievedGroupMessage extends StatelessWidget {
         if (!snapshot.hasData) {
           return Row(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 6),
-                child: CircleAvatar(radius: 12, backgroundColor: Colors.grey),
+              Padding(
+                padding: EdgeInsets.only(left: 6.w),
+                child: CircleAvatar(radius: 12.r, backgroundColor: Colors.grey),
               ),
               RecievedMessage(message: message),
             ],
@@ -36,14 +37,14 @@ class RecievedGroupMessage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 6, top: 8),
+              padding: EdgeInsets.only(left: 6.w, top: 8.h),
               child: userImage != null && userImage.isNotEmpty
                   ? CircleAvatar(
-                      radius: 13,
+                      radius: 12.r,
                       backgroundImage: NetworkImage(userImage),
                     )
                   : CircleAvatar(
-                      radius: 13,
+                      radius: 12.r,
                       child: DefaultImage(name: userName),
                     ),
             ),

@@ -51,7 +51,10 @@ class AppRoutes {
       case scheduleRoute:
         return MaterialPageRoute(builder: (_) => const ScheduleSceen());
       case chatingRoute:
-        return MaterialPageRoute(builder: (_) => const ChatScreen());
+        return MaterialPageRoute(
+          builder: (_) => const ChatScreen(),
+          settings: settings,
+        );
 
       case createTaskRoute:
         return MaterialPageRoute(

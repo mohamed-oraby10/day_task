@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/task_check_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CutomTasks extends StatelessWidget {
   const CutomTasks({
@@ -18,11 +19,11 @@ class CutomTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding:  EdgeInsets.symmetric(vertical: 7.h),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
           width: double.infinity,
           color: kFillTextFormColor,
           child: Row(
@@ -31,7 +32,7 @@ class CutomTasks extends StatelessWidget {
               Expanded(
                 child: Text(
                   task.title,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 18.sp),
                 ),
               ),
 

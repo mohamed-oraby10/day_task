@@ -9,6 +9,7 @@ import 'package:day_task/widgets/custom_sized_box.dart';
 import 'package:day_task/widgets/notifiy_category.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -48,7 +49,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         }
         final now = DateTime.now();
         final oneDayAgo = now.subtract(const Duration(days: 1));
-
+        final newNotifications = notificationsList
+            .where((n) => n.time!.toDate().isAfter(oneDayAgo))
+            .toList();
         final earlierNotifications = notificationsList
             .where((n) => n.time!.toDate().isBefore(oneDayAgo))
             .toList();
@@ -59,34 +62,34 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
           appBar: const CustomAppBar(title: "Notifications"),
           body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+            padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 25.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: const Text(
+                  padding:  EdgeInsets.only(bottom: 15.h),
+                  child:  Text(
                     'New',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
                   ),
                 ),
-                notificationsList.isEmpty
+                newNotifications.isEmpty
                     ? CustomSizedBox(messageText: 'No new notifications yet.')
                     : SizedBox(
-                        height: 300,
+                        height: 300.h,
                         child: ListView.builder(
-                          itemCount: notificationsList.length,
+                          itemCount: newNotifications.length,
                           itemBuilder: (context, index) {
-                            final item = notificationsList[index];
+                            final item = newNotifications[index];
                             return NotificationCategory(notification: item);
                           },
                         ),
                       ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: const Text(
+                  padding:  EdgeInsets.symmetric(vertical: 20.h),
+                  child:  Text(
                     'Earlier',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
                   ),
                 ),
                 earlierNotifications.isEmpty

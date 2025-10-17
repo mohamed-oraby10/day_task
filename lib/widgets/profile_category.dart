@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProfileCategory extends StatelessWidget {
@@ -17,25 +18,34 @@ class ProfileCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Container(
+        padding: EdgeInsets.all(4.r),
         color: kFillTextFormColor,
         width: double.infinity,
-        height: 55,
         child: Padding(
-          padding: const EdgeInsets.only(right: 8, left: 8),
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
             children: [
               SvgPicture.asset(preImage),
-              SizedBox(width: 8,),
+              SizedBox(width: 8.w),
               Expanded(
                 child: Text(
+                  overflow: TextOverflow.ellipsis,
                   text,
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 18.sp),
                 ),
               ),
-             
-              IconButton(onPressed: onPress, icon: SvgPicture.asset(postImage,color: kLabelTextColor,)),
+
+              IconButton(
+                onPressed: onPress,
+                icon: SvgPicture.asset(
+                  postImage,
+                  color: kLabelTextColor,
+                  width: 24.w,
+                  height: 24.h,
+                ),
+              ),
             ],
           ),
         ),

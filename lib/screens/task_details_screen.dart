@@ -3,6 +3,7 @@ import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/task_details_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskDetailsScreen extends StatefulWidget {
   const TaskDetailsScreen({super.key});
@@ -28,23 +29,23 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:  EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            SizedBox(height: 30),
+            SizedBox(height: 30.h),
             Text(
               task.title,
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: "PilatExtended",
-                fontSize: 21,
+                fontSize: 21.sp,
               ),
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding:  EdgeInsets.symmetric(vertical: 20.h),
               child: Row(
                 children: [
                   TaskDetailsRow(
@@ -66,12 +67,12 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               "Task Details",
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Flexible(
               child: SingleChildScrollView(
                 child: Text(
                   task.details,
-                  style: TextStyle(color: kLabelTextColor, fontSize: 16),
+                  style: TextStyle(color: kLabelTextColor, fontSize: 16.sp),
                 ),
               ),
             ),

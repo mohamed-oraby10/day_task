@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/widgets/task_members_images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskesCategory extends StatelessWidget {
   const TaskesCategory({super.key, this.onTap, required this.task});
@@ -11,24 +12,25 @@ class TaskesCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding: EdgeInsets.symmetric(vertical: 7.h),
       child: GestureDetector(
         onTap: onTap,
         child: Row(
           children: [
-            Container(height: 70, width: 10, color: kMainColor),
+            Container(height: 72.h, width: 10.w, color: kMainColor),
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: EdgeInsets.all(6.r),
               color: kSecondColor,
-              width: 345,
+              height: 72.h,
+              width: 370.w,
               child: Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: EdgeInsets.only(left: 15.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -36,17 +38,17 @@ class TaskesCategory extends StatelessWidget {
                               task.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 18,
+                              style: TextStyle(
+                                fontSize: 18.sp,
                                 color: Colors.white,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5.h),
                             Text(
                               task.time,
                               style: TextStyle(
                                 color: kLabelTextColor,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ],

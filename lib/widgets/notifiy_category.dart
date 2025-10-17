@@ -2,6 +2,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/helper/chat%20methods/get_smart_time_method.dart';
 import 'package:day_task/model/notification_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotificationCategory extends StatelessWidget {
@@ -10,24 +11,24 @@ class NotificationCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
         children: [
           CircleAvatar(
-            radius: 24,
+            radius: 24.r,
             backgroundColor: kSecondColor,
             child: const Icon(FontAwesomeIcons.listCheck, color: Colors.white),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   notification.title,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   notification.body,
                   style: const TextStyle(color: kMainColor),
@@ -40,7 +41,7 @@ class NotificationCategory extends StatelessWidget {
             getSmartTime(notification.time),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white, fontSize: 12),
+            style: TextStyle(color: Colors.white, fontSize: 12.sp),
           ),
         ],
       ),

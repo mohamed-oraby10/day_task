@@ -13,6 +13,7 @@ import 'package:day_task/widgets/percent_circular.dart';
 import 'package:day_task/widgets/task_details_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
@@ -35,8 +36,6 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProjectsCubit, ProjectsState>(
       builder: (context, state) {
-        // final projects = BlocProvider.of<ProjectsCubit>(context).projects;
-
         final box = Hive.box<ProjectModel>(kProjectBox);
         final project = box.get(projectId)!;
         return MultiBlocProvider(
@@ -81,23 +80,23 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               ),
 
               body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
-                    SizedBox(height: 30),
+                    SizedBox(height: 30.h),
                     Text(
                       project.title,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "PilatExtended",
-                        fontSize: 21,
+                        fontSize: 21.sp,
                       ),
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
                       child: Row(
                         children: [
                           TaskDetailsRow(
@@ -115,30 +114,35 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 20.h),
+
                     Text(
                       "Project Details",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 10.h),
                     SizedBox(
-                      height: 80,
+                      height: 80.h,
                       child: SingleChildScrollView(
                         child: Text(
                           project.details,
                           style: TextStyle(
                             color: kLabelTextColor,
-                            fontSize: 16,
+                            fontSize: 12.sp,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Row(
                         children: [
                           Text(
                             "Project Progress",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.sp,
+                            ),
                           ),
                           Spacer(),
                           PercentCircular(
@@ -150,9 +154,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                     ),
                     Text(
                       "All Tasks",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 15.h),
                     Expanded(
                       child: ListView.builder(
                         itemCount: project.projectTasks.length,

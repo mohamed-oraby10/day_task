@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskCheckBox extends StatelessWidget {
   final bool value;
@@ -17,8 +18,8 @@ class TaskCheckBox extends StatelessWidget {
       onTap: () => onChanged(!value),
       
       child: Container(
-        height: 40,
-        width: 40,
+        height: 40.h,
+        width: 40.w,
         decoration: BoxDecoration(
           color: kMainColor,
         
@@ -27,7 +28,7 @@ class TaskCheckBox extends StatelessWidget {
           child: Icon(
             value ? Icons.check_circle_outline : Icons.circle_outlined  ,
             color: kBackgroundColor, 
-            size: 28,
+            size: 28.sp,
           ),
         ),
       ),

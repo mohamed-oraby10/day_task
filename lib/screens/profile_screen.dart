@@ -5,6 +5,7 @@ import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/logout_button.dart';
 import 'package:day_task/widgets/profile_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -27,29 +28,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         appBar: CustomAppBar(title: "Profile"),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(horizontal: 25.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 20.h),
                 child: Center(
                   child: CircleAvatar(
-                    radius: 70,
+                    radius: 67.r,
                     backgroundColor: kMainColor,
                     child: CircleAvatar(
-                      radius: 67,
+                      radius: 65.r,
                       backgroundImage: user.userModel?.image != null
                           ? NetworkImage(user.userModel!.image!)
                           : null,
                       child: user.userModel?.image == null
-                          ? Text(firstLetter, style: TextStyle(fontSize: 30))
+                          ? Text(firstLetter, style: TextStyle(fontSize: 30.sp))
                           : null,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               ProfileCategory(
                 text: user.userModel?.name ?? "",
                 preImage: 'assets/images/useradd.svg',
@@ -60,11 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 preImage: 'assets/images/usertag.svg',
                 postImage: 'assets/images/edit.svg',
               ),
-              // ProfileCategory(
-              //   text: 'Password',
-              //   preImage: 'assets/images/lock.svg',
-              //   postImage: 'assets/images/edit.svg',
-              // ),
+
               ProfileCategory(
                 text: 'My Tasks',
                 preImage: 'assets/images/task.svg',
@@ -97,6 +94,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
- 
 }

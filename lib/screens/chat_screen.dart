@@ -1,20 +1,19 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/helper/chat%20methods/mark_message_as_seen.dart';
+import 'package:day_task/helper/chat%20methods/send_message_method.dart';
 import 'package:day_task/model/message_model.dart';
 import 'package:day_task/model/user_model.dart';
-import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/widgets/chat_screen_app_bar.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
-import 'package:day_task/widgets/default_image.dart';
 import 'package:day_task/widgets/recieved_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -57,44 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
         .collection(kChats)
         .doc(chatId)
         .collection(kMessages);
-    await markMessagesAsSeen(messages,chatId);
-  }
-
-  Future<void> sendMessage(String data) async {
-    if (data.trim().isEmpty) return;
-
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
-    final messageData = {
-      'text': data,
-      'senderEmail': userProvider.userModel?.email ?? currentUser.email,
-      'senderId': currentUser.uid,
-      'timestamp': FieldValue.serverTimestamp(),
-      'type': 'text',
-      'isSeen': false,
-    };
-
-    await messages.add(messageData);
-
-    await FirebaseFirestore.instance.collection(kChats).doc(chatId).set({
-      'lastMessage': data,
-      'lastMessageTime': FieldValue.serverTimestamp(),
-      'lastMessageType': 'text',
-      'members': [currentUser.uid, user.uid],
-      'createdAt': FieldValue.serverTimestamp(),
-      'lastMessageSeen': false,
-      'lastMessageSenderId': currentUser.uid,
-    }, SetOptions(merge: true));
-
-    controller.clear();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    });
+    await markMessagesAsSeen(messages, chatId);
   }
 
   @override
@@ -109,60 +71,10 @@ class _ChatScreenState extends State<ChatScreen> {
           }
         }
         return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: SvgPicture.asset("assets/images/arrowleft.svg"),
-            ),
-            backgroundColor: kBackgroundColor,
-            elevation: 0,
-            foregroundColor: Colors.white,
-            title: Row(
-              children: [
-                user.image == null
-                    ? DefaultImage(name: user.name)
-                    : CircleAvatar(
-                        radius: 22,
-                        backgroundImage: NetworkImage(user.image!),
-                      ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          user.name,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                        Text(
-                          userStatus,
-                          style: TextStyle(fontSize: 12, color: kMainColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset('assets/images/video.svg'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset('assets/images/callcalling.svg'),
-                ),
-              ),
-            ],
+          appBar: ChatScreenAppBar(
+            name: user.name,
+            image: user.image,
+            userStatus: userStatus,
           ),
           body: Column(
             children: [
@@ -182,25 +94,26 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 10,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ChatTextField(
                       controller: controller,
-                      onSubmitted: (data) => sendMessage(data),
+                      onSubmitted: (data) => sendMessage(data, context, messages, chatId, user, controller, scrollController),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10.w),
                     Container(
-                      height: 55,
-                      width: 55,
+                      height: 57.h,
+                      width: 57.w,
                       color: kSecondColor,
                       child: IconButton(
                         onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/microphone2.svg'),
+                        icon: SvgPicture.asset(
+                          'assets/images/microphone2.svg',
+                          height: 24.h,
+                          width: 24.w,
+                        ),
                       ),
                     ),
                   ],

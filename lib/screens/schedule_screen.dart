@@ -3,13 +3,14 @@ import 'package:day_task/cubits/task cubit/tasks of today cubit/tasks_of_today_c
 import 'package:day_task/cubits/task cubit/tasks of today cubit/tasks_of_today_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/helper/animation_to_selected_day.dart';
-import 'package:day_task/screens/task_details_screen.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/schedule_category.dart';
 import 'package:day_task/widgets/taskes_category.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:day_task/provider/user_provider.dart';
@@ -70,18 +71,18 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
               sufImage: "assets/images/addsquare.svg",
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              padding:  EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     DateFormat('MMMM').format(now),
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style:  TextStyle(color: Colors.white, fontSize: 20.sp),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    padding:  EdgeInsets.symmetric(vertical: 20.h),
                     child: SizedBox(
-                      height: 75,
+                      height: 75.h,
                       child: ListView.builder(
                         controller: scrollController,
                         scrollDirection: Axis.horizontal,
@@ -116,11 +117,11 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                   Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
                     child: Text(
                       "Today's Tasks",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
                     ),
                   ),
                   Expanded(
@@ -129,14 +130,10 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                       itemBuilder: (context, index) {
                         return TaskesCategory(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => const TaskDetailsScreen(),
-                                settings: RouteSettings(
-                                  arguments: userTasks[index],
-                                ),
-                              ),
+                              AppRoutes.taskDetailsRoute,
+                               arguments: userTasks[index]
                             );
                           },
                           task: userTasks[index],

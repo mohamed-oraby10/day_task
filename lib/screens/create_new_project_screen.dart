@@ -14,6 +14,7 @@ import 'package:day_task/widgets/text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -54,10 +55,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
             child: Scaffold(
               appBar: CustomAppBar(title: "Create New Project"),
               body: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                 child: SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -66,11 +64,14 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                       children: [
                         Text(
                           'Project Title',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: TextInput(
                             hint: "Title",
                             onSaved: (value) async {
@@ -78,13 +79,16 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 15),
-                        const Text(
+                        SizedBox(height: 15.h),
+                        Text(
                           'Details',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: TextInput(
                             hint: "Details",
                             maxLines: 3,
@@ -93,17 +97,20 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                             },
                           ),
                         ),
-                        SizedBox(height: 15),
-                        const Text(
+                        SizedBox(height: 15.h),
+                        Text(
                           'Add team members',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
-                        SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         Row(
                           children: [
                             SizedBox(
-                              height: 45,
-                              width: 300,
+                              height: 41.h,
+                              width: 320.w,
                               child: ListView.builder(
                                 itemCount: teamMembers.length,
                                 scrollDirection: Axis.horizontal,
@@ -121,7 +128,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(width: 25),
+                            SizedBox(width: 25.w),
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
@@ -141,12 +148,15 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                           ],
                         ),
 
-                        SizedBox(height: 10),
+                        SizedBox(height: 30.h),
                         Text(
                           'Date',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
-                        SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Row(
                           children: [
                             CustomSquare(
@@ -176,7 +186,7 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 60.h),
                         MainButton(
                           textButton: 'Create',
                           onPress: () async {
@@ -203,7 +213,8 @@ class _CreateNewProjectScreenState extends State<CreateNewProjectScreen> {
                                 progressPercent: 0,
                                 projectTasks: [],
                                 completedTasks: [],
-                                teamMemberIds: memberIds, userId: currentUserId,
+                                teamMemberIds: memberIds,
+                                userId: currentUserId,
                               );
 
                               final cubit = BlocProvider.of<AddProjectCubit>(

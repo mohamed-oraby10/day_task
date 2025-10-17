@@ -3,6 +3,7 @@ import 'package:day_task/model/project_model.dart';
 import 'package:day_task/widgets/percent_circular.dart';
 import 'package:day_task/widgets/team_members_images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OngoingTasks extends StatelessWidget {
   const OngoingTasks({super.key, required this.project, this.onTap});
@@ -15,30 +16,30 @@ class OngoingTasks extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 14),
+        padding:  EdgeInsets.only(bottom: 14.h),
         child: Container(
           padding: EdgeInsets.all(8),
 
           color: kFillTextFormColor,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            padding:  EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   project.title,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontFamily: "PilatExtended",
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: const Text(
+                  padding:  EdgeInsets.symmetric(vertical: 8.h),
+                  child:  Text(
                     'Team Members',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(color: Colors.white, fontSize: 15.sp),
                   ),
                 ),
                 Row(
@@ -54,7 +55,7 @@ class OngoingTasks extends StatelessWidget {
 
                 Text(
                   "Due on: ${project.date}",
-                  style: const TextStyle(color: Colors.white, fontSize: 15),
+                  style:  TextStyle(color: Colors.white, fontSize: 15.sp),
                 ),
               ],
             ),

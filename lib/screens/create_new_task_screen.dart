@@ -14,6 +14,7 @@ import 'package:day_task/widgets/main_button.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -59,10 +60,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
             child: Scaffold(
               appBar: const CustomAppBar(title: "Create New Task"),
               body: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                 child: SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -70,26 +68,32 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Task Title',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: TextInput(
                             hint: "Title",
                             onSaved: (value) => title = value,
                           ),
                         ),
 
-                        const SizedBox(height: 15),
+                        SizedBox(height: 15.h),
 
-                        const Text(
+                        Text(
                           'Task Details',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: TextInput(
                             hint: "Details",
                             maxLines: 3,
@@ -97,18 +101,21 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           ),
                         ),
 
-                        const SizedBox(height: 15),
+                        SizedBox(height: 15.h),
 
-                        const Text(
+                        Text(
                           'Add team members',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         Row(
                           children: [
                             SizedBox(
-                              height: 45,
-                              width: 300,
+                              height: 41.h,
+                              width: 320.w,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: teamMembers.length,
@@ -126,11 +133,10 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 },
                               ),
                             ),
-                            const SizedBox(width: 25),
+                            SizedBox(width: 25.w),
                             CustomSquare(
                               icon: "assets/images/addsquare.svg",
                               onPress: () async {
-                                
                                 final box = Hive.box<ProjectModel>(kProjectBox);
                                 final project = box.get(projectKey)!;
                                 await showUsersDialog(context, (users) {
@@ -149,13 +155,16 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           ],
                         ),
 
-                        const SizedBox(height: 25),
+                        SizedBox(height: 25.h),
 
-                        const Text(
+                        Text(
                           'Time & Date',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
-                        const SizedBox(height: 15),
+                        SizedBox(height: 15.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -176,7 +185,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             CustomTaskDateAndTime(
                               text: selectedTime.format(context),
                             ),
-                            const SizedBox(width: 7),
+                            Spacer(),
                             CustomSquare(
                               icon: "assets/images/calendar.svg",
                               onPress: () async {
@@ -205,7 +214,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                           ],
                         ),
 
-                        const SizedBox(height: 50),
+                        SizedBox(height: 70.h),
 
                         MainButton(
                           textButton: 'Create',
@@ -218,12 +227,8 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 details: details!,
                                 time: selectedTime.format(context),
                                 date: selectedDate == null
-                                    ? DateFormat(
-                                        'dd/MM/yyyy',
-                                      ).format(DateTime.now())
-                                    : DateFormat(
-                                        'dd/MM/yyyy',
-                                      ).format(selectedDate!),
+                                    ? DateFormat('d MMM').format(DateTime.now())
+                                    : DateFormat('d MMM').format(selectedDate!),
                                 teamMembers: teamMembers,
                               );
 

@@ -3,6 +3,7 @@ import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/group_members.dart';
 import 'package:day_task/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateGroupDialog extends StatelessWidget {
   const CreateGroupDialog({super.key});
@@ -35,13 +36,13 @@ class CreateGroupDialog extends StatelessWidget {
         title: Center(
           child: Text(
             'Create a group',
-            style: TextStyle(color: kMainColor, fontSize: 17),
+            style: TextStyle(color: kMainColor, fontSize: 17.sp),
           ),
         ),
         backgroundColor: kSecondColor,
         content: SizedBox(
           width: double.maxFinite,
-          height: 350,
+          height: 350.h,
           child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('users').snapshots(),
             builder: (context, snapshot) {
@@ -71,10 +72,10 @@ class CreateGroupDialog extends StatelessWidget {
                 children: [
                   Text(
                     'Group name',
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: TextStyle(color: Colors.white, fontSize: 17.sp),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 20),
+                    padding:  EdgeInsets.only(top: 10.h, bottom: 20.h),
                     child: TextInput(
                       hint: 'Group name',
                       controller: groupNameController,
@@ -82,7 +83,7 @@ class CreateGroupDialog extends StatelessWidget {
                   ),
                   Text(
                     'Group members',
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: TextStyle(color: Colors.white, fontSize: 17.sp),
                   ),
                   Expanded(
                     child: GroupMembers(

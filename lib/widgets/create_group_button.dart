@@ -1,6 +1,7 @@
 import 'package:day_task/constants.dart';
 import 'package:day_task/widgets/create_group_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CreateGroupButton extends StatelessWidget {
@@ -19,14 +20,18 @@ class CreateGroupButton extends StatelessWidget {
           );
         },
         child: Container(
-          height: 50,
-          width: 50,
+          height: 47.h,
+          width: 47.w,
           decoration: BoxDecoration(
             color: kMainColor,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100.r),
           ),
           child: Center(
-            child: SvgPicture.asset("assets/images/profile2user.svg"),
+            child: SvgPicture.asset(
+              "assets/images/profile2user.svg",
+              height: 24.h,
+              width: 24.w,
+            ),
           ),
         ),
       ),

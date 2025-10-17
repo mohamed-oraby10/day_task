@@ -5,11 +5,12 @@ import 'package:day_task/model/group_chat_model.dart';
 import 'package:day_task/model/message_model.dart';
 import 'package:day_task/provider/user_provider.dart';
 import 'package:day_task/widgets/chat_text_field.dart';
-import 'package:day_task/widgets/group_datails.dart';
+import 'package:day_task/widgets/group_chat_app_bar.dart';
 import 'package:day_task/widgets/recieved_group_message.dart';
 import 'package:day_task/widgets/sending_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -90,80 +91,10 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
         }
 
         return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: SvgPicture.asset("assets/images/arrowleft.svg"),
-            ),
-            backgroundColor: kBackgroundColor,
-            elevation: 0,
-            foregroundColor: Colors.white,
-            title: Row(
-              children: [
-                group.icon == null
-                    ? CircleAvatar(
-                        radius: 22,
-                        backgroundColor: Colors.grey[300],
-                        child: const Icon(
-                          Icons.group,
-                          size: 28,
-                          color: Colors.grey,
-                        ),
-                      )
-                    : CircleAvatar(
-                        radius: 22,
-                        backgroundImage: NetworkImage(group.icon!),
-                      ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return GroupDatails(group: group);
-                                },
-                              ),
-                            );
-                          },
-                          child: Text(
-                            group.name,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                        ),
-                        Text(
-                          userStatus,
-                          style: TextStyle(fontSize: 12, color: kMainColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset('assets/images/video.svg'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset('assets/images/callcalling.svg'),
-                ),
-              ),
-            ],
+          appBar: GroupChatAppBar(
+            group: group,
+            icon: group.icon,
+            userStatus: userStatus,
           ),
           body: Column(
             children: [
@@ -183,10 +114,7 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 10,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -194,14 +122,18 @@ class _ChatGroupScreenState extends State<ChatGroupScreen> {
                       controller: controller,
                       onSubmitted: (data) => sendMessage(data),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10.w),
                     Container(
-                      height: 55,
-                      width: 55,
+                      height: 57.h,
+                      width: 57.w,
                       color: kSecondColor,
                       child: IconButton(
                         onPressed: () {},
-                        icon: SvgPicture.asset('assets/images/microphone2.svg'),
+                        icon: SvgPicture.asset(
+                          'assets/images/microphone2.svg',
+                          height: 24.h,
+                          width: 24.w,
+                        ),
                       ),
                     ),
                   ],

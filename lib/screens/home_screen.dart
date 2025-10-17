@@ -8,7 +8,6 @@ import 'package:day_task/widgets/all_completed_projects.dart';
 import 'package:day_task/widgets/all_ongoing_projects.dart';
 import 'package:day_task/service/presence_service.dart';
 import 'package:day_task/utilitis/app_routes.dart';
-import 'package:day_task/widgets/circuler_avatar_image.dart';
 import 'package:day_task/widgets/custom_list_view.dart';
 import 'package:day_task/widgets/custom_row.dart';
 import 'package:day_task/widgets/completed_tasks_card.dart';
@@ -109,13 +108,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               AppRoutes.profileRoute,
                             );
                           },
-                          icon: CirculerAvatarImage(
-                            name: firstLetter,
-                            urlImage: user.userModel!.image!,
-                            image: user.userModel?.image,
-                          ),
+                          icon:CircleAvatar(
+                          radius: 20,
+                          backgroundColor: kMainColor,
+                          backgroundImage: user.userModel?.image != null
+                              ? NetworkImage(user.userModel!.image!)
+                              : null,
+                          child: user.userModel?.image == null
+                              ? Text(
+                                  firstLetter,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                  ),
+                                )
+                              : null
                         ),
                       ),
+                      )
                     ],
                   ),
                   SizedBox(height: 20.h),

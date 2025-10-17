@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -16,15 +17,16 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        height: 47,
-        width: 175,
+        height: 47.h,
+        width: 175.w,
         decoration: BoxDecoration(color: isMessage ? kMainColor : kSecondColor),
         child: Center(
           child: Text(
             text,
             style: TextStyle(
               color: isMessage ? Colors.black : Colors.white,
-              fontSize: 15,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/model/user_model.dart';
-import 'package:day_task/screens/chat_screen.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/create_group_button.dart';
 import 'package:day_task/widgets/new_message_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NewMessage extends StatefulWidget {
@@ -44,7 +45,11 @@ class _NewMessageState extends State<NewMessage> {
               backgroundColor: kBackgroundColor,
               elevation: 0,
               leading: IconButton(
-                icon: SvgPicture.asset("assets/images/arrowleft.svg"),
+                icon: SvgPicture.asset(
+                  "assets/images/arrowleft.svg",
+                  height: 24.h,
+                  width: 24.w,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
               title: AnimatedSwitcher(
@@ -71,10 +76,13 @@ class _NewMessageState extends State<NewMessage> {
                         ),
                       )
                     : Center(
-                        child: const Text(
+                        child: Text(
                           "New Message",
                           key: ValueKey('titleText'),
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                       ),
               ),
@@ -82,7 +90,11 @@ class _NewMessageState extends State<NewMessage> {
                 IconButton(
                   icon: isSearching
                       ? const Icon(Icons.close, color: Colors.white)
-                      : SvgPicture.asset("assets/images/searchnormal1.svg"),
+                      : SvgPicture.asset(
+                          "assets/images/searchnormal1.svg",
+                          height: 24.h,
+                          width: 24.w,
+                        ),
                   onPressed: () {
                     setState(() {
                       if (isSearching) searchQuery = '';
@@ -102,7 +114,10 @@ class _NewMessageState extends State<NewMessage> {
                             isSearching && searchQuery.isNotEmpty
                                 ? 'No users found'
                                 : 'No users available',
-                            style: TextStyle(color: kMainColor, fontSize: 16),
+                            style: TextStyle(
+                              color: kMainColor,
+                              fontSize: 16.sp,
+                            ),
                           ),
                         )
                       : ListView.builder(
@@ -112,14 +127,10 @@ class _NewMessageState extends State<NewMessage> {
                             return NewMessageCategory(
                               user: user,
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushNamed(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const ChatScreen();
-                                    },
-                                    settings: RouteSettings(arguments: user),
-                                  ),
+                                  AppRoutes.chatingRoute,
+                                  arguments: user,
                                 );
                               },
                             );

@@ -1,5 +1,6 @@
 import 'package:day_task/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PercentCircular extends StatelessWidget {
@@ -10,11 +11,11 @@ class PercentCircular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
-      radius: 30,
-      lineWidth: 2,
+      radius: 30.r,
+      lineWidth: 2.w,
       percent: percent,
       startAngle: 180,
-      center: Text("${(percent*100).toInt()}%", style: TextStyle(fontSize: 14, color: Colors.white)),
+      center: Text("${(percent*100).toInt()}%", style: TextStyle(fontSize: 14.sp, color: Colors.white)),
       progressColor: kMainColor,
       backgroundColor: backgroundColor,
       circularStrokeCap: CircularStrokeCap.round,
