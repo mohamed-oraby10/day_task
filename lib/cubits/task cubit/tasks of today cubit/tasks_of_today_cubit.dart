@@ -19,9 +19,7 @@ class TasksOfTodayCubit extends Cubit<TasksOfTodayState> {
       for (var project in projectBox.values) {
         allTasks.addAll(project.projectTasks);
       }
-
-      final todayFormatted = DateFormat('dd/MM/yyyy').format(DateTime.now());
-
+      final todayFormatted = DateFormat('d MMM').format(DateTime.now());
       tasks = allTasks.where((t) => t.date == todayFormatted).toList();
 
       emit(TasksOfTodaySuccess());

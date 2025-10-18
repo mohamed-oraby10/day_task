@@ -17,11 +17,11 @@ class TaskesCategory extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            Container(height: 72.h, width: 10.w, color: kMainColor),
+            Container(height: 90.h, width: 10.w, color: kMainColor),
             Container(
               padding: EdgeInsets.all(6.r),
               color: kSecondColor,
-              height: 72.h,
+              height:90.h,
               width: 370.w,
               child: Padding(
                 padding: EdgeInsets.only(left: 15.w),
@@ -43,7 +43,7 @@ class TaskesCategory extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(height: 5.h),
+                            SizedBox(height: 6.h),
                             Text(
                               task.time,
                               style: TextStyle(
