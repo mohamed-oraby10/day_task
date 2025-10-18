@@ -62,51 +62,67 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
           appBar: const CustomAppBar(title: "Notifications"),
           body: Padding(
-            padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 25.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:  EdgeInsets.only(bottom: 15.h),
-                  child:  Text(
-                    'New',
-                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
-                  ),
-                ),
-                newNotifications.isEmpty
-                    ? CustomSizedBox(messageText: 'No new notifications yet.')
-                    : SizedBox(
-                        height: 300.h,
-                        child: ListView.builder(
-                          itemCount: newNotifications.length,
-                          itemBuilder: (context, index) {
-                            final item = newNotifications[index];
-                            return NotificationCategory(notification: item);
-                          },
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 25.w),
+            child: notificationsList.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15.h),
+                        child: Text(
+                          'New',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                       ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 20.h),
-                  child:  Text(
-                    'Earlier',
-                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
-                  ),
-                ),
-                earlierNotifications.isEmpty
-                    ? CustomSizedBox(
-                        messageText: 'No earlier notifications yet.',
-                      )
-                    : Expanded(
-                        child: ListView.builder(
-                          itemCount: earlierNotifications.length,
-                          itemBuilder: (context, index) {
-                            final earlier = earlierNotifications[index];
-                            return NotificationCategory(notification: earlier);
-                          },
+                      newNotifications.isEmpty
+                          ? CustomSizedBox(
+                              messageText: 'No new notifications yet.',
+                            )
+                          : SizedBox(
+                              height: 300.h,
+                              child: ListView.builder(
+                                itemCount: newNotifications.length,
+                                itemBuilder: (context, index) {
+                                  final item = newNotifications[index];
+                                  return NotificationCategory(
+                                    notification: item,
+                                  );
+                                },
+                              ),
+                            ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.h),
+                        child: Text(
+                          'Earlier',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                          ),
                         ),
                       ),
-              ],
-            ),
+                      earlierNotifications.isEmpty
+                          ? CustomSizedBox(
+                              messageText: 'No earlier notifications yet.',
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                itemCount: earlierNotifications.length,
+                                itemBuilder: (context, index) {
+                                  final earlier = earlierNotifications[index];
+                                  return NotificationCategory(
+                                    notification: earlier,
+                                  );
+                                },
+                              ),
+                            ),
+                    ],
+                  )
+                : Center(
+                    child: CustomSizedBox(messageText: 'No notifications yet.'),
+                  ),
           ),
         );
       },

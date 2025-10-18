@@ -149,63 +149,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               )
                             : CustomListView(selectedList: projects)
-                      : CustomRow(
-                          title: "Completed tasks",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return AllCompletedProjects(
-                                    projects: completedProjects,
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                  completedProjects.isNotEmpty
-                      ? SizedBox(
-                          height: 200.h,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: completedProjects.length,
-                            itemBuilder: (context, index) {
-                              return CompletedTasksCrad(
-                                project: completedProjects[index],
-                                onTap: () {
-                                  final projectKey =
-                                      completedProjects[index].key;
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.projectDetailsRoute,
-                                    arguments: projectKey as int,
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                      : allProjects.isNotEmpty
+                      ? Column(
+                          children: [
+                            CustomRow(
+                              title: "Completed tasks",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return AllCompletedProjects(
+                                        projects: completedProjects,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            completedProjects.isNotEmpty
+                                ? SizedBox(
+                                    height: 200.h,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: completedProjects.length,
+                                      itemBuilder: (context, index) {
+                                        return CompletedTasksCrad(
+                                          project: completedProjects[index],
+                                          onTap: () {
+                                            final projectKey =
+                                                completedProjects[index].key;
+                                            Navigator.pushNamed(
+                                              context,
+                                              AppRoutes.projectDetailsRoute,
+                                              arguments: projectKey as int,
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : CustomSizedBox(
+                                    messageText: 'No completed tasks yet.',
+                                  ),
+                            SizedBox(height: 20.h),
+                            CustomRow(
+                              title: "Ongoing Projects",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return AllOngoingProjects(
+                                        projects: ongoingProjects,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            ongoingProjects.isNotEmpty
+                                ? CustomListView(selectedList: ongoingProjects)
+                                : CustomSizedBox(
+                                    messageText: 'No ongoing projects yet.',
+                                  ),
+                          ],
                         )
-                      : CustomSizedBox(messageText: 'No completed tasks yet.'),
-                  SizedBox(height: 20.h),
-                  CustomRow(
-                    title: "Ongoing Projects",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return AllOngoingProjects(
-                              projects: ongoingProjects,
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  ongoingProjects.isNotEmpty
-                      ? CustomListView(selectedList: ongoingProjects)
-                      : CustomSizedBox(messageText: 'No ongoing tasks yet.'),
+                      : CustomSizedBox(messageText: 'No projects yet.'),
                 ],
               ),
             ),

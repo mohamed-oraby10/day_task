@@ -21,7 +21,7 @@ class TaskesCategory extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(6.r),
               color: kSecondColor,
-              height:90.h,
+              height: 90.h,
               width: 370.w,
               child: Padding(
                 padding: EdgeInsets.only(left: 15.w),

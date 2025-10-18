@@ -8,6 +8,7 @@ import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/custom_button.dart';
 import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
+import 'package:day_task/widgets/custom_sized_box.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class _MassegesScraanState extends State<MassegesScraan> {
           body: Column(
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(vertical: 10.h),
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -72,51 +73,55 @@ class _MassegesScraanState extends State<MassegesScraan> {
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: chatList.length,
-                  itemBuilder: (context, index) {
-                    final sortedChats = chatList
-                      ..sort((a, b) {
-                        final aTime = a.lastMessageTime ?? Timestamp(0, 0);
-                        final bTime = b.lastMessageTime ?? Timestamp(0, 0);
-                        return bTime.compareTo(aTime); 
-                      });
+              chatList.isNotEmpty
+                  ? Expanded(
+                      child: ListView.builder(
+                        itemCount: chatList.length,
+                        itemBuilder: (context, index) {
+                          final sortedChats = chatList
+                            ..sort((a, b) {
+                              final aTime =
+                                  a.lastMessageTime ?? Timestamp(0, 0);
+                              final bTime =
+                                  b.lastMessageTime ?? Timestamp(0, 0);
+                              return bTime.compareTo(aTime);
+                            });
 
-                    final chat = sortedChats[index];
-                    final otherUserId = chat.userId == currentUser.uid
-                        ? chat.currentUserId
-                        : chat.userId;
+                          final chat = sortedChats[index];
+                          final otherUserId = chat.userId == currentUser.uid
+                              ? chat.currentUserId
+                              : chat.userId;
 
-                    return FutureBuilder<DocumentSnapshot>(
-                      future: FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(otherUserId)
-                          .get(),
-                      builder: (context, userSnapshot) {
-                        if (!userSnapshot.hasData) {
-                          return const SizedBox();
-                        }
+                          return FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(otherUserId)
+                                .get(),
+                            builder: (context, userSnapshot) {
+                              if (!userSnapshot.hasData) {
+                                return const SizedBox();
+                              }
 
-                        final userData = userSnapshot.data!.data();
+                              final userData = userSnapshot.data!.data();
 
-                        if (userData == null) return const SizedBox();
+                              if (userData == null) return const SizedBox();
 
-                        final user = UserModel.fromJson(
-                          otherUserId,
-                          userData as Map<String, dynamic>,
-                        );
+                              final user = UserModel.fromJson(
+                                otherUserId,
+                                userData as Map<String, dynamic>,
+                              );
 
-                        return ChatPerson(chat: chat, user: user);
-                      },
-                    );
-                  },
-                ),
-              ),
+                              return ChatPerson(chat: chat, user: user);
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  : Center(child: CustomSizedBox(messageText: 'No chats yet.')),
             ],
           ),
           floatingActionButton: Padding(
-            padding:  EdgeInsets.symmetric(vertical: 70.h, horizontal: 10.w),
+            padding: EdgeInsets.symmetric(vertical: 70.h, horizontal: 10.w),
             child: CustomButton(
               text: "Start Chat",
               isMessage: true,
