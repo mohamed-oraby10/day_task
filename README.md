@@ -123,20 +123,48 @@ This project demonstrates:
 
 ---
 
-## 👤 Profile Screen
+
+## 🧠 Projects & Tasks
+### create_new_project_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
+  <img src="assets/screens/Screenshot_1760889617.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
+
+### project_details_screen
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
+
+### create_new_task_screen
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890702.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
+
+### task_details_screen
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
 </p>
 ---
 
 ## 💬 Chat & Groups
-### chat_screen
+## chat_screen
 <p align="center">
   <img src="assets/screens/Screenshot_1760894822.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
 ---
-### chat_group_screen
+
+## chat_group_screen
 
 <p align="center">
   <img src="assets/screens/Screenshot_1760894768.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
@@ -186,36 +214,13 @@ This project demonstrates:
 </p>
 ---
 
-## 🧠 Projects & Tasks
-### create_new_project_screen
+
+## 👤 Profile Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760889617.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+  <img src="assets/screens/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
----
-### project_details_screen
-
-<p align="center">
-  <img src="assets/screens/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
-</p>
----
-### create_new_task_screen
-
-<p align="center">
-  <img src="assets/screens/Screenshot_1760890702.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
-</p>
----
-### task_details_screen
-
-
-<p align="center">
-  <img src="assets/screens/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
-</p>
----
+--- 
 
 ## 🔮 Future Improvements
 
