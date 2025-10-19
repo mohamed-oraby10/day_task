@@ -11,7 +11,7 @@ class TaskModel extends HiveObject {
   @HiveField(2)
   final String time;
   @HiveField(3)
-  final String date;
+  final DateTime date;
   @HiveField(4)
   final List<TeamMemberModel> teamMembers;
 

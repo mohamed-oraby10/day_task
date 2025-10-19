@@ -4,6 +4,7 @@ import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/widgets/task_details_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class TaskDetailsScreen extends StatefulWidget {
   const TaskDetailsScreen({super.key});
@@ -51,7 +52,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                   TaskDetailsRow(
                     iconImage: 'assets/images/calendarremove.svg',
                     title: 'Due Date',
-                    content: task.date,
+                    content: DateFormat('d MMM').format(task.date),
                   ),
                   Spacer(flex: 2),
                   TaskDetailsRow(

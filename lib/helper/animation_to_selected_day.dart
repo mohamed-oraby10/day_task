@@ -6,7 +6,7 @@ void animationToSelectedDay(
   int selectedIndex,
   ScrollController scrollController,
 ) {
-  double itemWidth = 55.w;
+  double itemWidth = 60.w;
   double screenWidth = MediaQuery.of(context).size.width;
 
   double targetScroll =

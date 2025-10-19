@@ -69,7 +69,10 @@ class AppRoutes {
           settings: settings,
         );
       case taskDetailsRoute:
-        return MaterialPageRoute(builder: (_) => const TaskDetailsScreen());
+        return MaterialPageRoute(
+          builder: (_) => const TaskDetailsScreen(),
+          settings: settings,
+        );
       case chatGroupRoute:
         return MaterialPageRoute(
           builder: (_) => const ChatGroupScreen(),

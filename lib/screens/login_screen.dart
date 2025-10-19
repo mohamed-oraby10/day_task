@@ -132,8 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         } on FirebaseAuthException catch (e) {
                           inAsyncCall = false;
                           setState(() {});
-
-                          if (e.code == 'invalid-credential') {
+                         
+                         if (
+                              e.code == 'invalid-credential') {
                             showSnakBar(
                               context,
                               'Wrong password provided for that user or No user found for that email. ',

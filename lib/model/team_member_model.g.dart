@@ -8,7 +8,7 @@ part of 'team_member_model.dart';
 
 class TeamMemberModelAdapter extends TypeAdapter<TeamMemberModel> {
   @override
-  final int typeId = 4;
+  final int typeId = 2;
 
   @override
   TeamMemberModel read(BinaryReader reader) {
@@ -16,11 +16,10 @@ class TeamMemberModelAdapter extends TypeAdapter<TeamMemberModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-
     return TeamMemberModel(
-      name: fields[0] as String? ?? '', 
-      image: fields[1] as String?,      
-      id: fields[2] as String? ?? '',   
+      name: fields[0] as String,
+      image: fields[1] as String?,
+      id: fields[2] as String,
     );
   }
 

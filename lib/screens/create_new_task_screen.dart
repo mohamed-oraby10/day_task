@@ -226,9 +226,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 title: title!,
                                 details: details!,
                                 time: selectedTime.format(context),
-                                date: selectedDate == null
-                                    ? DateFormat('d MMM').format(DateTime.now())
-                                    : DateFormat('d MMM').format(selectedDate!),
+                                date: selectedDate ?? DateTime.now(),
                                 teamMembers: teamMembers,
                               );
 

@@ -20,7 +20,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       title: fields[0] as String,
       details: fields[1] as String,
       time: fields[2] as String,
-      date: fields[3] as String,
+      date: fields[3] as DateTime,
       teamMembers: (fields[4] as List).cast<TeamMemberModel>(),
     );
   }
