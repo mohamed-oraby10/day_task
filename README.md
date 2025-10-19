@@ -96,7 +96,10 @@ This project demonstrates:
 ---
 
 ## 🔑 Login Screen
-![](assets/screens/Screenshot_1760889310.png)
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760889310.png" alt="Login Screen" width="30%" style="margin-right: 10px;">
+</p>
 
 ---
 
@@ -110,66 +113,110 @@ This project demonstrates:
 ---
 
 ## 🏠 Home Screen
-![Home Screen 1]()
-![Home Screen 2]()
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760889582.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+   <img src="assets/screens/Screenshot_1760890782.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+  <img src="assets/screens/Screenshot_1760890803.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760891245.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+</p>
 
 ---
 
 ## 👤 Profile Screen
-![Profile Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
+</p>
 ---
 
 ## 💬 Chat & Groups
 ### chat_screen
-![Chat Screen 1]()
-
+<p align="center">
+  <img src="assets/screens/Screenshot_1760894822.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
 ### chat_group_screen
-![Chat Group Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760894768.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890976.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
+  
+</p>
+
+---
 ### groupes_messages_screen
-![Group Messages Screen 1]()
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890846.png" alt="groupes_messages Screen" width="30%" style="margin-right: 10px;">
+  
+</p>
 
 ---
 
 ## 📨 Messages
 ### masseges_screen
-![Messages Screen 1]()
 
+<p align="center">
+  <img src="assets\screens\Screenshot_1760894722.png" alt="masseges Screen" width="30%" style="margin-right: 10px;">
+</p>
+
+---
 ### new_message_screen
-![New Message Screen 1]()
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890954.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+   <img src="assets/screens/Screenshot_1760890960.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+   <img src="assets/screens/Screenshot_1760890968.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+</p>
 
 ---
 
 ## 📅 Schedule Screen
-![Schedule Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760893321.png" alt="Schedule Screen" width="30%" style="margin-right: 10px;">
+</p>
 ---
 
 ## 🔔 Notifications Screen
-![Notifications Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760891227.png" alt="Notifications Screen" width="30%" style="margin-right: 10px;">
+</p>
 ---
 
 ## 🧠 Projects & Tasks
 ### create_new_project_screen
-![Create New Project Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760889617.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
 ### project_details_screen
-![Project Details Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
 ### create_new_task_screen
-![Create New Task Screen 1]()
 
+<p align="center">
+  <img src="assets/screens/Screenshot_1760890702.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+    <img src="assets/screens/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+</p>
+---
 ### task_details_screen
-![Task Details Screen 1]()
 
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
+</p>
 ---
 
-## ➕ Other Screens
-![Extra Screen 1]()
-
----
 ## 🔮 Future Improvements
 
 - 🔍 Add advanced search and filtering for projects and tasks.  
