@@ -32,7 +32,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
     selectedIndex = DateTime.now().day;
     scrollController = ScrollController();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       animationToSelectedDay(context, selectedIndex, scrollController);
     });
   }
@@ -71,16 +71,16 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
               sufImage: "assets/images/addsquare.svg",
             ),
             body: Padding(
-              padding:  EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
+              padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     DateFormat('MMMM').format(now),
-                    style:  TextStyle(color: Colors.white, fontSize: 20.sp),
+                    style: TextStyle(color: Colors.white, fontSize: 20.sp),
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 20.h),
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: SizedBox(
                       height: 75.h,
                       child: ListView.builder(
@@ -117,7 +117,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                       ),
                     ),
                   ),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.h),
                     child: Text(
                       "Today's Tasks",
@@ -133,7 +133,7 @@ class _ScheduleSceenState extends State<ScheduleSceen> {
                             Navigator.pushNamed(
                               context,
                               AppRoutes.taskDetailsRoute,
-                               arguments: userTasks[index]
+                              arguments: userTasks[index],
                             );
                           },
                           task: userTasks[index],

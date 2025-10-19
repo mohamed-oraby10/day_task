@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void animationToSelectedDay(
   BuildContext context,
   int selectedIndex,
   ScrollController scrollController,
 ) {
-  final screenWidth = MediaQuery.of(context).size.width;
+  double itemWidth = 55.w;
+  double screenWidth = MediaQuery.of(context).size.width;
 
-  const itemWidth = 70.0;
+  double targetScroll =
+      (selectedIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
 
-  final targetOffset =
-      (selectedIndex - 1) * itemWidth - (screenWidth / 2) + (itemWidth / 2);
+  if (targetScroll < 0) targetScroll = 0;
 
-  final double safeOffset = targetOffset < 0 ? 0 : targetOffset;
   scrollController.animateTo(
-    safeOffset,
-    duration: Duration(milliseconds: 500),
+    targetScroll,
+    duration: const Duration(milliseconds: 500),
     curve: Curves.easeInOut,
   );
 }
