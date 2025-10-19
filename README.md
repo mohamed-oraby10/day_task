@@ -132,6 +132,7 @@ This project demonstrates:
     <img src="assets/screens/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
     <img src="assets/screens/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 ---
 
 ### project_details_screen
@@ -139,6 +140,7 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 ---
 
 ### create_new_task_screen
@@ -148,6 +150,7 @@ This project demonstrates:
     <img src="assets/screens/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
     <img src="assets/screens/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 ---
 
 ### task_details_screen
@@ -155,6 +158,7 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 ---
 
 ## 💬 Chat & Groups
@@ -162,6 +166,7 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760894822.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 ---
 
 ## chat_group_screen
@@ -173,11 +178,11 @@ This project demonstrates:
 </p>
 
 ---
+
 ### groupes_messages_screen
 
 <p align="center">
   <img src="assets/screens/Screenshot_1760890846.png" alt="groupes_messages Screen" width="30%" style="margin-right: 10px;">
-  
 </p>
 
 ---
@@ -190,6 +195,7 @@ This project demonstrates:
 </p>
 
 ---
+
 ### new_message_screen
 
 <p align="center">
@@ -205,6 +211,8 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760893321.png" alt="Schedule Screen" width="30%" style="margin-right: 10px;">
 </p>
+
+
 ---
 
 ## 🔔 Notifications Screen
@@ -212,6 +220,8 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760891227.png" alt="Notifications Screen" width="30%" style="margin-right: 10px;">
 </p>
+
+
 ---
 
 
