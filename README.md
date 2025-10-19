@@ -88,7 +88,10 @@ This project demonstrates:
 
 
 ## 🚀 Splash Screen
-![](assets/screens/Screenshot_1760893647.png)
+
+<p align="center">
+  <img src="assets/screens/Screenshot_1760893647.png" alt="Splash Screen" width="30%" style="margin-right: 10px;">
+</p>
 
 ---
 
