@@ -26,10 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: inAsyncCall,
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: ModalProgressHUD(
+        inAsyncCall: inAsyncCall,
+        child: Padding(
           padding: EdgeInsets.symmetric(vertical: 45.h, horizontal: 16.w),
           child: SingleChildScrollView(
             child: Form(
@@ -130,20 +130,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           showSnakBar(context, 'You login successfully');
                         } on FirebaseAuthException catch (e) {
-                          if (e.code == "user-not-found") {
+                          inAsyncCall = false;
+                          setState(() {});
+
+                          if (e.code == 'invalid-credential') {
                             showSnakBar(
                               context,
-                              "No user found for that email.",
+                              'Wrong password provided for that user or No user found for that email. ',
                             );
-                          } else if (e.code == 'wrong-password') {
+                          } else {
                             showSnakBar(
                               context,
-                              "Wrong password provided for that user.",
+                              'Login failed. Please try again.',
                             );
                           }
                         }
-                        inAsyncCall = false;
-                        setState(() {});
                       }
                     },
                   ),

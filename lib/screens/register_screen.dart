@@ -29,14 +29,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       progressIndicator: CircularProgressIndicator(color: kMainColor),
       inAsyncCall: inAsyncCall,
       child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.only(
-            left: 16.w,
-            right: 16.w,
-            top: 45.h,
-            bottom: 16.h,
-          ),
-          child: SingleChildScrollView(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 16.w,
+              right: 16.w,
+              top: 45.h,
+              bottom: 16.h,
+            ),
             child: Form(
               key: formkey,
               child: Column(
@@ -136,7 +137,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           inAsyncCall = true;
                           setState(() {});
                           try {
-                            await registerUser(email: email, name: name!, password: password);
+                            await registerUser(
+                              email: email!,
+                              name: name!,
+                              password: password!,
+                            );
 
                             Navigator.pushNamed(context, AppRoutes.homeRoute);
                             showSnakBar(
@@ -147,17 +152,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             if (e.code == 'weak-password') {
                               showSnakBar(
                                 context,
-                                'The password provided is too weak.',
+                                "The password must be at least 6 characters.",
                               );
                             } else if (e.code == 'email-already-in-use') {
                               showSnakBar(
                                 context,
                                 'The account already exists for that email.',
                               );
+                            } else if (e.code == 'invalid-email') {
+                              showSnakBar(
+                                context,
+                                'The email address is badly formatted.',
+                              );
+                            } else {
+                              showSnakBar(
+                                context,
+                                'Registration failed. Please try again.',
+                              );
                             }
+                          } finally {
+                            inAsyncCall = false;
+                            setState(() {});
                           }
-                          inAsyncCall = false;
-                          setState(() {});
                         } else if (!check) {
                           showSnakBar(
                             context,
@@ -176,5 +192,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-
 }
