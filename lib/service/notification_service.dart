@@ -15,9 +15,18 @@ class NotificationService {
     const InitializationSettings initSettings = InitializationSettings(
       android: androidInit,
     );
-
     await _notifications.initialize(initSettings);
     tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    final iosImplementation = _notifications
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
+    await iosImplementation?.requestPermissions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
   }
 
   Future<void> showNotification({
@@ -29,16 +38,13 @@ class NotificationService {
         .collection('users')
         .doc(currentUser.uid)
         .collection(kNotifications);
-
     final notificationData = {
       "title": title,
       "body": body,
       "userId": currentUser.uid,
       "timestamp": FieldValue.serverTimestamp(),
     };
-
     await userNotifications.add(notificationData);
-
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
           'day_task_channel',
@@ -46,11 +52,9 @@ class NotificationService {
           importance: Importance.max,
           priority: Priority.high,
         );
-
     const NotificationDetails details = NotificationDetails(
       android: androidDetails,
     );
-
     await _notifications.show(
       DateTime.now().millisecondsSinceEpoch ~/ 1000,
       title,
@@ -74,11 +78,9 @@ class NotificationService {
       hour,
       minute,
     );
-
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
-
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
           'day_task_channel',
@@ -86,13 +88,11 @@ class NotificationService {
           importance: Importance.max,
           priority: Priority.high,
         );
-
     const NotificationDetails details = NotificationDetails(
       android: androidDetails,
     );
-
     await _notifications.zonedSchedule(
-      0,
+      DateTime.now().millisecondsSinceEpoch ~/ 1000,
       title,
       body,
       scheduledDate,

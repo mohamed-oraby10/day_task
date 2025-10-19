@@ -31,13 +31,12 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.init();
-  NotificationService().scheduleDailyNotification(
+  await NotificationService().scheduleDailyNotification(
     title: "Here’s your daily tasks",
     body: "Let’s get today’s tasks done!",
     hour: 9,
     minute: 0,
   );
-
   runApp(
     ChangeNotifierProvider(create: (_) => UserProvider(), child: const MyApp()),
   );
