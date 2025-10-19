@@ -85,7 +85,83 @@ This project demonstrates:
 
 ---
 ## 📸 Screenshots (Example placeholders)
-Home Screen	Update Product Screen
+
+
+## 🚀 Splash Screen
+![](assets/screens/Screenshot_1760893647.png)
+
+---
+
+## 🔑 Login Screen
+![](assets/screens/Screenshot_1760889310.png)
+
+---
+
+## 🧾 Register Screen
+| ![Screen 1](assets/screens/Screenshot_1760889322.png) | ![Screen 2](assets/screens/Screenshot_1760889433.png) |
+
+
+---
+
+## 🏠 Home Screen
+![Home Screen 1]()
+![Home Screen 2]()
+
+---
+
+## 👤 Profile Screen
+![Profile Screen 1]()
+
+---
+
+## 💬 Chat & Groups
+### chat_screen
+![Chat Screen 1]()
+
+### chat_group_screen
+![Chat Group Screen 1]()
+
+### groupes_messages_screen
+![Group Messages Screen 1]()
+
+---
+
+## 📨 Messages
+### masseges_screen
+![Messages Screen 1]()
+
+### new_message_screen
+![New Message Screen 1]()
+
+---
+
+## 📅 Schedule Screen
+![Schedule Screen 1]()
+
+---
+
+## 🔔 Notifications Screen
+![Notifications Screen 1]()
+
+---
+
+## 🧠 Projects & Tasks
+### create_new_project_screen
+![Create New Project Screen 1]()
+
+### project_details_screen
+![Project Details Screen 1]()
+
+### create_new_task_screen
+![Create New Task Screen 1]()
+
+### task_details_screen
+![Task Details Screen 1]()
+
+---
+
+## ➕ Other Screens
+![Extra Screen 1]()
 
 ---
 ## 🔮 Future Improvements
