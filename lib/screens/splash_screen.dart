@@ -1,5 +1,5 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/service/navigate_after_delay_service.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,14 +14,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      navigateAfterDelay(context);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
               MainButton(
                 textButton: 'Let\'s Start',
                 onPress: () {
-                  // await navigateAfterDelay(context);
+                  Navigator.pushNamed(context, AppRoutes.loginRoute);
                 },
               ),
             ],
