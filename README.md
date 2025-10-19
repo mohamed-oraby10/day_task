@@ -101,7 +101,10 @@ This project demonstrates:
 ---
 
 ## 🧾 Register Screen
-| ![Screen 1](assets/screens/Screenshot_1760889322.png) | ![Screen 2](assets/screens/Screenshot_1760889433.png) |
+<p align="center">
+  <img src="assets/screens/Screenshot_1760889322.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
+   <img src="assets/screens/Screenshot_1760889433.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
+</p>
 
 
 ---
