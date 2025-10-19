@@ -23,72 +23,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var user = Provider.of<UserProvider>(context);
     final firstLetter = user.userModel?.name[0].toUpperCase() ?? '?';
+    List<List<String?>> profileCategoryList = [
+      [
+        user.userModel?.name,
+        'assets/images/useradd.svg',
+        'assets/images/edit.svg',
+      ],
+      [
+        user.userModel?.email,
+        'assets/images/usertag.svg',
+        'assets/images/edit.svg',
+      ],
+      ['My Tasks', 'assets/images/task.svg', 'assets/images/arrowdown2.svg'],
+      [
+        'Privacy',
+        'assets/images/securitycard.svg',
+        'assets/images/arrowdown2.svg',
+      ],
+      ['Setting', 'assets/images/setting2.svg', 'assets/images/arrowdown2.svg'],
+    ];
+
     return ModalProgressHUD(
       inAsyncCall: inAsyncCall,
       child: Scaffold(
         appBar: CustomAppBar(title: "Profile"),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.h),
-                child: Center(
-                  child: CircleAvatar(
-                    radius: 67.r,
-                    backgroundColor: kMainColor,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: Center(
                     child: CircleAvatar(
-                      radius: 65.r,
-                      backgroundImage: user.userModel?.image != null
-                          ? NetworkImage(user.userModel!.image!)
-                          : null,
-                      child: user.userModel?.image == null
-                          ? Text(firstLetter, style: TextStyle(fontSize: 30.sp))
-                          : null,
+                      radius: 67.r,
+                      backgroundColor: kMainColor,
+                      child: CircleAvatar(
+                        radius: 65.r,
+                        backgroundImage: user.userModel?.image != null
+                            ? NetworkImage(user.userModel!.image!)
+                            : null,
+                        child: user.userModel?.image == null
+                            ? Text(
+                                firstLetter,
+                                style: TextStyle(fontSize: 30.sp),
+                              )
+                            : null,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20.h),
-              ProfileCategory(
-                text: user.userModel?.name ?? "",
-                preImage: 'assets/images/useradd.svg',
-                postImage: 'assets/images/edit.svg',
-              ),
-              ProfileCategory(
-                text: user.userModel?.email ?? '',
-                preImage: 'assets/images/usertag.svg',
-                postImage: 'assets/images/edit.svg',
-              ),
-
-              ProfileCategory(
-                text: 'My Tasks',
-                preImage: 'assets/images/task.svg',
-                postImage: 'assets/images/arrowdown2.svg',
-              ),
-              ProfileCategory(
-                text: 'Privacy',
-                preImage: 'assets/images/securitycard.svg',
-                postImage: 'assets/images/arrowdown2.svg',
-              ),
-              ProfileCategory(
-                text: 'Setting',
-                preImage: 'assets/images/setting2.svg',
-                postImage: 'assets/images/arrowdown2.svg',
-              ),
-              LogoutButton(
-                onPress: () async {
-                  setState(() {
-                    inAsyncCall = true;
-                  });
-                  await signOut(context);
-                  setState(() {
-                    inAsyncCall = false;
-                  });
-                },
-              ),
-            ],
+                SizedBox(height: 20.h),
+                Column(
+                  children: List.generate(profileCategoryList.length, (index) {
+                    final item = profileCategoryList[index];
+                    return ProfileCategory(
+                      text: item[0],
+                      preImage: item[1],
+                      postImage: item[2],
+                    );
+                  }),
+                ),
+                LogoutButton(
+                  onPress: () async {
+                    setState(() {
+                      inAsyncCall = true;
+                    });
+                    await signOut(context);
+                    setState(() {
+                      inAsyncCall = false;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

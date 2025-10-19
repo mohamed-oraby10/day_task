@@ -11,9 +11,9 @@ class ProfileCategory extends StatelessWidget {
     required this.postImage,
     this.onPress,
   });
-  final String text;
-  final String preImage;
-  final String postImage;
+  final String? text;
+  final String? preImage;
+  final String? postImage;
   final void Function()? onPress;
   @override
   Widget build(BuildContext context) {
@@ -27,12 +27,12 @@ class ProfileCategory extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
             children: [
-              SvgPicture.asset(preImage),
+              SvgPicture.asset(preImage!),
               SizedBox(width: 8.w),
               Expanded(
                 child: Text(
                   overflow: TextOverflow.ellipsis,
-                  text,
+                  text!,
                   style: TextStyle(color: Colors.white, fontSize: 18.sp),
                 ),
               ),
@@ -40,7 +40,7 @@ class ProfileCategory extends StatelessWidget {
               IconButton(
                 onPressed: onPress,
                 icon: SvgPicture.asset(
-                  postImage,
+                  postImage!,
                   color: kLabelTextColor,
                   width: 24.w,
                   height: 24.h,
