@@ -230,6 +230,7 @@ This project demonstrates:
 <p align="center">
   <img src="assets/screens/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
+
 --- 
 
 ## 🔮 Future Improvements
