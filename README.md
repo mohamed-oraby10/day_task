@@ -85,7 +85,7 @@ This project demonstrates:
 
 ---
 
-## 📸 Screenshots
+## 📱 Screenshots
 
 ## 🚀 Splash Screen
 
