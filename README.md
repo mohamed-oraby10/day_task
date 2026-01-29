@@ -84,13 +84,13 @@ This project demonstrates:
    flutter run
 
 ---
-## 📸 Screenshots (Example placeholders)
 
+## 📱 Screenshots
 
 ## 🚀 Splash Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760893647.png" alt="Splash Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760893647.png" alt="Splash Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -98,39 +98,37 @@ This project demonstrates:
 ## 🔑 Login Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760889310.png" alt="Login Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889310.png" alt="Login Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
 
 ## 🧾 Register Screen
 <p align="center">
-  <img src="assets/screens/Screenshot_1760889322.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
-   <img src="assets/screens/Screenshot_1760889433.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889322.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889433.png" alt="Register Screen" width="30%" style="margin-right: 10px;">
 </p>
-
 
 ---
 
 ## 🏠 Home Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760889582.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
-   <img src="assets/screens/Screenshot_1760890782.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
-  <img src="assets/screens/Screenshot_1760890803.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760891245.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889582.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890782.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890803.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760891245.png" alt="Home Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
-
 
 ## 🧠 Projects & Tasks
 ### create_new_project_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760889617.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889617.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760889637.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890645.png" alt="create_new_project Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -138,7 +136,7 @@ This project demonstrates:
 ### project_details_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890770.png" alt="project_details Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -146,9 +144,9 @@ This project demonstrates:
 ### create_new_task_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890702.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890702.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890710.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890716.png" alt="create_new_task Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -156,7 +154,7 @@ This project demonstrates:
 ### task_details_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760894093.png" alt="task_details Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -164,7 +162,7 @@ This project demonstrates:
 ## 💬 Chat & Groups
 ## chat_screen
 <p align="center">
-  <img src="assets/screens/Screenshot_1760894822.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760894822.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -172,9 +170,8 @@ This project demonstrates:
 ## chat_group_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760894768.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
-    <img src="assets/screens/Screenshot_1760890976.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
-  
+  <img src="screenshots/Screenshot_1760894768.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890976.png" alt="chat_group Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -182,7 +179,7 @@ This project demonstrates:
 ### groupes_messages_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890846.png" alt="groupes_messages Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890846.png" alt="groupes_messages Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -191,7 +188,7 @@ This project demonstrates:
 ### masseges_screen
 
 <p align="center">
-  <img src="assets\screens\Screenshot_1760894722.png" alt="masseges Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760894722.png" alt="masseges Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -199,9 +196,9 @@ This project demonstrates:
 ### new_message_screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890954.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
-   <img src="assets/screens/Screenshot_1760890960.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
-   <img src="assets/screens/Screenshot_1760890968.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890954.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890960.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890968.png" alt="new_message Screen" width="30%" style="margin-right: 10px;">
 </p>
 
 ---
@@ -209,29 +206,26 @@ This project demonstrates:
 ## 📅 Schedule Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760893321.png" alt="Schedule Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760893321.png" alt="Schedule Screen" width="30%" style="margin-right: 10px;">
 </p>
-
 
 ---
 
 ## 🔔 Notifications Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760891227.png" alt="Notifications Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760891227.png" alt="Notifications Screen" width="30%" style="margin-right: 10px;">
 </p>
 
-
 ---
-
 
 ## 👤 Profile Screen
 
 <p align="center">
-  <img src="assets/screens/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
+  <img src="screenshots/Screenshot_1760890792.png" alt="Profile Screen" width="30%" style="margin-right: 10px;">
 </p>
 
---- 
+---
 
 ## 🔮 Future Improvements
 
