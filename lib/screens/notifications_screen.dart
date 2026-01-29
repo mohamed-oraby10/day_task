@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/notification_model.dart';
-import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/widgets/custom_app_bar.dart';
 import 'package:day_task/utilitis/custom_bottom_bar.dart';
 import 'package:day_task/widgets/custom_sized_box.dart';
@@ -22,7 +21,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   void initState() {
     super.initState();
-    NotificationService.init();
   }
 
   @override

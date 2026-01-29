@@ -69,6 +69,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         Navigator.pushNamed(context, route);
       },
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(iconPath, width: 24.w, height: 24.h, color: color),

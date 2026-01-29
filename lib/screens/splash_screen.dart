@@ -1,9 +1,9 @@
 import 'package:day_task/constants.dart';
-import 'package:day_task/utilitis/app_routes.dart';
 import 'package:day_task/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../widgets/main_button.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +14,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  Future<void> requestNotificationPermission() async {
+    final status = await Permission.notification.request();
+    if (status.isGranted) {
+      debugPrint('Notification permission granted');
+    } else {
+      debugPrint('Notification permission denied');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
               MainButton(
                 textButton: 'Let\'s Start',
                 onPress: () {
-                  Navigator.pushNamed(context, AppRoutes.loginRoute);
+                  // Navigator.pushNamed(context, AppRoutes.loginRoute);
                 },
               ),
             ],

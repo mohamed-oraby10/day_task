@@ -34,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final user = FirebaseAuth.instance.currentUser!;
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
     presenceService = PresenceService(user.uid);
     presenceService.start();
     BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
