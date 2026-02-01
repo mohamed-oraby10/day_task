@@ -1,10 +1,12 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/day_task.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/model/task_model.dart';
 import 'package:day_task/model/team_member_model.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/service/notification_service.dart';
+import 'package:day_task/service/notification_service/notification_controller.dart';
+import 'package:day_task/service/notification_service/notification_service.dart';
 import 'package:day_task/simple_bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,9 @@ Future<void> main() async {
   await Hive.openBox<ProjectModel>(kProjectBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService().init();
+  await AwesomeNotifications().setListeners(
+    onActionReceivedMethod: NotificationController.onActionReceived,
+  );
   runApp(
     ChangeNotifierProvider(
       create: (_) => UserProvider(),

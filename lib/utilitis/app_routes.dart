@@ -93,3 +93,6 @@ class AppRoutes {
     }
   }
 }
+
+final GlobalKey<NavigatorState> navigatorKey =
+    GlobalKey<NavigatorState>();

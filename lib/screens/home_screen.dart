@@ -5,7 +5,7 @@ import 'package:day_task/cubits/project cubit/projects cubit/projects_state.dart
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
-import 'package:day_task/service/notification_service.dart';
+import 'package:day_task/service/notification_service/notification_service.dart';
 import 'package:day_task/widgets/all_completed_projects.dart';
 import 'package:day_task/widgets/all_ongoing_projects.dart';
 import 'package:day_task/service/presence_service.dart';

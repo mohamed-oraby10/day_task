@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:day_task/utilitis/app_routes.dart';
 
 class NotificationService {
   static final AwesomeNotifications notification = AwesomeNotifications();
@@ -25,10 +26,13 @@ class NotificationService {
         channelKey: 'channelKey',
         title: 'Here\'s your daily tasks',
         body: 'Let\'s get today\'s tasks done! 💪',
+        payload: {
+         'route': AppRoutes.scheduleRoute
+        }
       ),
       schedule: NotificationCalendar(
-        hour: 10,
-        minute: 10,
+        hour: 16,
+        minute: 11,
         second: 0,
         repeats: true,
       ),

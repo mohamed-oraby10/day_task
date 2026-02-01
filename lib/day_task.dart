@@ -30,6 +30,7 @@ class DayTask extends StatelessWidget {
               scaffoldBackgroundColor: kBackgroundColor,
               useMaterial3: false,
             ),
+            navigatorKey: navigatorKey,
             initialRoute: user != null
                 ? AppRoutes.homeRoute
                 : AppRoutes.splashRoute,
