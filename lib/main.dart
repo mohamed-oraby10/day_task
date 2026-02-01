@@ -23,7 +23,6 @@ Future<void> main() async {
   await Hive.openBox<ProjectModel>(kProjectBox);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService().init();
-  await NotificationService().showNotification();
   runApp(
     ChangeNotifierProvider(
       create: (_) => UserProvider(),

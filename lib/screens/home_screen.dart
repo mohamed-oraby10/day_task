@@ -1,9 +1,11 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:day_task/constants.dart';
 import 'package:day_task/cubits/project cubit/projects cubit/projects_cubit.dart';
 import 'package:day_task/cubits/project cubit/projects cubit/projects_state.dart';
 import 'package:day_task/enum.dart';
 import 'package:day_task/model/project_model.dart';
 import 'package:day_task/provider/user_provider.dart';
+import 'package:day_task/service/notification_service.dart';
 import 'package:day_task/widgets/all_completed_projects.dart';
 import 'package:day_task/widgets/all_ongoing_projects.dart';
 import 'package:day_task/service/presence_service.dart';
@@ -34,11 +36,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    initNotification();
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
     presenceService = PresenceService(user.uid);
     presenceService.start();
     BlocProvider.of<ProjectsCubit>(context).fetchAllProjects();
+  }
+
+  Future<void> initNotification() async {
+    bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
+
+    if (!isAllowed) {
+      isAllowed = await AwesomeNotifications()
+          .requestPermissionToSendNotifications();
+    }
+
+    if (isAllowed) {
+      await NotificationService().showNotification();
+    }
   }
 
   @override
